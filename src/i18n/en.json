@@ -1,0 +1,9 @@
+{
+  "solarRevenue": {
+    "name": "Solar Profitability Calculator",
+    "tooltip": "Solar Profitability Calculator",
+    "profitability": {
+      "selectFeature": "Please select one or more Features"
+    }
+  }
+}

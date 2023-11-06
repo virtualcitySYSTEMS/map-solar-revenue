@@ -1,0 +1,9 @@
+{
+  "solarRevenue": {
+    "name": "Solar Wirtschaftlichkeitsrechner",
+    "tooltip": "Solar Wirtschaftlichkeitsrechner",
+    "profitability": {
+      "selectFeature": "Selektieren Sie ein oder mehrere Objekte"
+    }
+  }
+}
