@@ -2,8 +2,212 @@
   "solarRevenue": {
     "name": "Solar Wirtschaftlichkeitsrechner",
     "tooltip": "Solar Wirtschaftlichkeitsrechner",
+    "nasa": "Der Kalibrierungsdienst der NASA ist nicht erreichbar",
     "profitability": {
       "selectFeature": "Selektieren Sie ein oder mehrere Objekte"
+    },
+    "solarSelector": {
+      "noVCSolar": "Diese Fläche wurde über VC Solar nicht vorgerechnet. Verwenden Sie die Option Flächen Zeichnen",
+      "recalculate": "Neu berechnen",
+      "remove": "Entfernen",
+      "calculate": "Solarertrag berechnen",
+      "method": "Schritt 1 - Potentialflächen erfassen",
+      "selectArea": "Flächen selektieren",
+      "drawArea": "Flächen zeichnen",
+      "helpMethod": "Wählen Sie eine Methode für die Berechnung der solaren  Einstrahlung in der Toolbar aus.",
+      "helpMethod2": "Sie können entweder eine bereits berechnete Fläche selektieren oder eine Freifläche zeichnen.",
+      "helpMethodArea": "Für die Berechnung der solaren Einstrahlung auf eine Fläche aktivieren Sie den Zeichnungsmodus in der Toolbar und zeichnen eine beliebige Fläche.",
+      "modulesList": "Schritt 2 - Ertrag der Flächen berechnen",
+      "helpModulesList": "Hier werden alle selektierten oder gezeichneten Flächen angezeigt. Bei gezeichneten Flächen muss die solare Einstrahlung über den Button (Solarertrag berechnen) berechnet werden.",
+      "total": "Gesamt",
+      "results": "Schritt 3 - Verbrauchsdaten anpassen / Ergebnisse",
+      "helpResults": "Nachdem Sie eine oder mehrere Flächen selektiert bzw. gezeichnet haben und für freie Flächen den Solarertrag berechnet haben, können Sie ihre Verbrauchsdaten anpassen. Die Ergebnisse werden direkt an Ihre Eingaben angepasst.",
+      "coTwoSavings": "CO2-Einsparung",
+      "revenueCalculation": "Wirtschaftlichkeitsberechnung",
+      "finance": "Finanzierungsplan",
+      "keyData": "Kennzahlenbericht",
+      "table": {
+        "area": "Fläche",
+        "id": "Id",
+        "yield": "Ertrag",
+        "calculated": "Berechnet",
+        "actions": "Aktionen"
+      },
+      "selection": "Selektion aufheben"
+    },
+    "revenue": {
+      "help": {
+        "demand": "In diesem Bereich können Sie die Angaben über Ihren persönlichen Strombedarf vornehmen. Der errechnete Strombedarf passt sich dabei automatisch an Ihre Eingaben an. Sollten Sie Ihren Strombedarf jedoch exakt kennen, können Sie diesen direkt in das entsprechende Feld eingeben.",
+        "consumption": "Abhängig von Ihrem Verbrauchverhalten kann mehr Strom aus der Solaranlage direkt genutzt werden. Verbrauchen Sie beispielsweise tagsüber mehr Strom wird der Direktverbrauchsanteil steigen. Gleiches gilt für den Speicherverbrauch. Hier können Sie nun angeben, welchen Anteil am Solarstrom Sie direkt verbrauchen. Die voreingestellten Werte spiegeln einen durchschnittlichen Haushalt wider.",
+        "costs": "In diesem Bereich können Sie Angaben über die Energiekosten machen. Dazu geben Sie die aktuellen Stromkosten von Ihrem Anbieter an. Zusätzlich können Sie eine prognostizierte Strompreissteigerung berücksichtigen.",
+        "finance": "In diesem Bereich können Sie auswählen, ob Sie die Solaranlage finanzieren möchten. Dazu können Sie Angaben über das Eigenkapital, die Laufzeit und den Zinssatz machen."
+      },
+      "title": "Wirtschaftlichkeitsrechner",
+      "button": "Verbrauchsdaten anpassen",
+      "demand": {
+        "title": "Strombedarf",
+        "person": "Haushaltsgröße",
+        "isHeatPump": "Wärmepumpe vorhanden",
+        "livingSpace": "Wohnraumgröße",
+        "isCar": "E-Auto vorhanden",
+        "distance": "Strecke / Jahr",
+        "demand": "Errechneter Strombedarf",
+        "demandUnit": "kWh/Jahr"
+      },
+      "consumption": {
+        "title": "Eigenverbrauch",
+        "directConsumption": "Direktverbrauch",
+        "storageConsumption": "Speicherverbrauch",
+        "isStorageConsumption": "Stromspeicher einbeziehen"
+      },
+      "costs": {
+        "title": "Energiekosten",
+        "consumption": "Bezugskosten pro kWh",
+        "supply": "Vergütung pro kWh",
+        "isIncrease": "Strompreissteigerung anpassen",
+        "increase": "Strompreissteigerung pro Jahr"
+      },
+      "finance": {
+        "title": "Finanzierung",
+        "isFinance": "Finanzierung",
+        "invest": "Investitionskosten",
+        "credit": "Kreditbetrag",
+        "equity": "Eigenkapital",
+        "duration": "Laufzeit",
+        "durationUnit": "Jahre",
+        "interest": "Zinsen"
+      }
+    },
+    "cotwo": {
+      "title": "Einsparung",
+      "totalEmission": "Herstellungsemissionen, gesamt",
+      "totalSavings": "CO2-Einsparung, gesamt",
+      "text1": "Eine Solaranlage stößt bei der Erzeugung von Strom kein CO2 aus. Lediglich bei der Produktion von Solarmodulen wird CO2 durch die benötigte Herstellungsenergie ausgestoßen.",
+      "text2": "Der CO2-Ausstoß amortisiert sich in Ihrem individuellen Fall nach einer Laufzeit von:",
+      "unit": "Jahren",
+      "text3": "Die Herstellungsemissionen der Solarmodule übersteigen die potentielle C02-Einsparung",
+      "text4": "Die CO2-Einsparung entspricht dem rechnerischen Vergleich mit der CO2-Emission, welche durch Bezug der gleichen Strommenge aus dem deutschen Strommix (Stand: %{germanPowerMixYear}) entstehen würde. ",
+      "chart": {
+        "yUnit": "Jahr",
+        "xUnit": "kg",
+        "seriesEmission": "Herstellungsemission",
+        "seriesSavings": "Einsparung"
+      }
+    },
+    "prof": {
+      "title": "Wirtschaftlichkeit",
+      "description": "Der Einnahmen- und Ausgabenplan stellt die jährlichen Einnahmen und Ausgaben über eine angenommene Laufzeit der PV-Anlage von %{lifeTime} Jahren gegenüber.",
+      "typeLabel": "Wählen Sie das gewünschte Ergebnis:",
+      "type": {
+        "liquidity": "Liquiditätsverlauf",
+        "revenue": "Einnahmen-/Ausgabenplan"
+      },
+      "chart": {
+        "yUnit": "Jahr",
+        "liquidity": {
+          "series": "Liquidität"
+        },
+        "plan": {
+          "maintenanceCosts": "Betriebskosten",
+          "gridConsumptionPrice": "Bezugskosten",
+          "repaymentRate": "Tilgung",
+          "interestAmount": "Zinsen",
+          "directConsumptionPrice": "Direktverbrauch",
+          "storageConsumptionPrice": "Speicherverbrauch",
+          "gridSupplyPrice": "Netzeinspeisung"
+        }
+      }
+    },
+    "finance": {
+      "title": "Finanzierungsplan",
+      "creditAmount": "Kreditbetrag",
+      "creditInterest": "Zinssatz",
+      "creditPeriod": "Laufzeit",
+      "creditPeriodUnit": "Jahre",
+      "creditTotal": "Kreditkosten, gesamt",
+      "text": "Neben einer Finanzierung über ein Kreditinstitut bestehen weitere Fördermöglichkeiten von staatlicher Seite. Weitere Informationen finden Sie bei der KfW",
+      "header": {
+        "year": "Jahr",
+        "annuity": "Annuität",
+        "repaymentRate": "Tilgung",
+        "remainingDept": "Restschuld",
+        "interestAmount": "Zinsanteil"
+      }
+    },
+    "keydata": {
+      "title": "Kennzahlenbericht",
+      "description": "Der Kennzahlenbericht umfasst jeweils eine tabellarische Übersicht der Energiebilanz (in kWh), der Energiekostenbilanz (in €) sowie eine Umweltbilanz (CO2 in kg). Die Angegebenen Werte errechnen sich aus dem Energieertrag der Potentialflächen sowie den personalisierten Verbrauchs- und Energiekostenangaben.",
+      "typeLabel": "Wählen Sie das gewünschte Ergebnis:",
+      "hint": "* Bitte Beachten Sie: ",
+      "hintText": "Die Gesamtsumme ergibt sich aus den Einträgen aller Seiten der Tabelle.",
+      "total": "Gesamt",
+      "type": {
+        "energyCosts": "Energiekostenbilanz",
+        "energy": "Energiebilanz",
+        "environmentalBalance": "Umweltbilanz"
+      },
+      "energyPriceHeader": {
+        "year": "Jahr",
+        "maintenanceCosts": "Betriebskosten",
+        "gridConsumptionPrice": "Netzbezug",
+        "directConsumptionPrice": "Direktverbrauch",
+        "storageConsumptionPrice": "Speicherverbrauch",
+        "gridSupplyPrice": "Netzeinspeisung",
+        "liquidity": "kum. Liquidität"
+      },
+      "energyHeader": {
+        "year": "Jahr",
+        "solarPowerYield": "Energieertrag",
+        "electricityDemand": "Energiebedarf",
+        "storageLosses": "Speicherverluste",
+        "directConsumption": "Direktverbrauch",
+        "storageConsumption": "Speicherverbrauch",
+        "gridConsumption": "Netzbezug",
+        "gridSupply": "Netzeinspeisung"
+      },
+      "environmentalBalanceHeader": {
+        "year": "Jahr",
+        "coTwoSavings": "CO2-Einsparung"
+      }
+    },
+    "config": {
+      "admin": {
+        "germanPowerMix": "Deutscher Strommix",
+        "germanPowerMixYear": "Deutscher Strommix Stand",
+        "solarManufacture": "Herstellungskosten Modul",
+        "electricityDemandPerPerson": "Strombedarf pro Person",
+        "electricityDemandHeatPump": "Strombedarf Wärmepumpe",
+        "electricityDemandCar": "Strombedarf E-Auto",
+        "storageDegradation": "Speicherdegradation",
+        "storageLosses": "Speicherverluste",
+        "amortizationPeriod": "Amortisierungszeitraum",
+        "maintenancePortion": "Anteil Betriebskosten"
+      },
+      "user": {
+        "numberOfPersons": "Personen im Haushalt",
+        "livingSpace": "Wohnraumgröße",
+        "annualDrivingDistance": "Jährliche Fahrstrecke",
+        "directConsumptionPortion": "Direktverbrauchsanteil",
+        "storageConsumptionPortion": "Speicherverbrauchsanteil",
+        "gridPurchaseCosts": "Netzbezugskosten",
+        "feedInTariff": "Einspeisetarif",
+        "electricityPriceIncrease": "Strompreissteigerung",
+        "equityCapital": "Eigenkapital",
+        "creditPeriod": "Kreditlaufzeit",
+        "creditInterest": "Kreditzinsrate",
+        "electricityDemand": "Strombedarf"
+      },
+      "global": {
+        "solarLayerName": "Solar Layer Name",
+        "isVcSolar": "VC Solar Layer vorhanden",
+        "isDebug": "Debug Feature erzeugen"
+      },
+      "vcSolar": {
+        "efficiency": "Effizienz",
+        "costs": "Kosten",
+        "degradation": "Degradation",
+        "kwpPerArea": "kWp pro m²"
+      }
     }
   }
 }

@@ -1,9 +1,213 @@
 {
   "solarRevenue": {
-    "name": "Solar Profitability Calculator",
-    "tooltip": "Solar Profitability Calculator",
+    "name": "Solar Revenue Calculator",
+    "tooltip": "Solar Revenue Calculator",
+    "nasa": "The NASA calibration service is not available",
     "profitability": {
-      "selectFeature": "Please select one or more Features"
+      "selectFeature": "Select one or more objects"
+    },
+    "solarSelector": {
+      "noVCSolar": "This surface was not pre-calculated via VC Solar. Use the draw areas option",
+      "recalculate": "recalculate",
+      "remove": "remove",
+      "calculate": "Calculate solar yield",
+      "method": "Step 1 - Register potential areas",
+      "selectArea": "select areas",
+      "drawArea": "draw areas",
+      "helpMethod": "Select a method for calculating the solar irradiation in the toolbar.",
+      "helpMethod2": "You can either select an area that has already been calculated or draw a free area.",
+      "helpMethodArea": "To calculate the solar irradiation on a surface, activate the drawing mode in the toolbar and draw an arbitrary surface.",
+      "modulesList": "Step 2 - Calculate yield of the areas",
+      "helpModulesList": "All selected or drawn areas are displayed here. For drawn areas, the solar irradiation must be calculated using the (Calculate solar yield) button.",
+      "total": "Total",
+      "results": "Step 3 - Adjust consumption data / results",
+      "helpResults": "After you have selected or drawn one or more areas and calculated the solar yield for drawn areas, you can customize your consumption data. The results are adapted directly to your inputs.",
+      "coTwoSavings": "CO2 savings",
+      "revenueCalculation": "Profitability calculation",
+      "finance": "Financing plan",
+      "keyData": "Key data report",
+      "table": {
+        "area": "Area",
+        "id": "Id",
+        "yield": "Yield",
+        "calculated": "Calculated",
+        "actions": "Actions"
+      },
+      "selection": "Deselect all"
+    },
+    "revenue": {
+      "help": {
+        "demand": "In this section, you can specify your personal electricity demand. The calculated electricity demand is automatically adjusted to your inputs. However, if you know your exact electricity demand, you can type it directly into the corresponding field.",
+        "consumption": "Depending on your consumption behavior, more electricity from the solar system can be used directly. For example, if you consume more electricity during the day, the proportion of direct consumption will increase. The same applies to storage consumption. You can now specify the proportion of solar power that you consume directly. The default values reflect an average household.",
+        "costs": "In this section, you can specify your energy costs. To do this, you need to provide the current electricity costs from your supplier. You can also take into account a forecast increase in electricity prices.",
+        "finance": "In this section you can choose whether you would like to finance the solar system. You can enter details about the equity capital, the duration and the interest rate."
+      },
+      "title": "Profitability calculator",
+      "button": "Customize consumption data",
+      "demand": {
+        "title": "Electricity demand",
+        "person": "Household size",
+        "isHeatPump": "Heat pump available",
+        "livingSpace": "Living space size",
+        "isCar": "E-car available",
+        "distance": "Distance / year",
+        "demand": "Calculated electricity demand",
+        "demandUnit": "kWh/year"
+      },
+      "consumption": {
+        "title": "Self-consumption",
+        "directConsumption": "Direct consumption",
+        "storageConsumption": "Storage consumption",
+        "isStorageConsumption": "Include power storage"
+      },
+      "costs": {
+        "title": "Energy costs",
+        "consumption": "Purchase costs per kWh",
+        "supply": "Repayment per kWh",
+        "isIncrease": "Adjust electricity price increase",
+        "increase": "Electricity price increase per year"
+      },
+      "finance": {
+        "title": "Financing",
+        "isFinance": "Financing",
+        "invest": "Investment costs",
+        "credit": "Credit amount",
+        "equity": "Equity capital",
+        "duration": "Duration",
+        "durationUnit": "years",
+        "interest": "Interest rate"
+      }
+    },
+    "cotwo": {
+      "title": "Savings",
+      "totalEmission": "Manufacturing emissions, total",
+      "totalSavings": "CO2 savings, total",
+      "text1": "A solar system does not emit any CO2 when generating electricity. CO2 is only emitted during the production of solar modules due to the energy required to manufacture them.",
+      "text2": "In your individual case, the CO2 emissions are amortized after a period of:",
+      "unit": "years",
+      "text3": "The manufacturing emissions of the solar modules exceed the potential C02 savings",
+      "text4": "The CO2 savings correspond to the calculated comparison with the CO2 emissions that would result from purchasing the same amount of electricity from the German electricity mix (as of %{germanPowerMixYear}).",
+      "chart": {
+        "yUnit": "Year",
+        "xUnit": "kg",
+        "seriesEmission": "Manufacturing emissions",
+        "seriesSavings": "Savings"
+      }
+    },
+    "prof": {
+      "title": "Profitability",
+      "description": "The income and expense plan compares the annual income and expenses over an assumed lifetime of the PV systems of %{lifeTime} years.",
+      "typeLabel": "Select the desired result:",
+      "type": {
+        "liquidity": "Liquidity trend",
+        "revenue": "Revenue/expenditure plan"
+      },
+      "chart": {
+        "yUnit": "Year",
+        "liquidity": {
+          "series": "Liquidity"
+        },
+        "plan": {
+          "maintenanceCosts": "Operating costs",
+          "gridConsumptionPrice": "Purchase costs",
+          "repaymentRate": "Repayment",
+          "interestAmount": "Interest",
+          "directConsumptionPrice": "Direct consumption",
+          "storageConsumptionPrice": "Storage consumption",
+          "gridSupplyPrice": "Grid feed-in"
+        }
+      }
+    },
+    "finance": {
+      "title": "Financing plan",
+      "creditAmount": "Credit amount",
+      "creditInterest": "Interest rate",
+      "creditPeriod": "Duration",
+      "creditPeriodUnit": "Years",
+      "creditTotal": "Credit costs, total",
+      "text": "In addition to financing via a credit institution, there are other funding options from the state. Further information can be found at KfW",
+      "header": {
+        "year": "Years",
+        "annuity": "Annuity",
+        "repaymentRate": "Repayment",
+        "remainingDept": "Remaining debt",
+        "interestAmount": "Interest portion"
+      }
+    },
+    "keydata": {
+      "title": "Key data report",
+      "description": "The key data report includes a spreadsheet overview of the energy balance (in kWh), the energy cost balance (in €) and an environmental balance (CO2 in kg). The values given are based on the energy yield of the potential surfaces and the personalized consumption and energy cost data.",
+      "typeLabel": "Select the desired result:",
+      "hint": "* Please notice: ",
+      "hintText": "The total sum results from the entries of all pages in the table.",
+      "total": "Total",
+      "type": {
+        "energyCosts": "Energy cost balance",
+        "energy": "Energy balance",
+        "environmentalBalance": "Environmental balance"
+      },
+      "energyPriceHeader": {
+        "year": "Year",
+        "maintenanceCosts": "Operating costs",
+        "gridConsumptionPrice": "Grid consumption",
+        "directConsumptionPrice": "Direct consumption",
+        "storageConsumptionPrice": "Storage consumption",
+        "gridSupplyPrice": "Grid feed-in",
+        "liquidity": "Liquidity"
+      },
+      "energyHeader": {
+        "year": "Year",
+        "solarPowerYield": "Energy yield",
+        "electricityDemand": "Energy demand",
+        "storageLosses": "Storage losses",
+        "directConsumption": "Direct consumption",
+        "storageConsumption": "Storage consumption",
+        "gridConsumption": "Grid consumption",
+        "gridSupply": "Grid supply"
+      },
+      "environmentalBalanceHeader": {
+        "year": "Year",
+        "coTwoSavings": "CO2 savings"
+      }
+    },
+    "config": {
+      "admin": {
+        "germanPowerMix": "german power mix",
+        "germanPowerMixYear": "german power mix (year)",
+        "solarManufacture": "manufacture costs modul",
+        "electricityDemandPerPerson": "electricity demand per person",
+        "electricityDemandHeatPump": "electricity demand heat pump",
+        "electricityDemandCar": "electricity demand car",
+        "storageDegradation": "storage degradation",
+        "storageLosses": "storage losses",
+        "amortizationPeriod": "amortization periode",
+        "maintenancePortion": "maintenance portion"
+      },
+      "user": {
+        "numberOfPersons": "number of persons",
+        "livingSpace": "living space",
+        "annualDrivingDistance": "annual driving distance",
+        "directConsumptionPortion": "direct consumption portion",
+        "storageConsumptionPortion": "storage consumption portion",
+        "gridPurchaseCosts": "grid purchase costs",
+        "feedInTariff": "feed in tariff",
+        "electricityPriceIncrease": "electricity prise increase",
+        "equityCapital": "equity capital",
+        "creditPeriod": "credit periode",
+        "creditInterest": "credit interest",
+        "electricityDemand": "electricity demand"
+      },
+      "global": {
+        "solarLayerName": "solar layer name",
+        "isVcSolar": "VC Solar Layer available",
+        "isDebug": "Create debug features"
+      },
+      "vcSolar": {
+        "efficiency": "efficiency",
+        "costs": "costs",
+        "degradation": "degradation",
+        "kwpPerArea": "kWp per area"
+      }
     }
   }
 }

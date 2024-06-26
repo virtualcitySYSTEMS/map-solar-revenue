@@ -2,6 +2,7 @@ dist/
 plugin-assets/
 public/
 test-report.xml
+datasource-data/
 
 # local env files
 .env.local

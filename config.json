@@ -1,4 +1,9 @@
 {
-  "name": "solar-revenue",
-  "solar": 10
+  "name": "@vcmap/solar-revenue",
+  "adminOptions": {
+    "germanPowerMix": 0.5
+  },
+  "globalSettings": {
+    "isVcSolar": true
+  }
 }
