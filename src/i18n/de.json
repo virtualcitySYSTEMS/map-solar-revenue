@@ -7,6 +7,7 @@
       "selectFeature": "Selektieren Sie ein oder mehrere Objekte"
     },
     "solarSelector": {
+      "noSelection": "Keine Flächen gezeichnet oder ausgewählt",
       "noVCSolar": "Diese Fläche wurde über VC Solar nicht vorgerechnet. Verwenden Sie die Option Flächen Zeichnen",
       "recalculate": "Neu berechnen",
       "remove": "Entfernen",
@@ -86,7 +87,7 @@
       "text2": "Der CO2-Ausstoß amortisiert sich in Ihrem individuellen Fall nach einer Laufzeit von:",
       "unit": "Jahren",
       "text3": "Die Herstellungsemissionen der Solarmodule übersteigen die potentielle C02-Einsparung",
-      "text4": "Die CO2-Einsparung entspricht dem rechnerischen Vergleich mit der CO2-Emission, welche durch Bezug der gleichen Strommenge aus dem deutschen Strommix (Stand: %{germanPowerMixYear}) entstehen würde. ",
+      "text4": "Die CO2-Einsparung entspricht dem rechnerischen Vergleich mit der CO2-Emission, welche durch den Bezug der gleichen Strommenge aus dem deutschen Strommix (Stand: %{germanPowerMixYear}) entstehen würde. ",
       "chart": {
         "yUnit": "Jahr",
         "xUnit": "kg",
@@ -96,7 +97,7 @@
     },
     "prof": {
       "title": "Wirtschaftlichkeit",
-      "description": "Der Einnahmen- und Ausgabenplan stellt die jährlichen Einnahmen und Ausgaben über eine angenommene Laufzeit der PV-Anlage von %{lifeTime} Jahren gegenüber.",
+      "description": "Der Einnahmen- und Ausgabenplan stellt die jährlichen Einnahmen und Ausgaben über eine angenommene Laufzeit der PV-Anlage von {lifeTime} Jahren gegenüber.",
       "typeLabel": "Wählen Sie das gewünschte Ergebnis:",
       "type": {
         "liquidity": "Liquiditätsverlauf",
@@ -136,7 +137,7 @@
     },
     "keydata": {
       "title": "Kennzahlenbericht",
-      "description": "Der Kennzahlenbericht umfasst jeweils eine tabellarische Übersicht der Energiebilanz (in kWh), der Energiekostenbilanz (in €) sowie eine Umweltbilanz (CO2 in kg). Die Angegebenen Werte errechnen sich aus dem Energieertrag der Potentialflächen sowie den personalisierten Verbrauchs- und Energiekostenangaben.",
+      "description": "Der Kennzahlenbericht umfasst jeweils eine tabellarische Übersicht der Energiebilanz (in kWh), der Energiekostenbilanz (in €) sowie eine Umweltbilanz (CO2 in kg). Die angegebenen Werte errechnen sich aus dem Energieertrag der Potentialflächen sowie den personalisierten Verbrauchs- und Energiekostenangaben.",
       "typeLabel": "Wählen Sie das gewünschte Ergebnis:",
       "hint": "* Bitte Beachten Sie: ",
       "hintText": "Die Gesamtsumme ergibt sich aus den Einträgen aller Seiten der Tabelle.",

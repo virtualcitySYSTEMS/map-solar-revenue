@@ -16,7 +16,7 @@ import {
   startCreateFeatureSession,
   VectorLayer,
 } from '@vcmap/core';
-import { Ref } from 'vue';
+import { reactive, Ref } from 'vue';
 import { Feature } from 'ol';
 import { Polygon } from 'ol/geom';
 import SolarSelector from './SolarSelector.vue';
@@ -30,8 +30,6 @@ import { SolarModule } from '../solarInputTypes.js';
 import { VcSolarOptions } from '../solarOptions.js';
 
 export const solarSelectorId = 'solar-selector';
-
-export type SolarCalculationType = 'vcsolar' | 'area' | 'module';
 
 export default function createSolarNavbar(vcsUiApp: VcsUiApp): () => void {
   const { action } = createToggleAction(
@@ -65,19 +63,16 @@ export default function createSolarNavbar(vcsUiApp: VcsUiApp): () => void {
     ButtonLocation.TOOL,
   );
 
-  const mapChangedListener = vcsUiApp.maps.mapActivated.addEventListener(
-    (map) => {
-      if (!(map instanceof CesiumMap)) {
-        if (vcsUiApp.windowManager.has(solarSelectorId)) {
-          vcsUiApp.windowManager.remove(solarSelectorId);
-        }
-        action.disabled = true;
-      } else {
-        action.disabled = false;
+  return vcsUiApp.maps.mapActivated.addEventListener((map) => {
+    if (!(map instanceof CesiumMap)) {
+      if (vcsUiApp.windowManager.has(solarSelectorId)) {
+        vcsUiApp.windowManager.remove(solarSelectorId);
       }
-    },
-  );
-  return mapChangedListener;
+      action.disabled = true;
+    } else {
+      action.disabled = false;
+    }
+  });
 }
 
 export function createSolarAreaToolbox(
@@ -122,92 +117,84 @@ export function createSolarAreaToolbox(
     currentFeatureId = currentFeature.getId();
   };
 
-  const solarAreaAction: VcsAction = {
+  const solarAreaAction: VcsAction = reactive({
     name: 'areaAction',
     title: 'solarRevenue.solarSelector.drawArea',
     icon: 'mdi-view-grid-plus-outline',
     active: false,
     async callback(): Promise<void> {
-      if (this.active) {
+      if (solarAreaAction.active) {
         session.stop();
         window.removeEventListener('keydown', escapeListener);
         app.maps.eventHandler.featureInteraction.pullPickedPosition = 0.0;
-        this.active = false;
+        solarAreaAction.active = false;
       } else {
-        if (layer instanceof VectorLayer) {
-          await layer.activate();
-          window.addEventListener('keydown', escapeListener);
-          app.maps.eventHandler.featureInteraction.pullPickedPosition = 0.05;
-          session = startCreateFeatureSession(app, layer, GeometryType.Polygon);
-          session.featureCreated.addEventListener(currentFeatureIdListener);
-          session.stopped.addEventListener(() => {
-            this.active = false;
-          });
+        await layer.activate();
+        window.addEventListener('keydown', escapeListener);
+        app.maps.eventHandler.featureInteraction.pullPickedPosition = 0.05;
+        session = startCreateFeatureSession(app, layer, GeometryType.Polygon);
+        session.featureCreated.addEventListener(currentFeatureIdListener);
+        session.stopped.addEventListener(() => {
+          solarAreaAction.active = false;
+        });
+        session.creationFinished.addEventListener((feature) => {
+          if (feature) {
+            const solarSurface = createSolarSurface(feature, app);
+            const moduleFeature = reactive<SolarModule>({
+              id: feature.getId() || 0,
+              featureId: areaId,
+              area: solarSurface.solarArea,
+              efficiency: vcSolarOptions.efficiency,
+              costs: vcSolarOptions.costs,
+              kwp: areaToKwp(vcSolarOptions.kwpPerArea, solarSurface.solarArea),
+              solarIrradiation: solarSurface.globalRad,
+              degradation: vcSolarOptions.degradation,
+              solarSurface,
+              calculatedProgress: {
+                numberTotalRays: 0,
+                numberCurrentRays: 0,
+                progress: 0,
+              },
+              actions: [],
+            }) as SolarModule;
 
-          session.creationFinished.addEventListener((feature) => {
-            if (feature) {
-              const solarSurface = createSolarSurface(feature, app);
-              const moduleFeature: SolarModule = {
-                id: feature.getId() || 0,
-                featureId: areaId,
-                area: solarSurface.solarArea,
-                efficiency: vcSolarOptions.efficiency,
-                costs: vcSolarOptions.costs,
-                kwp: areaToKwp(
-                  vcSolarOptions.kwpPerArea,
-                  solarSurface.solarArea,
-                ),
-                solarIrradiation: solarSurface.globalRad,
-                degradation: vcSolarOptions.degradation,
-                solarSurface,
-                calculatedProgress: {
-                  numberTotalRays: 0,
-                  numberCurrentRays: 0,
-                  progress: 0,
-                },
-                actions: [
-                  {
-                    name: 'removeSolarModule',
-                    title: 'solarRevenue.solarSelector.remove',
-                    icon: '$vcsTrashCan',
-                    callback: (): void => {
-                      if (feature.getId()) {
-                        layer.removeFeaturesById([
-                          feature.getId() as string | number,
-                        ]);
-                      }
-                      selectedModules.value = selectedModules.value.filter(
-                        (x) => {
-                          return x.id !== feature.getId();
-                        },
-                      );
-                    },
-                  },
-                  {
-                    name: 'calculateSolarModule',
-                    icon: 'mdi-refresh-circle',
-                    title: 'solarRevenue.solarSelector.recalculate',
-                    async callback(): Promise<void> {
-                      this.icon = '$vcsProgress';
-                      await calculateSolarAreaModule(
-                        moduleFeature,
-                        app,
-                        isDebug,
-                      );
-                      this.icon = 'mdi-refresh-circle';
-                    },
-                  },
-                ],
-              };
-              selectedModules.value.push(moduleFeature);
-              areaId += 1;
-            }
-          });
-        }
+            const removeModuleAction = {
+              name: 'removeSolarModule',
+              title: 'solarRevenue.solarSelector.remove',
+              icon: '$vcsTrashCan',
+              callback: (): void => {
+                if (feature.getId()) {
+                  layer.removeFeaturesById([
+                    feature.getId() as string | number,
+                  ]);
+                }
+                selectedModules.value = selectedModules.value.filter((x) => {
+                  return x.id !== feature.getId();
+                });
+              },
+            };
+            const calculateModuleAction = reactive<VcsAction>({
+              name: 'calculateSolarModule',
+              icon: 'mdi-refresh-circle',
+              title: 'solarRevenue.solarSelector.recalculate',
+              async callback(): Promise<void> {
+                calculateModuleAction.icon = '$vcsProgress';
+                await calculateSolarAreaModule(moduleFeature, app, isDebug);
+                calculateModuleAction.icon = 'mdi-refresh-circle';
+              },
+            });
+            moduleFeature.actions?.push(
+              removeModuleAction,
+              calculateModuleAction,
+            );
+            selectedModules.value.push(moduleFeature);
+            areaId += 1;
+          }
+        });
         this.active = true;
       }
     },
-  };
+  });
 
   app.toolboxManager.add(
     {
@@ -217,12 +204,11 @@ export function createSolarAreaToolbox(
     },
     name,
   );
-  const destroy = (): void => {
+  return (): void => {
     session.stop();
     app.layers.remove(layer);
     window.removeEventListener('keydown', escapeListener);
   };
-  return destroy;
 }
 
 export function createVcSolarToolBox(
@@ -269,8 +255,7 @@ export function createVcSolarToolBox(
     name,
   );
 
-  const destroy = (): void => {
+  return (): void => {
     removeSolarInteraction();
   };
-  return destroy;
 }

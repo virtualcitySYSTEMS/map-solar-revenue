@@ -9,12 +9,12 @@ import { Camera, Cartesian3, Matrix3, Plane } from '@vcmap-cesium/engine';
 import { Feature } from 'ol';
 import {
   BBox,
-  Units,
-  polygon,
-  Position,
+  centerOfMass,
   hexGrid,
   inside,
-  centerOfMass,
+  polygon,
+  Position,
+  Units,
 } from '@turf/turf';
 import { Coordinate } from 'ol/coordinate';
 import { Stroke, Style } from 'ol/style';
@@ -396,7 +396,7 @@ export function createSolarSurface(
     surfacePoints.push(surfacePoint);
   }
 
-  const solarSurface: SolarSurface = {
+  return {
     centerPoint,
     directRad: 0,
     diffuseRad: 0,
@@ -406,7 +406,6 @@ export function createSolarSurface(
     surfacePoints,
     surfaceFeature,
   };
-  return solarSurface;
 }
 
 function updateSolarProgress(solarProgress: SolarCalculationProgress): void {
@@ -472,7 +471,7 @@ export async function calculateDiffuseIrradiation(
 ): Promise<void> {
   if (solarSurface.surfacePoints && solarSurface.hemispherePoints) {
     for (const surfacePoint of solarSurface.surfacePoints) {
-      let curentIntersectionsCount = 0;
+      let currentIntersectionsCount = 0;
       const hemisphereRayFeatures: Feature<LineString>[] = [];
       surfacePoint.diffuseRad = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       let pointDiffRad = 0.0;
@@ -492,9 +491,9 @@ export async function calculateDiffuseIrradiation(
             app,
           );
           hemisphereRay.intersect();
-          curentIntersectionsCount += 1;
+          currentIntersectionsCount += 1;
           solarProgress.numberCurrentRays += 1;
-          if (curentIntersectionsCount % 20 === 0) {
+          if (currentIntersectionsCount % 20 === 0) {
             // eslint-disable-next-line no-await-in-loop
             await timeout(0);
             updateSolarProgress(solarProgress);
@@ -543,11 +542,6 @@ export async function calculateSolarAreaModule(
   isDebug: boolean,
 ): Promise<void> {
   if (solarAreaModule.solarSurface) {
-    solarAreaModule.calculatedProgress = {
-      numberTotalRays: 0,
-      numberCurrentRays: 0,
-      progress: 0,
-    };
     const action = solarAreaModule.actions?.find((act) => {
       return act.name === 'calculateSolarModule';
     });
@@ -567,6 +561,9 @@ export async function calculateSolarAreaModule(
       throw err;
     }
 
+    solarAreaModule.calculatedProgress.progress = 0;
+    solarAreaModule.calculatedProgress.numberCurrentRays = 0;
+
     const numberSurfacePoints =
       solarAreaModule.solarSurface.surfacePoints.length;
     const numberSunPoints = solarAreaModule.solarSurface.sunPoints
@@ -575,9 +572,8 @@ export async function calculateSolarAreaModule(
     const numberHemispherePoints = solarAreaModule.solarSurface.hemispherePoints
       ? solarAreaModule.solarSurface.hemispherePoints.length
       : 0;
-    const numberTotalRays =
+    solarAreaModule.calculatedProgress.numberTotalRays =
       (numberSunPoints + numberHemispherePoints) * numberSurfacePoints;
-    solarAreaModule.calculatedProgress.numberTotalRays = numberTotalRays;
 
     await calculateDiffuseIrradiation(
       solarAreaModule.solarSurface,

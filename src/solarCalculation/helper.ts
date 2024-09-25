@@ -4,8 +4,7 @@ export default function direction(
   fromPoint: Cartesian3,
   toPoint: Cartesian3,
 ): Cartesian3 {
-  const dir = Cartesian3.subtract(toPoint, fromPoint, new Cartesian3());
-  return dir;
+  return Cartesian3.subtract(toPoint, fromPoint, new Cartesian3());
 }
 
 export function getAzimuth(normal: Cartesian3): number {

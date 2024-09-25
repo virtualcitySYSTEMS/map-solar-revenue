@@ -5,7 +5,7 @@ export default {
         _id: 'fc1e46f8-8c02-40d3-a1f4-d83cc5bea19a',
         name: 'Solar Revenue',
         startingViewpointName: 'Viewpoint(1)',
-        startingMapName: 'OpenlayersMap',
+        startingMapName: 'CesiumMap',
         maps: [
           {
             type: 'CesiumMap',

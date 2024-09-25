@@ -1,25 +1,25 @@
 <template>
   <v-dialog v-model="dialog" width="500px">
-    <template #activator="{ on }">
+    <template #activator="{ props }">
       <v-row no-gutters>
         <v-col class="d-flex justify-center">
-          <vcs-form-button v-on="on" small>
+          <vcs-form-button v-bind="props" small>
             {{ $t('solarRevenue.revenue.button') }}</vcs-form-button
           >
         </v-col>
       </v-row>
     </template>
     <v-card>
-      <v-container class="px-5 py-1">
+      <v-container class="pt-1">
         <h3 class="d-flex align-center px-0 py-3">
-          <v-icon class="mr-1 text--primary" size="16">mdi-finance</v-icon>
+          <v-icon class="mr-1 text-primary" size="16">mdi-finance</v-icon>
           <span
-            class="d-inline-block user-select-none font-weight-bold text--primary"
+            class="d-inline-block user-select-none font-weight-bold text-primary"
           >
             {{ $t('solarRevenue.revenue.title') }}
           </span>
         </h3>
-        <VcsWizard v-model.number="currentStep" class="elevation-0">
+        <VcsWizard v-model.number="currentStep">
           <VcsWizardStep
             :step="stepOrder.DEMAND"
             editable
@@ -27,7 +27,7 @@
             heading="solarRevenue.revenue.demand.title"
             v-model.number="currentStep"
           >
-            <template #content>
+            <template #default>
               <v-container>
                 <v-row no-gutters>
                   <v-col>
@@ -42,12 +42,11 @@
                       <VcsSlider
                         :max="4"
                         :min="1"
-                        type="number"
-                        step="1"
-                        ticks="always"
+                        :step="1"
+                        show-ticks="always"
                         thumb-label="always"
-                        :thumb-size="24"
-                        v-model="localSolarOptions.userOptions.numberOfPersons"
+                        :thumb-size="8"
+                        v-model="solarOptions.userOptions.numberOfPersons"
                       />
                     </v-container>
                   </v-col>
@@ -69,7 +68,7 @@
                   <v-col>
                     <VcsTextField
                       type="number"
-                      v-model.number="localSolarOptions.userOptions.livingSpace"
+                      v-model.number="solarOptions.userOptions.livingSpace"
                       unit="m²"
                       show-spin-buttons
                       step="5"
@@ -96,7 +95,7 @@
                       :disabled="!isCar"
                       type="number"
                       v-model.number="
-                        localSolarOptions.userOptions.annualDrivingDistance
+                        solarOptions.userOptions.annualDrivingDistance
                       "
                       unit="km"
                       show-spin-buttons
@@ -115,12 +114,11 @@
                     <VcsTextField
                       type="number"
                       v-model.number="
-                        localSolarOptions.userOptions.electricityDemand
+                        solarOptions.userOptions.electricityDemand
                       "
                       :unit="
                         $t('solarRevenue.revenue.demand.demandUnit').toString()
                       "
-                      show-spin-buttons
                     />
                   </v-col>
                 </v-row>
@@ -134,7 +132,7 @@
             heading="solarRevenue.revenue.consumption.title"
             v-model.number="currentStep"
           >
-            <template #content>
+            <template #default>
               <v-container class="px-1 py-0">
                 <v-row no-gutters class="align-center">
                   <v-col>
@@ -151,15 +149,15 @@
                       type="number"
                       step="1"
                       v-model="
-                        localSolarOptions.userOptions.directConsumptionPortion
+                        solarOptions.userOptions.directConsumptionPortion
                       "
                     />
                   </v-col>
                   <v-col class="d-flex justify-end">
                     <VcsFormattedNumber
                       id="formattedNumber"
-                      :value="
-                        localSolarOptions.userOptions.directConsumptionPortion
+                      :model-value="
+                        solarOptions.userOptions.directConsumptionPortion
                       "
                       unit="%"
                       :fraction-digits="0"
@@ -169,7 +167,7 @@
                 <v-row no-gutters>
                   <v-col>
                     <VcsCheckbox
-                      v-model="localIsStorageConsumption"
+                      v-model="isStorageConsumption"
                       label="solarRevenue.revenue.consumption.isStorageConsumption"
                     />
                   </v-col>
@@ -184,21 +182,21 @@
                 <v-row no-gutters class="align-center">
                   <v-col cols="10">
                     <VcsSlider
-                      :disabled="!localIsStorageConsumption"
+                      :disabled="!isStorageConsumption"
                       :max="100"
                       :min="0"
                       type="number"
                       step="1"
                       v-model="
-                        localSolarOptions.userOptions.storageConsumptionPortion
+                        solarOptions.userOptions.storageConsumptionPortion
                       "
                     />
                   </v-col>
                   <v-col class="d-flex justify-end">
                     <VcsFormattedNumber
                       id="formattedNumber"
-                      :value="
-                        localSolarOptions.userOptions.storageConsumptionPortion
+                      :model-value="
+                        solarOptions.userOptions.storageConsumptionPortion
                       "
                       unit="%"
                       :fraction-digits="0"
@@ -215,7 +213,7 @@
             heading="solarRevenue.revenue.costs.title"
             v-model.number="currentStep"
           >
-            <template #content>
+            <template #default>
               <v-container class="px-1 py-0">
                 <v-row no-gutters class="align-center">
                   <v-col>
@@ -227,7 +225,7 @@
                     <VcsTextField
                       type="number"
                       v-model.number="
-                        localSolarOptions.userOptions.gridPurchaseCosts
+                        solarOptions.userOptions.gridPurchaseCosts
                       "
                       unit="€"
                       show-spin-buttons
@@ -245,9 +243,7 @@
                   <v-col>
                     <VcsTextField
                       type="number"
-                      v-model.number="
-                        localSolarOptions.userOptions.feedInTariff
-                      "
+                      v-model.number="solarOptions.userOptions.feedInTariff"
                       unit="€"
                       show-spin-buttons
                       step="0.001"
@@ -263,7 +259,7 @@
                     />
                   </v-col>
                 </v-row>
-                <v-row no-gutters class="align-center">
+                <v-row no-gutters class="align-center" v-if="isPriceIncrease">
                   <v-col>
                     <VcsLabel>{{
                       $t('solarRevenue.revenue.costs.increase')
@@ -271,10 +267,9 @@
                   </v-col>
                   <v-col>
                     <VcsTextField
-                      :disabled="!isPriceIncrease"
                       type="number"
                       v-model.number="
-                        localSolarOptions.userOptions.electricityPriceIncrease
+                        solarOptions.userOptions.electricityPriceIncrease
                       "
                       unit="%"
                       show-spin-buttons
@@ -293,7 +288,7 @@
             heading="solarRevenue.revenue.finance.title"
             v-model.number="currentStep"
           >
-            <template #content>
+            <template #default>
               <v-container class="px-1 py-0">
                 <v-row no-gutters class="align-center">
                   <v-col>
@@ -302,11 +297,7 @@
                     }}</VcsLabel>
                   </v-col>
                   <v-col class="d-flex justify-end">
-                    <v-switch
-                      v-model="localIsFinance"
-                      hide-details
-                      class="ma-0"
-                    />
+                    <v-switch v-model="isFinance" hide-details class="ma-0" />
                   </v-col>
                 </v-row>
                 <v-row no-gutters class="align-center font-weight-bold">
@@ -318,13 +309,13 @@
                   <v-col class="d-flex justify-end">
                     <VcsFormattedNumber
                       id="formattedNumber"
-                      :value="investmentCosts"
+                      :model-value="investmentCosts"
                       unit="€"
                       :fraction-digits="2"
                     />
                   </v-col>
                 </v-row>
-                <v-container class="px-0 py-0" v-if="localIsFinance">
+                <v-container class="px-0 py-0" v-if="isFinance">
                   <v-row no-gutters class="align-center font-weight-bold">
                     <v-col>
                       <VcsLabel>{{
@@ -334,7 +325,7 @@
                     <v-col class="d-flex justify-end">
                       <VcsFormattedNumber
                         id="formattedNumber"
-                        :value="creditAmount"
+                        :model-value="creditAmount"
                         unit="€"
                         :fraction-digits="2"
                       />
@@ -350,9 +341,7 @@
                     <v-col>
                       <VcsTextField
                         type="number"
-                        v-model.number="
-                          localSolarOptions.userOptions.equityCapital
-                        "
+                        v-model.number="solarOptions.userOptions.equityCapital"
                         unit="€"
                         show-spin-buttons
                         :rules="[creditRule]"
@@ -370,9 +359,7 @@
                     <v-col>
                       <VcsTextField
                         type="number"
-                        v-model.number="
-                          localSolarOptions.userOptions.creditPeriod
-                        "
+                        v-model.number="solarOptions.userOptions.creditPeriod"
                         :unit="
                           $t(
                             'solarRevenue.revenue.finance.durationUnit',
@@ -395,9 +382,7 @@
                     <v-col>
                       <VcsTextField
                         type="number"
-                        v-model.number="
-                          localSolarOptions.userOptions.creditInterest
-                        "
+                        v-model.number="solarOptions.userOptions.creditInterest"
                         unit="%"
                         show-spin-buttons
                         :max="30"
@@ -416,16 +401,8 @@
   </v-dialog>
 </template>
 
-<script lang="ts">
-  import {
-    computed,
-    defineComponent,
-    inject,
-    PropType,
-    Ref,
-    ref,
-    watch,
-  } from 'vue';
+<script setup lang="ts">
+  import { PropType, Ref, ref, watch } from 'vue';
   import {
     VDialog,
     VRow,
@@ -435,7 +412,7 @@
     VDivider,
     VSwitch,
     VIcon,
-  } from 'vuetify/lib';
+  } from 'vuetify/components';
   import {
     VcsCheckbox,
     VcsFormattedNumber,
@@ -443,157 +420,87 @@
     VcsLabel,
     VcsSlider,
     VcsTextField,
-    VcsUiApp,
     VcsWizard,
     VcsWizardStep,
   } from '@vcmap/ui';
   import type { SolarOptions } from '../solarOptions';
-  import { calculateSolarAreaModules } from './areaSelector/areaSelector.js';
-  import { SolarModule } from '../solarInputTypes.js';
 
-  export default defineComponent({
-    name: 'SolarRevenue',
-    methods: { calculateSolarAreaModules },
-    components: {
-      VcsSlider,
-      VcsCheckbox,
-      VcsLabel,
-      VRow,
-      VCol,
-      VDialog,
-      VcsFormButton,
-      VCard,
-      VcsWizard,
-      VcsWizardStep,
-      VContainer,
-      VcsTextField,
-      VcsFormattedNumber,
-      VDivider,
-      VSwitch,
-      VIcon,
+  const innerProps = defineProps({
+    investmentCosts: {
+      type: Number as PropType<number>,
+      required: true,
     },
-    props: {
-      solarOptions: {
-        type: Object as PropType<SolarOptions>,
-        required: true,
-      },
-      investmentCosts: {
-        type: Number as PropType<number>,
-        required: true,
-      },
-      creditAmount: {
-        type: Number as PropType<number>,
-        required: true,
-      },
-      isFinance: {
-        type: Boolean as PropType<boolean>,
-        required: true,
-      },
-      isStorageConsumption: {
-        type: Boolean as PropType<boolean>,
-        required: true,
-      },
-      selectedModules: {
-        type: Array as PropType<SolarModule[]>,
-        required: true,
-      },
-    },
-    setup(props, context) {
-      const app: VcsUiApp = inject<VcsUiApp>('vcsApp')!;
-      const isHeatPump: Ref<boolean> = ref(false);
-      const isCar: Ref<boolean> = ref(false);
-      const isPriceIncrease: Ref<boolean> = ref(false);
-      const dialog: Ref<boolean> = ref(false);
-      const sliderValues = ref(3);
-
-      const stepOrder = {
-        DEMAND: 1,
-        CONSUMPTION: 2,
-        COSTS: 3,
-        FINANCE: 4,
-      };
-
-      const currentStep: Ref<number> = ref(stepOrder.DEMAND);
-
-      const localSolarOptions = computed({
-        get(): SolarOptions {
-          return props.solarOptions;
-        },
-        set(newValue: SolarOptions): void {
-          context.emit('update-solar-options', newValue);
-        },
-      });
-
-      const localIsFinance = computed({
-        get(): boolean {
-          return props.isFinance;
-        },
-        set(newValue: boolean): void {
-          context.emit('update-isFinance', Boolean(newValue));
-        },
-      });
-
-      const localIsStorageConsumption = computed({
-        get(): boolean {
-          return props.isStorageConsumption;
-        },
-        set(newValue: boolean): void {
-          context.emit('update-isStorageConsumption', Boolean(newValue));
-        },
-      });
-
-      const calculatedElectricityDemand = (): void => {
-        localSolarOptions.value.userOptions.electricityDemand =
-          localSolarOptions.value.userOptions.numberOfPersons *
-          localSolarOptions.value.adminOptions.electricityDemandPerPerson;
-        if (isHeatPump.value) {
-          localSolarOptions.value.userOptions.electricityDemand +=
-            localSolarOptions.value.userOptions.livingSpace *
-            localSolarOptions.value.adminOptions.electricityDemandHeatPump;
-        }
-        if (isCar.value) {
-          localSolarOptions.value.userOptions.electricityDemand +=
-            (localSolarOptions.value.userOptions.annualDrivingDistance *
-              localSolarOptions.value.adminOptions.electricityDemandCar) /
-            100;
-        }
-      };
-      calculatedElectricityDemand();
-
-      watch(
-        () => localSolarOptions.value.userOptions.numberOfPersons,
-        () => calculatedElectricityDemand(),
-      );
-      watch(
-        () => localSolarOptions.value.userOptions.livingSpace,
-        () => calculatedElectricityDemand(),
-      );
-      watch(
-        () => localSolarOptions.value.userOptions.annualDrivingDistance,
-        () => calculatedElectricityDemand(),
-      );
-      watch(isHeatPump, () => calculatedElectricityDemand());
-      watch(isCar, () => calculatedElectricityDemand());
-
-      return {
-        app,
-        dialog,
-        stepOrder,
-        currentStep,
-        isHeatPump,
-        isCar,
-        sliderValues,
-        isPriceIncrease,
-        localSolarOptions,
-        localIsFinance,
-        localIsStorageConsumption,
-        creditRule(v: number): boolean | string {
-          return (
-            (v < props.investmentCosts && v > 0) ||
-            'Eigenkapital darf die Investitionskosten nicht übersteigen'
-          );
-        },
-      };
+    creditAmount: {
+      type: Number as PropType<number>,
+      required: true,
     },
   });
+
+  const solarOptions = defineModel('solarOptions', {
+    type: Object as PropType<SolarOptions>,
+    required: true,
+  });
+
+  const isFinance = defineModel('isFinance', {
+    type: Boolean as PropType<boolean>,
+    required: true,
+  });
+
+  const isStorageConsumption = defineModel('isStorageConsumption', {
+    type: Boolean as PropType<boolean>,
+    required: true,
+  });
+
+  const isHeatPump: Ref<boolean> = ref(false);
+  const isCar: Ref<boolean> = ref(false);
+  const isPriceIncrease: Ref<boolean> = ref(true);
+  const dialog: Ref<boolean> = ref(false);
+  const stepOrder = {
+    DEMAND: 1,
+    CONSUMPTION: 2,
+    COSTS: 3,
+    FINANCE: 4,
+  };
+
+  const currentStep: Ref<number> = ref(stepOrder.DEMAND);
+
+  const calculatedElectricityDemand = (): void => {
+    solarOptions.value.userOptions.electricityDemand =
+      solarOptions.value.userOptions.numberOfPersons *
+      solarOptions.value.adminOptions.electricityDemandPerPerson;
+    if (isHeatPump.value) {
+      solarOptions.value.userOptions.electricityDemand +=
+        solarOptions.value.userOptions.livingSpace *
+        solarOptions.value.adminOptions.electricityDemandHeatPump;
+    }
+    if (isCar.value) {
+      solarOptions.value.userOptions.electricityDemand +=
+        (solarOptions.value.userOptions.annualDrivingDistance *
+          solarOptions.value.adminOptions.electricityDemandCar) /
+        100;
+    }
+  };
+  calculatedElectricityDemand();
+
+  const creditRule = (v: number): boolean | string => {
+    return (
+      (v < innerProps.investmentCosts && v > 0) ||
+      'Eigenkapital darf die Investitionskosten nicht übersteigen'
+    );
+  };
+
+  watch(
+    () => solarOptions.value.userOptions.numberOfPersons,
+    () => calculatedElectricityDemand(),
+  );
+  watch(
+    () => solarOptions.value.userOptions.livingSpace,
+    () => calculatedElectricityDemand(),
+  );
+  watch(
+    () => solarOptions.value.userOptions.annualDrivingDistance,
+    () => calculatedElectricityDemand(),
+  );
+  watch(isHeatPump, () => calculatedElectricityDemand());
+  watch(isCar, () => calculatedElectricityDemand());
 </script>

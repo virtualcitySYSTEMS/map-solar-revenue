@@ -1,4 +1,4 @@
-import { PluginConfigEditor, VcsPlugin, VcsUiApp, vuetify } from '@vcmap/ui';
+import { PluginConfigEditor, VcsPlugin, VcsUiApp } from '@vcmap/ui';
 import { Component, ref, Ref } from 'vue';
 import { name, version, mapVersion } from '../package.json';
 import de from './i18n/de.json';
@@ -21,7 +21,6 @@ export type SolarPlugin = VcsPlugin<DeepPartial<SolarOptions>, never> & {
   readonly config: SolarOptions;
   selectedModules: Ref<SolarModule[]>;
   vcSolarInteraction: VcSolarInteraction;
-  chartTheme: Ref<string>;
 };
 
 export default function solarRevenuePlugin(
@@ -30,7 +29,6 @@ export default function solarRevenuePlugin(
   let app: VcsUiApp;
   let selectedModules: Ref<SolarModule[]>;
   let vcSolarInteraction: VcSolarInteraction;
-  let chartTheme: Ref<string>;
   const destroyFunctions: (() => void)[] = [];
   const config = deepMerge(getDefaultOptions(), configInput) as SolarOptions;
 
@@ -53,14 +51,10 @@ export default function solarRevenuePlugin(
     get vcSolarInteraction(): VcSolarInteraction {
       return vcSolarInteraction;
     },
-    get chartTheme(): Ref<string> {
-      return chartTheme;
-    },
     initialize(vcsUiApp: VcsUiApp): void {
       const solarRevenueId = 'solar-revenue';
       app = vcsUiApp;
       selectedModules = ref([]);
-      chartTheme = ref(vuetify.framework.theme.dark ? 'dark' : 'light');
       vcSolarInteraction = new VcSolarInteraction(
         app,
         selectedModules,
@@ -100,16 +94,10 @@ export default function solarRevenuePlugin(
         },
       );
 
-      const changedListener = app.themeChanged.addEventListener(() => {
-        chartTheme.value = vuetify.framework.theme.dark ? 'dark' : 'light';
-      });
-
       const vcSolarInteractionListener = createSolarNavbar(app);
 
       destroyFunctions.push(removedListener);
-      destroyFunctions.push(changedListener);
       destroyFunctions.push(vcSolarInteractionListener);
-
       destroyFunctions.push(toolboxAddedListener);
     },
     getDefaultOptions,
@@ -118,10 +106,10 @@ export default function solarRevenuePlugin(
       return deepDiff(getDefaultOptions(), config);
     },
 
-    getConfigEditors(): PluginConfigEditor[] {
+    getConfigEditors(): PluginConfigEditor<object>[] {
       return [
         {
-          component: SolarConfigEditor as Component & { title: string },
+          component: SolarConfigEditor as Component,
           infoUrlCallback: app.getHelpUrlCallback(
             '/components/plugins/solarToolConfig.html',
           ),

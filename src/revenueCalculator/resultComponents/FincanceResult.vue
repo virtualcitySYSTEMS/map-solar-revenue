@@ -1,9 +1,9 @@
 <template>
   <v-dialog v-model="dialog" width="600px">
-    <template #activator="{ on }">
+    <template #activator="{ props }">
       <VcsButton
         icon="mdi-open-in-new"
-        v-on="on"
+        v-bind="props"
         :disabled="!hasSelectedModules || !isFinance"
       />
     </template>
@@ -33,7 +33,7 @@
                 <v-col cols="9">
                   <VcsFormattedNumber
                     id="formattedNumber"
-                    :value="creditAmount"
+                    :model-value="creditAmount"
                     unit="€"
                     :fraction-digits="2"
                   />
@@ -66,7 +66,6 @@
         <v-row no-gutters class="px-0 py-3">
           <v-col class="d-flex justify-center">
             <vcs-data-table
-              class="elevation-0"
               :items="localFinance"
               item-key="year"
               :show-select="false"
@@ -74,6 +73,7 @@
               :show-searchbar="false"
               :headers="headers"
               v-model="localFinance"
+              density="compact"
             >
               <template #item="{ item }">
                 <tr>
@@ -83,7 +83,7 @@
                   <td>
                     <VcsFormattedNumber
                       id="formattedNumber"
-                      :value="item.annuity"
+                      :model-value="item.annuity"
                       unit="€"
                       :fraction-digits="2"
                     />
@@ -91,7 +91,7 @@
                   <td>
                     <VcsFormattedNumber
                       id="formattedNumber"
-                      :value="item.repaymentRate"
+                      :model-value="item.repaymentRate"
                       unit="€"
                       :fraction-digits="2"
                     />
@@ -99,7 +99,7 @@
                   <td>
                     <VcsFormattedNumber
                       id="formattedNumber"
-                      :value="item.remainingDept"
+                      :model-value="item.remainingDept"
                       unit="€"
                       :fraction-digits="2"
                     />
@@ -107,7 +107,7 @@
                   <td>
                     <VcsFormattedNumber
                       id="formattedNumber"
-                      :value="item.interestAmount"
+                      :model-value="item.interestAmount"
                       unit="€"
                       :fraction-digits="2"
                     />
@@ -126,7 +126,7 @@
             <VcsLabel>
               <VcsFormattedNumber
                 id="formattedNumber"
-                :value="creditCosts"
+                :model-value="creditCosts"
                 unit="€"
                 :fraction-digits="2"
               />
@@ -144,14 +144,14 @@
 </template>
 
 <style scoped lang="scss">
-  .borderCard.v-sheet.v-card {
+  .borderCard {
     border-width: 2px;
-    border-color: var(--v-primary-base);
+    border-color: rgb(var(--v-theme-primary));
   }
 </style>
 
-<script lang="ts">
-  import { computed, defineComponent, PropType, Ref, ref } from 'vue';
+<script setup lang="ts">
+  import { computed, PropType, Ref, ref } from 'vue';
   import {
     VDialog,
     VRow,
@@ -160,13 +160,75 @@
     VContainer,
     VIcon,
     VDivider,
-  } from 'vuetify/lib';
+  } from 'vuetify/components';
   import {
     VcsButton,
     VcsDataTable,
     VcsFormattedNumber,
     VcsLabel,
   } from '@vcmap/ui';
+
+  const innerProps = defineProps({
+    annuity: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    remainingDept: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    repaymentRate: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    interestAmount: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    isFinance: {
+      type: Boolean as PropType<boolean>,
+      required: true,
+    },
+    creditAmount: {
+      type: Number as PropType<number>,
+      required: true,
+    },
+    creditInterest: {
+      type: Number as PropType<number>,
+      required: true,
+    },
+    creditPeriod: {
+      type: Number as PropType<number>,
+      required: true,
+    },
+    hasSelectedModules: {
+      type: Boolean as PropType<boolean>,
+      required: true,
+    },
+  });
+
+  const headers = [
+    {
+      title: 'solarRevenue.finance.header.year',
+      key: 'year',
+    },
+    {
+      title: 'solarRevenue.finance.header.annuity',
+      key: 'annuity',
+    },
+    {
+      title: 'solarRevenue.finance.header.repaymentRate',
+      key: 'repaymentRate',
+    },
+    {
+      title: 'solarRevenue.finance.header.remainingDept',
+      key: 'remainingDept',
+    },
+    {
+      title: 'solarRevenue.finance.header.interestAmount',
+      key: 'interestAmount',
+    },
+  ];
 
   export type FinanceValues = {
     year: number;
@@ -176,111 +238,23 @@
     interestAmount: number;
   };
 
-  const defaultHeaders = [
-    {
-      text: 'solarRevenue.finance.header.year',
-      value: 'year',
-    },
-    {
-      text: 'solarRevenue.finance.header.annuity',
-      value: 'annuity',
-    },
-    {
-      text: 'solarRevenue.finance.header.repaymentRate',
-      value: 'repaymentRate',
-    },
-    {
-      text: 'solarRevenue.finance.header.remainingDept',
-      value: 'remainingDept',
-    },
-    {
-      text: 'solarRevenue.finance.header.interestAmount',
-      value: 'interestAmount',
-    },
-  ];
+  const dialog: Ref<boolean> = ref(false);
 
-  export default defineComponent({
-    name: 'FinanceResult',
-    components: {
-      VcsLabel,
-      VcsButton,
-      VRow,
-      VDialog,
-      VCard,
-      VCol,
-      VcsDataTable,
-      VContainer,
-      VIcon,
-      VDivider,
-      VcsFormattedNumber,
-    },
-    props: {
-      annuity: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      remainingDept: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      repaymentRate: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      interestAmount: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      isFinance: {
-        type: Boolean as PropType<boolean>,
-        required: true,
-      },
-      creditAmount: {
-        type: Number as PropType<number>,
-        required: true,
-      },
-      creditInterest: {
-        type: Number as PropType<number>,
-        required: true,
-      },
-      creditPeriod: {
-        type: Number as PropType<number>,
-        required: true,
-      },
-      hasSelectedModules: {
-        type: Boolean as PropType<boolean>,
-        required: true,
-      },
-    },
-
-    setup(props) {
-      const dialog: Ref<boolean> = ref(false);
-      const headers = defaultHeaders;
-
-      const localFinance = computed(() => {
-        const finance: FinanceValues[] = [];
-        props.annuity.forEach((v, k) => {
-          finance.push({
-            year: k,
-            annuity: v,
-            remainingDept: props.remainingDept.get(k) || 0,
-            repaymentRate: props.repaymentRate.get(k) || 0,
-            interestAmount: props.interestAmount.get(k) || 0,
-          });
-        });
-        return finance;
+  const localFinance = computed(() => {
+    const finance: FinanceValues[] = [];
+    innerProps.annuity.forEach((v, k) => {
+      finance.push({
+        year: k,
+        annuity: v,
+        remainingDept: innerProps.remainingDept.get(k) || 0,
+        repaymentRate: innerProps.repaymentRate.get(k) || 0,
+        interestAmount: innerProps.interestAmount.get(k) || 0,
       });
+    });
+    return finance;
+  });
 
-      const creditCosts = computed(() => {
-        return [...props.annuity.values()].reduce((acc, val) => acc + val);
-      });
-
-      return {
-        dialog,
-        localFinance,
-        headers,
-        creditCosts,
-      };
-    },
+  const creditCosts = computed(() => {
+    return [...innerProps.annuity.values()].reduce((acc, val) => acc + val);
   });
 </script>

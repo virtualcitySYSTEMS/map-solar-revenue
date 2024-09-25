@@ -2,21 +2,21 @@
   <v-sheet>
     <v-row no-gutters>
       <v-dialog v-model="dialog" width="1100px">
-        <template #activator="{ on }">
+        <template #activator="{ props }">
           <VcsButton
             icon="mdi-open-in-new"
-            v-on="on"
+            v-bind="props"
             :disabled="!hasSelectedModules"
           />
         </template>
         <v-card>
           <v-container class="px-5 py-1">
             <h3 class="d-flex align-center px-0 py-3">
-              <v-icon class="mr-1 text--primary" size="16"
+              <v-icon class="mr-1 text-primary" size="16"
                 >mdi-file-chart-outline</v-icon
               >
               <span
-                class="d-inline-block user-select-none font-weight-bold text--primary"
+                class="d-inline-block user-select-none font-weight-bold text-primary"
               >
                 {{ $t('solarRevenue.keydata.title') }}
               </span>
@@ -42,6 +42,8 @@
                 <VcsSelect
                   id="chartTypeEnergy"
                   :items="chartTypes"
+                  item-title="title"
+                  item-value="key"
                   v-model="selectedChartType"
                 />
               </v-col>
@@ -50,7 +52,6 @@
               <v-col class="d-flex justify-center">
                 <vcs-data-table
                   v-if="selectedChartType === 'environmentalBalance'"
-                  class="elevation-0"
                   :items="localEnvironmentalBalance"
                   item-key="year"
                   :show-select="false"
@@ -58,22 +59,22 @@
                   :show-searchbar="false"
                   :headers="environmentalBalanceHeaders"
                   v-model="localEnvironmentalBalance"
+                  density="compact"
                 >
                   <template
-                    v-for="(h, index) in environmentalBalanceHeaders"
-                    #[`header.${h.value}`]="{ header }"
+                    v-for="(header, index) in environmentalBalanceHeaders"
+                    :key="index"
+                    #[`header.${header.key}`]
                   >
-                    <v-tooltip
-                      bottom
-                      v-if="header.toolTip !== undefined"
-                      :key="index"
-                    >
-                      <template #activator="{ on }">
-                        <span v-on="on">{{ header.text }}</span>
-                      </template>
-                      <span>{{ header.toolTip }}</span>
-                    </v-tooltip>
-                    <span v-else :key="index">{{ header.text }}</span>
+                    <span>
+                      {{ $t(header.title) }}
+                      <v-tooltip
+                        location="bottom"
+                        v-if="header.toolTip !== undefined"
+                        activator="parent"
+                        :text="header.toolTip"
+                      />
+                    </span>
                   </template>
                   <template #item="{ item }">
                     <tr>
@@ -81,7 +82,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.coTwoSavings"
+                          :model-value="item.coTwoSavings"
                           unit="kg"
                           :fraction-digits="0"
                         />
@@ -94,7 +95,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="sumValues([...coTwoSavings.values()])"
+                          :model-value="sumValues([...coTwoSavings.values()])"
                           unit="kg"
                           :fraction-digits="0"
                         />
@@ -112,22 +113,22 @@
                   :show-searchbar="false"
                   :headers="energyHeaders"
                   v-model="localEnergyBalance"
+                  density="compact"
                 >
                   <template
-                    v-for="(h, index) in energyHeaders"
-                    #[`header.${h.value}`]="{ header }"
+                    v-for="(header, index) in energyHeaders"
+                    :key="index"
+                    #[`header.${header.key}`]
                   >
-                    <v-tooltip
-                      bottom
-                      v-if="header.toolTip !== undefined"
-                      :key="index"
-                    >
-                      <template #activator="{ on }">
-                        <span v-on="on">{{ header.text }}</span>
-                      </template>
-                      <span>{{ header.toolTip }}</span>
-                    </v-tooltip>
-                    <span v-else :key="index">{{ header.text }}</span>
+                    <span>
+                      {{ $t(header.title) }}
+                      <v-tooltip
+                        location="bottom"
+                        v-if="header.toolTip !== undefined"
+                        activator="parent"
+                        :text="header.toolTip"
+                      />
+                    </span>
                   </template>
                   <template #item="{ item }">
                     <tr>
@@ -135,7 +136,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.solarPowerYield"
+                          :model-value="item.solarPowerYield"
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -143,7 +144,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.electricityDemand"
+                          :model-value="item.electricityDemand"
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -151,7 +152,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.storageLosses"
+                          :model-value="item.storageLosses"
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -159,7 +160,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.directConsumption"
+                          :model-value="item.directConsumption"
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -167,7 +168,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.storageConsumption"
+                          :model-value="item.storageConsumption"
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -175,7 +176,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.gridConsumption"
+                          :model-value="item.gridConsumption"
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -183,7 +184,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.gridSupply"
+                          :model-value="item.gridSupply"
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -196,7 +197,9 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="sumValues([...solarPowerYield.values()])"
+                          :model-value="
+                            sumValues([...solarPowerYield.values()])
+                          "
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -204,7 +207,9 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="sumValues([...electricityDemand.values()])"
+                          :model-value="
+                            sumValues([...electricityDemand.values()])
+                          "
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -212,7 +217,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="sumValues([...storageLosses.values()])"
+                          :model-value="sumValues([...storageLosses.values()])"
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -220,7 +225,9 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="sumValues([...directConsumption.values()])"
+                          :model-value="
+                            sumValues([...directConsumption.values()])
+                          "
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -228,7 +235,9 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="sumValues([...storageConsumption.values()])"
+                          :model-value="
+                            sumValues([...storageConsumption.values()])
+                          "
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -236,7 +245,9 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="sumValues([...gridConsumption.values()])"
+                          :model-value="
+                            sumValues([...gridConsumption.values()])
+                          "
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -244,7 +255,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="sumValues([...gridSupply.values()])"
+                          :model-value="sumValues([...gridSupply.values()])"
                           unit="kWh"
                           :fraction-digits="0"
                         />
@@ -262,22 +273,22 @@
                   :show-searchbar="false"
                   :headers="energyPriceHeaders"
                   v-model="localEnergyPriceBalance"
+                  density="compact"
                 >
                   <template
-                    v-for="(h, index) in energyPriceHeaders"
-                    #[`header.${h.value}`]="{ header }"
+                    v-for="(header, index) in energyPriceHeaders"
+                    :key="index"
+                    #[`header.${header.key}`]
                   >
-                    <v-tooltip
-                      bottom
-                      v-if="header.toolTip !== undefined"
-                      :key="index"
-                    >
-                      <template #activator="{ on }">
-                        <span v-on="on">{{ header.text }}</span>
-                      </template>
-                      <span>{{ header.toolTip }}</span>
-                    </v-tooltip>
-                    <span v-else :key="index">{{ header.text }}</span>
+                    <span>
+                      {{ $t(header.title) }}
+                      <v-tooltip
+                        location="bottom"
+                        v-if="header.toolTip !== undefined"
+                        activator="parent"
+                        :text="header.toolTip"
+                      />
+                    </span>
                   </template>
                   <template #item="{ item }">
                     <tr>
@@ -285,7 +296,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.maintenanceCosts"
+                          :model-value="item.maintenanceCosts"
                           unit="€"
                           :fraction-digits="2"
                         />
@@ -293,7 +304,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.gridConsumptionPrice"
+                          :model-value="item.gridConsumptionPrice"
                           unit="€"
                           :fraction-digits="2"
                         />
@@ -301,7 +312,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.directConsumptionPrice"
+                          :model-value="item.directConsumptionPrice"
                           unit="€"
                           :fraction-digits="2"
                         />
@@ -309,7 +320,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.storageConsumptionPrice"
+                          :model-value="item.storageConsumptionPrice"
                           unit="€"
                           :fraction-digits="2"
                         />
@@ -317,7 +328,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.gridSupplyPrice"
+                          :model-value="item.gridSupplyPrice"
                           unit="€"
                           :fraction-digits="2"
                         />
@@ -325,7 +336,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="item.liquidity"
+                          :model-value="item.liquidity"
                           unit="€"
                           :fraction-digits="2"
                         />
@@ -338,7 +349,9 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="sumValues([...maintenanceCosts.values()])"
+                          :model-value="
+                            sumValues([...maintenanceCosts.values()])
+                          "
                           unit="€"
                           :fraction-digits="2"
                         />
@@ -346,7 +359,9 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="sumValues([...gridConsumptionPrice.values()])"
+                          :model-value="
+                            sumValues([...gridConsumptionPrice.values()])
+                          "
                           unit="€"
                           :fraction-digits="2"
                         />
@@ -354,7 +369,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="
+                          :model-value="
                             sumValues([...directConsumptionPrice.values()])
                           "
                           unit="€"
@@ -364,7 +379,7 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="
+                          :model-value="
                             sumValues([...storageConsumptionPrice.values()])
                           "
                           unit="€"
@@ -374,7 +389,9 @@
                       <td>
                         <VcsFormattedNumber
                           id="formattedNumber"
-                          :value="sumValues([...gridSupplyPrice.values()])"
+                          :model-value="
+                            sumValues([...gridSupplyPrice.values()])
+                          "
                           unit="€"
                           :fraction-digits="2"
                         />
@@ -403,21 +420,14 @@
 </template>
 
 <style scoped lang="scss">
-  .borderCard.v-sheet.v-card {
+  .borderCard {
     border-width: 2px;
-    border-color: var(--v-primary-base);
+    border-color: rgb(var(--v-theme-primary));
   }
 </style>
 
-<script lang="ts">
-  import {
-    computed,
-    defineComponent,
-    getCurrentInstance,
-    PropType,
-    Ref,
-    ref,
-  } from 'vue';
+<script setup lang="ts">
+  import { computed, getCurrentInstance, PropType, Ref, ref } from 'vue';
   import {
     VDialog,
     VRow,
@@ -427,7 +437,7 @@
     VCol,
     VIcon,
     VTooltip,
-  } from 'vuetify/lib';
+  } from 'vuetify/components';
   import {
     VcsButton,
     VcsDataTable,
@@ -436,6 +446,69 @@
     VcsFormattedNumber,
   } from '@vcmap/ui';
   import { sumValues } from '../../helper.js';
+
+  const innerProps = defineProps({
+    maintenanceCosts: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    gridConsumptionPrice: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    directConsumptionPrice: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    storageConsumptionPrice: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    gridSupplyPrice: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    coTwoSavings: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    solarPowerYield: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    liquidity: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    electricityDemand: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    storageLosses: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    directConsumption: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    storageConsumption: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    gridConsumption: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    gridSupply: {
+      type: Map as PropType<Map<number, number>>,
+      required: true,
+    },
+    hasSelectedModules: {
+      type: Boolean as PropType<boolean>,
+      required: true,
+    },
+  });
 
   export type EnvironmentalBalance = {
     year: number;
@@ -463,255 +536,156 @@
     liquidity: number;
   };
 
-  const energyHeadersDefault = [
+  const energyHeaders = [
     {
-      text: 'solarRevenue.keydata.energyHeader.year',
-      value: 'year',
+      title: 'solarRevenue.keydata.energyHeader.year',
+      key: 'year',
     },
     {
-      text: 'solarRevenue.keydata.energyHeader.solarPowerYield',
-      value: 'solarPowerYield',
+      title: 'solarRevenue.keydata.energyHeader.solarPowerYield',
+      key: 'solarPowerYield',
       toolTip: '[kWh]',
     },
     {
-      text: 'solarRevenue.keydata.energyHeader.electricityDemand',
-      value: 'electricityDemand',
+      title: 'solarRevenue.keydata.energyHeader.electricityDemand',
+      key: 'electricityDemand',
       toolTip: '[kWh]',
     },
     {
-      text: 'solarRevenue.keydata.energyHeader.storageLosses',
-      value: 'storageLosses',
+      title: 'solarRevenue.keydata.energyHeader.storageLosses',
+      key: 'storageLosses',
       toolTip: '[kWh]',
     },
     {
-      text: 'solarRevenue.keydata.energyHeader.directConsumption',
-      value: 'directConsumption',
+      title: 'solarRevenue.keydata.energyHeader.directConsumption',
+      key: 'directConsumption',
       toolTip: '[kWh]',
     },
     {
-      text: 'solarRevenue.keydata.energyHeader.storageConsumption',
-      value: 'storageConsumption',
+      title: 'solarRevenue.keydata.energyHeader.storageConsumption',
+      key: 'storageConsumption',
       toolTip: '[kWh]',
     },
     {
-      text: 'solarRevenue.keydata.energyHeader.gridConsumption',
-      value: 'gridConsumption',
+      title: 'solarRevenue.keydata.energyHeader.gridConsumption',
+      key: 'gridConsumption',
       toolTip: '[kWh]',
     },
     {
-      text: 'solarRevenue.keydata.energyHeader.gridSupply',
-      value: 'gridSupply',
+      title: 'solarRevenue.keydata.energyHeader.gridSupply',
+      key: 'gridSupply',
       toolTip: '[kWh]',
     },
   ];
 
-  const environmentalBalanceHeadersDefault = [
+  const environmentalBalanceHeaders = [
     {
-      text: 'solarRevenue.keydata.environmentalBalanceHeader.year',
-      value: 'year',
+      title: 'solarRevenue.keydata.environmentalBalanceHeader.year',
+      key: 'year',
     },
     {
-      text: 'solarRevenue.keydata.environmentalBalanceHeader.coTwoSavings',
-      value: 'coTwoSavings',
+      title: 'solarRevenue.keydata.environmentalBalanceHeader.coTwoSavings',
+      key: 'coTwoSavings',
       toolTip: '[kg]',
     },
   ];
 
-  const energyPriceHeadersDefault = [
+  const energyPriceHeaders = [
     {
-      text: 'solarRevenue.keydata.energyPriceHeader.year',
-      value: 'year',
+      title: 'solarRevenue.keydata.energyPriceHeader.year',
+      key: 'year',
     },
     {
-      text: 'solarRevenue.keydata.energyPriceHeader.maintenanceCosts',
-      value: 'maintenanceCosts',
+      title: 'solarRevenue.keydata.energyPriceHeader.maintenanceCosts',
+      key: 'maintenanceCosts',
       toolTip: '[€]',
     },
     {
-      text: 'solarRevenue.keydata.energyPriceHeader.gridConsumptionPrice',
-      value: 'gridConsumptionPrice',
+      title: 'solarRevenue.keydata.energyPriceHeader.gridConsumptionPrice',
+      key: 'gridConsumptionPrice',
       toolTip: '[€]',
     },
     {
-      text: 'solarRevenue.keydata.energyPriceHeader.directConsumptionPrice',
-      value: 'directConsumptionPrice',
+      title: 'solarRevenue.keydata.energyPriceHeader.directConsumptionPrice',
+      key: 'directConsumptionPrice',
       toolTip: '[€]',
     },
     {
-      text: 'solarRevenue.keydata.energyPriceHeader.storageConsumptionPrice',
+      title: 'solarRevenue.keydata.energyPriceHeader.storageConsumptionPrice',
 
-      value: 'storageConsumptionPrice',
+      key: 'storageConsumptionPrice',
       toolTip: '[€]',
     },
     {
-      text: 'solarRevenue.keydata.energyPriceHeader.gridSupplyPrice',
-      value: 'gridSupplyPrice',
+      title: 'solarRevenue.keydata.energyPriceHeader.gridSupplyPrice',
+      key: 'gridSupplyPrice',
       toolTip: '[€]',
     },
     {
-      text: 'solarRevenue.keydata.energyPriceHeader.liquidity',
-      value: 'liquidity',
+      title: 'solarRevenue.keydata.energyPriceHeader.liquidity',
+      key: 'liquidity',
       toolTip: '[€]',
     },
   ];
 
-  export default defineComponent({
-    name: 'KeyDataResult',
-    methods: { sumValues },
-    components: {
-      VcsButton,
-      VRow,
-      VCol,
-      VDialog,
-      VCard,
-      VSheet,
-      VContainer,
-      VcsDataTable,
-      VIcon,
-      VTooltip,
-      VcsSelect,
-      VcsLabel,
-      VcsFormattedNumber,
+  const dialog: Ref<boolean> = ref(false);
+
+  const vm = getCurrentInstance()?.proxy;
+
+  const chartTypes = computed(() => [
+    { key: 'energy', title: vm?.$t('solarRevenue.keydata.type.energy') },
+    {
+      key: 'energyCosts',
+      title: vm?.$t('solarRevenue.keydata.type.energyCosts'),
     },
-    props: {
-      maintenanceCosts: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      gridConsumptionPrice: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      directConsumptionPrice: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      storageConsumptionPrice: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      gridSupplyPrice: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      coTwoSavings: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      solarPowerYield: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      liquidity: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      electricityDemand: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      storageLosses: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      directConsumption: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      storageConsumption: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      gridConsumption: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      gridSupply: {
-        type: Map as PropType<Map<number, number>>,
-        required: true,
-      },
-      hasSelectedModules: {
-        type: Boolean as PropType<boolean>,
-        required: true,
-      },
+    {
+      key: 'environmentalBalance',
+      title: vm?.$t('solarRevenue.keydata.type.environmentalBalance'),
     },
-    setup(props) {
-      const dialog: Ref<boolean> = ref(false);
+  ]);
+  const selectedChartType = ref('energy');
 
-      const vm = getCurrentInstance()?.proxy;
-
-      const energyHeaders = energyHeadersDefault;
-      const energyPriceHeaders = energyPriceHeadersDefault;
-      const environmentalBalanceHeaders = environmentalBalanceHeadersDefault;
-
-      const chartTypes = computed(() => [
-        { value: 'energy', text: vm?.$t('solarRevenue.keydata.type.energy') },
-        {
-          value: 'energyCosts',
-          text: vm?.$t('solarRevenue.keydata.type.energyCosts'),
-        },
-        {
-          value: 'environmentalBalance',
-          text: vm?.$t('solarRevenue.keydata.type.environmentalBalance'),
-        },
-      ]);
-      const selectedChartType = ref('energy');
-
-      const localEnvironmentalBalance = computed(() => {
-        const environmentalBalance: EnvironmentalBalance[] = [];
-        props.coTwoSavings.forEach((v, k) => {
-          environmentalBalance.push({
-            year: k,
-            coTwoSavings: v,
-          });
-        });
-        return environmentalBalance;
+  const localEnvironmentalBalance = computed(() => {
+    const environmentalBalance: EnvironmentalBalance[] = [];
+    innerProps.coTwoSavings.forEach((v, k) => {
+      environmentalBalance.push({
+        year: k,
+        coTwoSavings: v,
       });
+    });
+    return environmentalBalance;
+  });
 
-      const localEnergyBalance = computed(() => {
-        const energyBalance: EnergyBalance[] = [];
-        props.solarPowerYield.forEach((v, k) => {
-          energyBalance.push({
-            year: k,
-            solarPowerYield: v,
-            electricityDemand: props.electricityDemand.get(k) || 0,
-            storageLosses: props.storageLosses.get(k) || 0,
-            directConsumption: props.directConsumption.get(k) || 0,
-            storageConsumption: props.storageConsumption.get(k) || 0,
-            gridConsumption: props.gridConsumption.get(k) || 0,
-            gridSupply: props.gridSupply.get(k) || 0,
-          });
-        });
-        return energyBalance;
+  const localEnergyBalance = computed(() => {
+    const energyBalance: EnergyBalance[] = [];
+    innerProps.solarPowerYield.forEach((v, k) => {
+      energyBalance.push({
+        year: k,
+        solarPowerYield: v,
+        electricityDemand: innerProps.electricityDemand.get(k) || 0,
+        storageLosses: innerProps.storageLosses.get(k) || 0,
+        directConsumption: innerProps.directConsumption.get(k) || 0,
+        storageConsumption: innerProps.storageConsumption.get(k) || 0,
+        gridConsumption: innerProps.gridConsumption.get(k) || 0,
+        gridSupply: innerProps.gridSupply.get(k) || 0,
       });
+    });
+    return energyBalance;
+  });
 
-      const localEnergyPriceBalance = computed(() => {
-        const energyPriceBalance: EnergyPriceBalance[] = [];
-        props.maintenanceCosts.forEach((v, k) => {
-          energyPriceBalance.push({
-            year: k,
-            maintenanceCosts: v,
-            gridConsumptionPrice: props.gridConsumptionPrice.get(k) || 0,
-            directConsumptionPrice: props.directConsumptionPrice.get(k) || 0,
-            storageConsumptionPrice: props.storageConsumptionPrice.get(k) || 0,
-            gridSupplyPrice: props.gridSupplyPrice.get(k) || 0,
-            liquidity: props.liquidity.get(k) || 0,
-          });
-        });
-        return energyPriceBalance;
+  const localEnergyPriceBalance = computed(() => {
+    const energyPriceBalance: EnergyPriceBalance[] = [];
+    innerProps.maintenanceCosts.forEach((v, k) => {
+      energyPriceBalance.push({
+        year: k,
+        maintenanceCosts: v,
+        gridConsumptionPrice: innerProps.gridConsumptionPrice.get(k) || 0,
+        directConsumptionPrice: innerProps.directConsumptionPrice.get(k) || 0,
+        storageConsumptionPrice: innerProps.storageConsumptionPrice.get(k) || 0,
+        gridSupplyPrice: innerProps.gridSupplyPrice.get(k) || 0,
+        liquidity: innerProps.liquidity.get(k) || 0,
       });
-
-      return {
-        dialog,
-        localEnergyBalance,
-        energyHeaders,
-        selectedChartType,
-        chartTypes,
-        localEnergyPriceBalance,
-        energyPriceHeaders,
-        localEnvironmentalBalance,
-        environmentalBalanceHeaders,
-      };
-    },
+    });
+    return energyPriceBalance;
   });
 </script>

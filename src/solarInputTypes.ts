@@ -21,5 +21,5 @@ export type SolarModule = {
   material?: ModuleMaterial;
   solarSurface?: SolarSurface;
   actions?: VcsAction[];
-  calculatedProgress?: SolarCalculationProgress;
+  calculatedProgress: SolarCalculationProgress;
 };

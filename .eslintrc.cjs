@@ -18,6 +18,8 @@ module.exports = {
       },
       rules: {
         '@typescript-eslint/no-non-null-assertion': 'off',
+        'vue/no-v-for-template-key': 'off',
+        'vue/no-v-model-argument': 'off',
       },
     },
   ],

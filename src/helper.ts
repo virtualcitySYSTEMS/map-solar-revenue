@@ -33,14 +33,14 @@ export function deepDiff<T extends Record<string, unknown>>(
           value1.length !== value2.length ||
           JSON.stringify(value1) !== JSON.stringify(value2)
         ) {
-          differences[key] = value2;
+          differences[key] = value2 as T[keyof T];
         }
       } else if (
         typeof value1 !== 'function' &&
         typeof value2 !== 'function' &&
         value1 !== value2
       ) {
-        differences[key] = value2;
+        differences[key] = value2 as T[keyof T];
       }
     }
   }
@@ -82,7 +82,7 @@ export function deepMerge<T extends Record<string, unknown>>(
           merged[key] = nestedMerge as T[typeof key];
         }
       } else {
-        merged[key] = value2;
+        merged[key] = value2 as T[keyof T];
       }
     }
   }

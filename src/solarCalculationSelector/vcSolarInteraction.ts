@@ -8,7 +8,7 @@ import {
 } from '@vcmap/core';
 import { Cesium3DTileFeature } from '@vcmap-cesium/engine';
 import { NotificationType, VcsUiApp } from '@vcmap/ui';
-import { Ref } from 'vue';
+import { reactive, Ref } from 'vue';
 import type { SolarModule } from '../solarInputTypes.js';
 import { filterObject } from '../helper.js';
 import { VcSolarOptions } from '../solarOptions.js';
@@ -102,7 +102,7 @@ class VcSolarInteraction extends AbstractInteraction {
     if (this._localFeatureTrack.indexOf(feature.featureId) === -1) {
       const attributes = feature.getProperty('attributes');
       if (attributes.solarArea) {
-        const moduleFeature: SolarModule = {
+        const moduleFeature = reactive<SolarModule>({
           id: feature.getId(),
           featureId: feature.featureId,
           area: attributes.solarArea || -9999,
@@ -127,7 +127,7 @@ class VcSolarInteraction extends AbstractInteraction {
               },
             },
           ],
-        };
+        }) as SolarModule;
         this._selectedModules.value.push(moduleFeature);
         this._localFeatureTrack.push(feature.featureId);
         this._highlightFeature(feature);
