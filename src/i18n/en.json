@@ -1,7 +1,8 @@
 {
   "solarRevenue": {
-    "name": "Solar Revenue Calculator",
-    "tooltip": "Solar Revenue Calculator",
+    "editorTitle": "Solar profitability calculator - Editor",
+    "name": "Solar profitability calculator",
+    "tooltip": "Solar profitability calculator",
     "nasa": "The NASA calibration service is not available",
     "profitability": {
       "selectFeature": "Select one or more objects"
@@ -13,8 +14,8 @@
       "remove": "remove",
       "calculate": "Calculate solar yield",
       "method": "Step 1 - Register potential areas",
-      "selectArea": "select areas",
-      "drawArea": "draw areas",
+      "selectArea": "Select solar potential area",
+      "drawArea": "Draw solar potential area",
       "helpMethod": "Select a method for calculating the solar irradiation in the toolbar.",
       "helpMethod2": "You can either select an area that has already been calculated or draw a free area.",
       "helpMethodArea": "To calculate the solar irradiation on a surface, activate the drawing mode in the toolbar and draw an arbitrary surface.",

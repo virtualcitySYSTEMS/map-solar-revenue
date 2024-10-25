@@ -158,7 +158,7 @@
 
   const totalCoTwoEmission = computed(() => {
     return innerProps.coTwoCosts.size
-      ? ([...innerProps.coTwoCosts.values()] || [0]).reduce(
+      ? [...innerProps.coTwoCosts.values()].reduce(
           (acc: number, val: number) => {
             return acc + val;
           },

@@ -110,14 +110,21 @@ export default function solarRevenuePlugin(
       return [
         {
           component: SolarConfigEditor as Component,
+          title: 'solarRevenue.editorTitle',
           infoUrlCallback: app.getHelpUrlCallback(
             '/components/plugins/solarToolConfig.html',
+            'app-configurator',
           ),
         },
       ];
     },
 
     destroy(): void {
+      const solarLayer = app.layers.getByKey('_solarAreaLayer');
+      if (solarLayer) {
+        app.layers.remove(solarLayer);
+      }
+      vcSolarInteraction?.clear();
       destroyFunctions.forEach((cb) => cb());
     },
     i18n: {

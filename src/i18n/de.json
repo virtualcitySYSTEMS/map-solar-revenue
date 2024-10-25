@@ -1,7 +1,8 @@
 {
   "solarRevenue": {
-    "name": "Solar Wirtschaftlichkeitsrechner",
-    "tooltip": "Solar Wirtschaftlichkeitsrechner",
+    "editorTitle": "Rentabilitätsrechner für Solaranlagen - Editor",
+    "name": "Rentabilitätsrechner für Solaranlagen",
+    "tooltip": "Rentabilitätsrechner für Solaranlagen",
     "nasa": "Der Kalibrierungsdienst der NASA ist nicht erreichbar",
     "profitability": {
       "selectFeature": "Selektieren Sie ein oder mehrere Objekte"
@@ -13,11 +14,11 @@
       "remove": "Entfernen",
       "calculate": "Solarertrag berechnen",
       "method": "Schritt 1 - Potentialflächen erfassen",
-      "selectArea": "Flächen selektieren",
-      "drawArea": "Flächen zeichnen",
-      "helpMethod": "Wählen Sie eine Methode für die Berechnung der solaren  Einstrahlung in der Toolbar aus.",
+      "selectArea": "Solarpotentialfläche selektieren",
+      "drawArea": "Solarpotentialfläche zeichnen",
+      "helpMethod": "Wählen Sie eine Methode für die Berechnung der solaren  Einstrahlung in der Werkzeugleiste aus.",
       "helpMethod2": "Sie können entweder eine bereits berechnete Fläche selektieren oder eine Freifläche zeichnen.",
-      "helpMethodArea": "Für die Berechnung der solaren Einstrahlung auf eine Fläche aktivieren Sie den Zeichnungsmodus in der Toolbar und zeichnen eine beliebige Fläche.",
+      "helpMethodArea": "Für die Berechnung der solaren Einstrahlung auf eine Fläche aktivieren Sie den Zeichnungsmodus in der Werkzeugleiste und zeichnen eine beliebige Fläche.",
       "modulesList": "Schritt 2 - Ertrag der Flächen berechnen",
       "helpModulesList": "Hier werden alle selektierten oder gezeichneten Flächen angezeigt. Bei gezeichneten Flächen muss die solare Einstrahlung über den Button (Solarertrag berechnen) berechnet werden.",
       "total": "Gesamt",
@@ -199,8 +200,8 @@
         "electricityDemand": "Strombedarf"
       },
       "global": {
-        "solarLayerName": "Solar Layer Name",
-        "isVcSolar": "VC Solar Layer vorhanden",
+        "solarLayerName": "Solar Ebene Name",
+        "isVcSolar": "VC Solar Ebene vorhanden",
         "isDebug": "Debug Feature erzeugen"
       },
       "vcSolar": {
