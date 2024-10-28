@@ -185,7 +185,7 @@ publish:
       - $PUBLISH
   script:
     - VERSION=$(node -pe "require('./package.json').version")
-    - npm run pack
+    - npm run bundle
     - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file dist/@vcmap-solar-revenue.tar.gz "${CI_API_V4_URL}/projects/317/packages/generic/vcmap-solar-revenue/${VERSION}/vcmap-solar-revenue-${VERSION}.tar.gz"'
     - LEVEL=$([ $PUBLISH == "prerelease" ] && echo "prerelease" || echo "patch")
     - npm config set '//npmregistry:4873/:_authToken' "${VERDACCIO_TOKEN}"
