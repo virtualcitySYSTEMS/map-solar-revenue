@@ -255,10 +255,10 @@ export function accumSolarRad(
       });
     });
   }
-  solarSurface.diffuseRad = diffuseRadSurface;
-  solarSurface.directRad = directRadSurface;
-  solarSurface.globalRad = diffuseRadSurface + directRadSurface;
-  solarModule.solarIrradiation = diffuseRadSurface + directRadSurface;
+  solarSurface.diffuseRad = diffuseRadSurface > 0 ? diffuseRadSurface : 0;
+  solarSurface.directRad = directRadSurface > 0 ? directRadSurface : 0;
+  solarSurface.globalRad = solarSurface.diffuseRad + solarSurface.directRad;
+  solarModule.solarIrradiation = solarSurface.globalRad;
 }
 
 async function createSunHemisphere(solarSurface: SolarSurface): Promise<void> {
