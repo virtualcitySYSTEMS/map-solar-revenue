@@ -3,45 +3,49 @@ import { Coordinate } from 'ol/coordinate';
 import { Projection } from '@vcmap/core';
 import { Polygon } from 'ol/geom';
 import { area, polygon, Position } from '@turf/turf';
-import { SolarOptions } from './solarOptions.js';
+import { isDark, VcsUiApp } from '@vcmap/ui';
+import { SolarDiagramColors, SolarOptions } from './solarOptions.js';
 
 export function deepDiff<T extends Record<string, unknown>>(
   defaultObject: Partial<T>,
   changeObject: Partial<T>,
 ): Partial<T> {
   const differences: Partial<T> = {} as Partial<T>;
-  const keys = Object.keys(defaultObject) as (keyof T)[];
+  const keys = new Set<keyof T>([
+    ...Object.keys(defaultObject),
+    ...Object.keys(changeObject),
+  ]);
 
   for (const key of keys) {
-    if (Object.getOwnPropertyDescriptor(changeObject, key)) {
-      const value1 = defaultObject[key];
-      const value2 = changeObject[key];
+    const value1 = defaultObject[key];
+    const value2 = changeObject[key];
+
+    if (
+      typeof value1 === 'object' &&
+      typeof value2 === 'object' &&
+      !Array.isArray(value1) &&
+      value1 !== null &&
+      !Array.isArray(value2) &&
+      value2 !== null
+    ) {
+      const nestedDifferences = deepDiff(value1, value2);
+      if (Object.keys(nestedDifferences).length > 0) {
+        differences[key] = nestedDifferences as T[typeof key];
+      }
+    } else if (Array.isArray(value1) && Array.isArray(value2)) {
       if (
-        typeof value1 === 'object' &&
-        typeof value2 === 'object' &&
-        !Array.isArray(value1) &&
-        value1 !== null &&
-        !Array.isArray(value2) &&
-        value2 !== null
-      ) {
-        const nestedDifferences = deepDiff(value1, value2);
-        if (nestedDifferences) {
-          differences[key] = nestedDifferences as T[typeof key];
-        }
-      } else if (Array.isArray(value1) && Array.isArray(value2)) {
-        if (
-          value1.length !== value2.length ||
-          JSON.stringify(value1) !== JSON.stringify(value2)
-        ) {
-          differences[key] = value2 as T[keyof T];
-        }
-      } else if (
-        typeof value1 !== 'function' &&
-        typeof value2 !== 'function' &&
-        value1 !== value2
+        value1.length !== value2.length ||
+        JSON.stringify(value1) !== JSON.stringify(value2)
       ) {
         differences[key] = value2 as T[keyof T];
       }
+    } else if (
+      value2 !== undefined &&
+      typeof value1 !== 'function' &&
+      typeof value2 !== 'function' &&
+      value1 !== value2
+    ) {
+      differences[key] = value2 as T[keyof T];
     }
   }
   return differences;
@@ -63,27 +67,26 @@ export function deepMerge<T extends Record<string, unknown>>(
   changeObject: Partial<T>,
 ): T {
   const merged: Partial<T> = { ...defaultObject };
-  const keys = Object.keys(defaultObject) as (keyof T)[];
+  const keys = new Set([
+    ...Object.keys(defaultObject),
+    ...Object.keys(changeObject),
+  ]) as Set<keyof T>;
 
   for (const key of keys) {
-    if (Object.getOwnPropertyDescriptor(changeObject, key)) {
-      const value1 = defaultObject[key];
-      const value2 = changeObject[key];
-      if (
-        typeof value1 === 'object' &&
-        typeof value2 === 'object' &&
-        !Array.isArray(value1) &&
-        value1 !== null &&
-        !Array.isArray(value2) &&
-        value2 !== null
-      ) {
-        const nestedMerge = deepMerge(value1, value2);
-        if (nestedMerge) {
-          merged[key] = nestedMerge as T[typeof key];
-        }
-      } else {
-        merged[key] = value2 as T[keyof T];
-      }
+    const value1 = defaultObject[key];
+    const value2 = changeObject[key];
+
+    if (
+      typeof value1 === 'object' &&
+      typeof value2 === 'object' &&
+      !Array.isArray(value1) &&
+      value1 !== null &&
+      !Array.isArray(value2) &&
+      value2 !== null
+    ) {
+      merged[key] = deepMerge(value1, value2) as T[typeof key];
+    } else if (value2 !== undefined) {
+      merged[key] = value2 as T[typeof key];
     }
   }
   return merged as T;
@@ -189,4 +192,20 @@ export function turfArea(feature: Feature<Polygon>): number {
       ?.getCoordinates() as Position[][],
   );
   return area(turfPoly);
+}
+
+function getColorBySingleKey(app: VcsUiApp, key: string): string {
+  return app.vuetify.theme.current.value.colors[key];
+}
+
+export function getSolarColorByKey(
+  app: VcsUiApp,
+  colors: SolarDiagramColors,
+  key: keyof SolarDiagramColors,
+): string {
+  return (
+    colors[key]?.[isDark(app) ? 'dark' : 'light'] ??
+    getColorBySingleKey(app, colors[key].default) ??
+    '#000000'
+  );
 }

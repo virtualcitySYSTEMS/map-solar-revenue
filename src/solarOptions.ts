@@ -1,3 +1,17 @@
+export type ConsumptionProfile = {
+  title: string;
+  direct: number;
+  storage: number;
+};
+
+export type ConsumptionProfiles = {
+  balanced: ConsumptionProfile;
+  day: ConsumptionProfile;
+  evening: ConsumptionProfile;
+  high: ConsumptionProfile;
+  optimal: ConsumptionProfile;
+};
+
 export type AdminOptions = {
   germanPowerMix: number;
   germanPowerMixYear: number;
@@ -9,6 +23,11 @@ export type AdminOptions = {
   storageLosses: number;
   amortizationPeriod: number;
   maintenancePortion: number;
+  storageCapacityPrice: number;
+  consumptionProfiles: ConsumptionProfiles;
+  helpPriceIncreaseStart: number;
+  helpPriceIncreaseEnd: number;
+  helpPriceIncreasePercentage: number;
 };
 
 export type UserOptions = {
@@ -24,6 +43,7 @@ export type UserOptions = {
   creditPeriod: number;
   creditInterest: number;
   electricityDemand: number;
+  storageCapacity: number;
 };
 
 export type VcSolarOptions = {
@@ -37,6 +57,24 @@ export type GlobalSettings = {
   isVcSolar: boolean;
   solarLayerName: string;
   isDebug: boolean;
+  itemsPerPage: number;
+  isPaginated: boolean;
+  infoContent: string;
+};
+
+export type SolarColor = {
+  light?: string;
+  dark?: string;
+  default: string;
+};
+
+export type SolarDiagramColors = Record<string, SolarColor>;
+
+export type SolarColors = {
+  global: SolarDiagramColors;
+  liquidity: SolarDiagramColors;
+  co2: SolarDiagramColors;
+  revenue: SolarDiagramColors;
 };
 
 export type SolarOptions = {
@@ -44,6 +82,7 @@ export type SolarOptions = {
   userOptions: UserOptions;
   globalSettings: GlobalSettings;
   vcSolarOptions: VcSolarOptions;
+  colors: SolarColors;
 };
 
 export default (): SolarOptions => ({
@@ -58,6 +97,37 @@ export default (): SolarOptions => ({
     storageLosses: 20,
     amortizationPeriod: 20,
     maintenancePortion: 2,
+    storageCapacityPrice: 500,
+    helpPriceIncreaseStart: 2000,
+    helpPriceIncreaseEnd: 2021,
+    helpPriceIncreasePercentage: 6.1,
+    consumptionProfiles: {
+      balanced: {
+        title: 'solarRevenue.revenue.consumption.profiles.balanced',
+        direct: 30,
+        storage: 30,
+      },
+      day: {
+        title: 'solarRevenue.revenue.consumption.profiles.day',
+        direct: 50,
+        storage: 20,
+      },
+      evening: {
+        title: 'solarRevenue.revenue.consumption.profiles.evening',
+        direct: 15,
+        storage: 45,
+      },
+      high: {
+        title: 'solarRevenue.revenue.consumption.profiles.high',
+        direct: 40,
+        storage: 30,
+      },
+      optimal: {
+        title: 'solarRevenue.revenue.consumption.profiles.optimal',
+        direct: 60,
+        storage: 20,
+      },
+    },
   },
   userOptions: {
     numberOfPersons: 3,
@@ -72,16 +142,46 @@ export default (): SolarOptions => ({
     creditPeriod: 10,
     creditInterest: 4.0,
     electricityDemand: 0,
+    storageCapacity: 10,
   },
   globalSettings: {
     isVcSolar: false,
     solarLayerName: 'SolarBuildings',
     isDebug: false,
+    itemsPerPage: 10,
+    isPaginated: true,
+    infoContent: 'solarRevenue.infoContent.content',
   },
   vcSolarOptions: {
     efficiency: 20,
     costs: 1200,
     degradation: 0.5,
     kwpPerArea: 0.215,
+  },
+  colors: {
+    global: {
+      strokeColor: {
+        light: '#F8F8F8',
+        dark: '#383838',
+        default: 'base-darken-4',
+      },
+    },
+    revenue: {
+      directConsumptionPriceColor: { default: 'primary-lighten-1' },
+      storageConsumptionPriceColor: { default: 'primary-darken-1' },
+      gridSupplyPriceColor: { default: 'primary-darken-2' },
+      maintenanceCostsColor: { default: 'base-darken-1' },
+      gridConsumptionPriceColor: { default: 'base-darken-2' },
+      repaymentRateColor: { default: 'base-darken-3' },
+      interestAmountColor: { default: 'base-darken-4' },
+    },
+    liquidity: {
+      positiveLiquidityColor: { default: 'primary' },
+      negativeLiquidityColor: { default: 'base-darken-1' },
+    },
+    co2: {
+      coTwoSavingsColor: { default: 'primary' },
+      coTwoCostsColor: { default: 'base-darken-1' },
+    },
   },
 });

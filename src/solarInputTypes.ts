@@ -8,8 +8,7 @@ export type SolarCalculationProgress = {
   progress: number;
 };
 export type SolarModule = {
-  id: string | number;
-  featureId: number;
+  featureId: string | number;
   area: number;
   zenith?: number;
   azimuth?: number;
@@ -22,4 +21,5 @@ export type SolarModule = {
   solarSurface?: SolarSurface;
   actions?: VcsAction[];
   calculatedProgress: SolarCalculationProgress;
+  type: 'area' | 'vcsolar';
 };

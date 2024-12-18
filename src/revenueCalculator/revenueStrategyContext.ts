@@ -35,6 +35,10 @@ export default class RevenueStrategyContext {
     return this._revenueStrategy.creditAmount(props);
   }
 
+  storagePrice(props?: unknown): number {
+    return this._revenueStrategy.storagePrice(props);
+  }
+
   gridPurchasePrice(props?: unknown): Map<number, number> {
     return this._revenueStrategy.gridConsumptionPrice(props);
   }

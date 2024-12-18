@@ -14,7 +14,7 @@
           <span
             class="d-inline-block user-select-none font-weight-bold text-primary"
           >
-            {{ $t('solarRevenue.cotwo.title') }}
+            {{ $st('solarRevenue.cotwo.title') }}
           </span>
         </h3>
         <VueApexCharts
@@ -27,7 +27,7 @@
         <v-divider />
         <v-row no-gutters class="px-0 py-0 font-weight-bold">
           <v-col class="d-flex justify-start">
-            <VcsLabel>{{ $t('solarRevenue.cotwo.totalEmission') }}</VcsLabel>
+            <VcsLabel>{{ $st('solarRevenue.cotwo.totalEmission') }}</VcsLabel>
           </v-col>
           <v-col class="d-flex justify-end">
             <VcsLabel>
@@ -42,7 +42,7 @@
         </v-row>
         <v-row no-gutters class="px-0 py-0 font-weight-bold">
           <v-col class="d-flex justify-start">
-            <VcsLabel>{{ $t('solarRevenue.cotwo.totalSavings') }}</VcsLabel>
+            <VcsLabel>{{ $st('solarRevenue.cotwo.totalSavings') }}</VcsLabel>
           </v-col>
           <v-col class="d-flex justify-end">
             <VcsLabel>
@@ -58,12 +58,12 @@
         <v-divider />
         <v-row no-gutters class="px-1 py-1">
           <v-col class="text-justify">
-            {{ $t('solarRevenue.cotwo.text1') }}
+            {{ $st('solarRevenue.cotwo.text1') }}
           </v-col>
         </v-row>
         <v-row no-gutters class="px-1 py-1" v-if="amortization > 0">
           <v-col class="text-justify d-flex justify-center font-weight-bold">
-            {{ $t('solarRevenue.cotwo.text2') }}
+            {{ $st('solarRevenue.cotwo.text2') }}
           </v-col>
         </v-row>
         <v-row no-gutters class="px-1 py-1" v-if="amortization > 0">
@@ -71,20 +71,20 @@
             <VcsFormattedNumber
               id="formattedNumber"
               :model-value="amortization"
-              :unit="$t('solarRevenue.cotwo.unit').toString()"
+              :unit="$st('solarRevenue.cotwo.unit').toString()"
               :fraction-digits="2"
             />
           </v-col>
         </v-row>
         <v-row no-gutters class="px-1 py-1" v-if="amortization <= 0">
           <v-col class="text-justify d-flex justify-center font-weight-bold">
-            {{ $t('solarRevenue.cotwo.text3') }}
+            {{ $st('solarRevenue.cotwo.text3') }}
           </v-col>
         </v-row>
         <v-row no-gutters class="px-1 pt-1 pb-3">
           <v-col class="text-justify">
             {{
-              $t('solarRevenue.cotwo.text4', {
+              $st('solarRevenue.cotwo.text4', {
                 germanPowerMixYear,
               })
             }}
@@ -96,15 +96,7 @@
 </template>
 
 <script setup lang="ts">
-  import {
-    computed,
-    getCurrentInstance,
-    inject,
-    onUnmounted,
-    PropType,
-    Ref,
-    ref,
-  } from 'vue';
+  import { computed, getCurrentInstance, inject, PropType } from 'vue';
   import {
     VCard,
     VContainer,
@@ -114,16 +106,16 @@
     VCol,
     VDivider,
   } from 'vuetify/components';
-  import {
-    VcsButton,
-    getColorByKey,
-    VcsUiApp,
-    VcsLabel,
-    VcsFormattedNumber,
-  } from '@vcmap/ui';
+  import { VcsButton, VcsUiApp, VcsLabel, VcsFormattedNumber } from '@vcmap/ui';
   import VueApexCharts from 'vue3-apexcharts';
   import { useTheme } from 'vuetify';
-  import { downloadSVG } from '../../helper.js';
+  import { downloadSVG, getSolarColorByKey } from '../../helper.js';
+  import { SolarColors } from '../../solarOptions.js';
+
+  const dialog = defineModel('dialog', {
+    type: Boolean as PropType<boolean>,
+    required: true,
+  });
 
   const innerProps = defineProps({
     coTwoSavings: {
@@ -142,19 +134,23 @@
       type: Number as PropType<number>,
       required: true,
     },
+    colorOptions: {
+      type: Object as PropType<SolarColors>,
+      required: true,
+    },
   });
 
   const app: VcsUiApp = inject<VcsUiApp>('vcsApp')!;
   const vm = getCurrentInstance()?.proxy;
-  const dialog: Ref<boolean> = ref(false);
-  const primary = ref(getColorByKey(app, 'primary'));
-  const baseDarken1 = ref(getColorByKey(app, 'base', 'darken-1'));
-  const baseLighten4 = ref(getColorByKey(app, 'base', 'lighten-4'));
-  const themeChangedListener = app.themeChanged.addEventListener(() => {
-    primary.value = getColorByKey(app, 'primary');
-    baseLighten4.value = getColorByKey(app, 'base', 'lighten-4');
-    baseDarken1.value = getColorByKey(app, 'base', 'darken-1');
-  });
+  const coTwoSavingsColor = computed(() =>
+    getSolarColorByKey(app, innerProps.colorOptions.co2, 'coTwoSavingsColor'),
+  );
+  const coTwoCostsColor = computed(() =>
+    getSolarColorByKey(app, innerProps.colorOptions.co2, 'coTwoCostsColor'),
+  );
+  const strokeColor = computed(() =>
+    getSolarColorByKey(app, innerProps.colorOptions.global, 'strokeColor'),
+  );
 
   const totalCoTwoEmission = computed(() => {
     return innerProps.coTwoCosts.size
@@ -207,7 +203,7 @@
           horizontal: true,
         },
       },
-      colors: [baseDarken1.value, primary.value],
+      colors: [coTwoCostsColor.value, coTwoSavingsColor.value],
       xaxis: {
         categories: [...innerProps.coTwoSavings.keys()],
         labels: {
@@ -223,7 +219,7 @@
         labels: {
           formatter(val: string): string {
             return `${val}. ${vm
-              ?.$t('solarRevenue.cotwo.chart.yUnit')
+              ?.$st('solarRevenue.cotwo.chart.yUnit')
               .toString()}`;
           },
         },
@@ -254,24 +250,20 @@
       stroke: {
         show: true,
         width: 1,
-        colors: [baseLighten4.value],
+        colors: [strokeColor.value],
       },
     };
   });
   const series = computed(() => [
     {
-      name: vm?.$t('solarRevenue.cotwo.chart.seriesEmission'),
+      name: vm?.$st('solarRevenue.cotwo.chart.seriesEmission'),
       data: [...innerProps.coTwoCosts.values()].map((v) => v | 0).map(Math.abs),
     },
     {
-      name: vm?.$t('solarRevenue.cotwo.chart.seriesSavings'),
+      name: vm?.$st('solarRevenue.cotwo.chart.seriesSavings'),
       data: [...innerProps.coTwoSavings.values()]
         .map((v) => v | 0)
         .map(Math.abs),
     },
   ]);
-
-  onUnmounted(() => {
-    themeChangedListener();
-  });
 </script>

@@ -1,406 +1,538 @@
 <template>
   <AbstractConfigEditor @submit="apply" v-bind="{ ...$attrs, ...$props }">
-    <VcsFormSection heading="admin options" expandable :start-open="true">
+    <VcsFormSection
+      heading="solarRevenue.config.adminSectionTitle"
+      expandable
+      :start-open="true"
+    >
       <v-container class="py-0 px-1">
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.admin.germanPowerMix') }}
+              {{ $st('solarRevenue.config.admin.germanPowerMix') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="germanPowerMix"
               v-model.number="localConfig.adminOptions.germanPowerMix"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.admin.germanPowerMixYear') }}
+              {{ $st('solarRevenue.config.admin.germanPowerMixYear') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="germanPowerMixYear"
               v-model.number="localConfig.adminOptions.germanPowerMixYear"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.admin.solarManufacture') }}
+              {{ $st('solarRevenue.config.admin.solarManufacture') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="solarManufacture"
               v-model.number="localConfig.adminOptions.solarManufacture"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.admin.electricityDemandPerPerson') }}
+              {{ $st('solarRevenue.config.admin.electricityDemandPerPerson') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="electricityDemandPerPerson"
               v-model.number="
                 localConfig.adminOptions.electricityDemandPerPerson
               "
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.admin.electricityDemandHeatPump') }}
+              {{ $st('solarRevenue.config.admin.electricityDemandHeatPump') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="electricityDemandHeatPump"
               v-model.number="
                 localConfig.adminOptions.electricityDemandHeatPump
               "
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.admin.electricityDemandCar') }}
+              {{ $st('solarRevenue.config.admin.electricityDemandCar') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="electricityDemandCar"
               v-model.number="localConfig.adminOptions.electricityDemandCar"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.admin.storageDegradation') }}
+              {{ $st('solarRevenue.config.admin.storageDegradation') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="storageDegradation"
               v-model.number="localConfig.adminOptions.storageDegradation"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.admin.storageLosses') }}
+              {{ $st('solarRevenue.config.admin.storageLosses') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="storageLosses"
               v-model.number="localConfig.adminOptions.storageLosses"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.admin.amortizationPeriod') }}
+              {{ $st('solarRevenue.config.admin.amortizationPeriod') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="amortizationPeriod"
               v-model.number="localConfig.adminOptions.amortizationPeriod"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.admin.maintenancePortion') }}
+              {{ $st('solarRevenue.config.admin.maintenancePortion') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="maintenancePortion"
               v-model.number="localConfig.adminOptions.maintenancePortion"
+              type="number"
+              hide-spin-buttons
+            />
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col>
+            <VcsLabel>
+              {{ $st('solarRevenue.config.admin.helpPriceIncreaseStart') }}
+            </VcsLabel>
+          </v-col>
+          <v-col>
+            <VcsTextField
+              v-model.number="localConfig.adminOptions.helpPriceIncreaseStart"
+              type="number"
+              hide-spin-buttons
+            />
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col>
+            <VcsLabel>
+              {{ $st('solarRevenue.config.admin.helpPriceIncreaseEnd') }}
+            </VcsLabel>
+          </v-col>
+          <v-col>
+            <VcsTextField
+              v-model.number="localConfig.adminOptions.helpPriceIncreaseEnd"
+              type="number"
+              hide-spin-buttons
+            />
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col>
+            <VcsLabel>
+              {{ $st('solarRevenue.config.admin.helpPriceIncreasePercentage') }}
+            </VcsLabel>
+          </v-col>
+          <v-col>
+            <VcsTextField
+              v-model.number="
+                localConfig.adminOptions.helpPriceIncreasePercentage
+              "
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
       </v-container>
     </VcsFormSection>
-    <VcsFormSection heading="user options" expandable :start-open="true">
+    <VcsFormSection
+      heading="solarRevenue.config.userSectionTitle"
+      expandable
+      :start-open="true"
+    >
       <v-container class="py-0 px-1">
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.user.numberOfPersons') }}
+              {{ $st('solarRevenue.config.user.numberOfPersons') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="numberOfPersons"
               v-model.number="localConfig.userOptions.numberOfPersons"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.user.livingSpace') }}
+              {{ $st('solarRevenue.config.user.livingSpace') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="livingSpace"
               v-model.number="localConfig.userOptions.livingSpace"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.user.annualDrivingDistance') }}
+              {{ $st('solarRevenue.config.user.annualDrivingDistance') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="annualDrivingDistance"
               v-model.number="localConfig.userOptions.annualDrivingDistance"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.user.directConsumptionPortion') }}
+              {{ $st('solarRevenue.config.user.directConsumptionPortion') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="directConsumptionPortion"
               v-model.number="localConfig.userOptions.directConsumptionPortion"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.user.storageConsumptionPortion') }}
+              {{ $st('solarRevenue.config.user.storageConsumptionPortion') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="storageConsumptionPortion"
               v-model.number="localConfig.userOptions.storageConsumptionPortion"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.user.gridPurchaseCosts') }}
+              {{ $st('solarRevenue.config.user.gridPurchaseCosts') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="gridPurchaseCosts"
               v-model.number="localConfig.userOptions.gridPurchaseCosts"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.user.feedInTariff') }}
+              {{ $st('solarRevenue.config.user.feedInTariff') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="feedInTariff"
               v-model.number="localConfig.userOptions.feedInTariff"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.user.electricityPriceIncrease') }}
+              {{ $st('solarRevenue.config.user.electricityPriceIncrease') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="electricityPriceIncrease"
               v-model.number="localConfig.userOptions.electricityPriceIncrease"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.user.equityCapital') }}
+              {{ $st('solarRevenue.config.user.equityCapital') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="equityCapital"
               v-model.number="localConfig.userOptions.equityCapital"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.user.creditPeriod') }}
+              {{ $st('solarRevenue.config.user.creditPeriod') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="creditPeriod"
               v-model.number="localConfig.userOptions.creditPeriod"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.user.creditInterest') }}
+              {{ $st('solarRevenue.config.user.creditInterest') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="creditInterest"
               v-model.number="localConfig.userOptions.creditInterest"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.user.electricityDemand') }}
+              {{ $st('solarRevenue.config.user.electricityDemand') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="electricityDemand"
               v-model.number="localConfig.userOptions.electricityDemand"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
       </v-container>
     </VcsFormSection>
-    <VcsFormSection heading="global options" expandable :start-open="true">
+    <SolarConsumptionProfile
+      heading="my Heading"
+      v-model="localConfig.adminOptions.consumptionProfiles"
+    />
+    <VcsFormSection
+      heading="solarRevenue.config.globalSectionTitle"
+      expandable
+      :start-open="true"
+    >
       <v-container class="py-0 px-1">
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.global.isVcSolar') }}
+              {{ $st('solarRevenue.config.global.isVcSolar') }}
             </VcsLabel>
           </v-col>
           <v-col>
-            <VcsCheckbox
-              id="isVcSolar"
-              v-model="localConfig.globalSettings.isVcSolar"
-            />
+            <VcsCheckbox v-model="localConfig.globalSettings.isVcSolar" />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.global.solarLayerName') }}
+              {{ $st('solarRevenue.config.global.solarLayerName') }}
+            </VcsLabel>
+          </v-col>
+          <v-col>
+            <VcsTextField v-model="localConfig.globalSettings.solarLayerName" />
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col>
+            <VcsLabel>
+              {{ $st('solarRevenue.config.global.isDebug') }}
+            </VcsLabel>
+          </v-col>
+          <v-col>
+            <VcsCheckbox v-model="localConfig.globalSettings.isDebug" />
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col>
+            <VcsLabel>
+              {{ $st('solarRevenue.config.global.isPaginated') }}
+            </VcsLabel>
+          </v-col>
+          <v-col>
+            <VcsCheckbox v-model="localConfig.globalSettings.isPaginated" />
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col>
+            <VcsLabel>
+              {{ $st('solarRevenue.config.global.itemsPerPage') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="solarLayerName"
-              v-model="localConfig.globalSettings.solarLayerName"
+              v-model="localConfig.globalSettings.itemsPerPage"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.global.isDebug') }}
+              {{ $st('solarRevenue.config.global.infoContent') }}
             </VcsLabel>
           </v-col>
           <v-col>
-            <VcsCheckbox
-              id="isDebug"
-              v-model="localConfig.globalSettings.isDebug"
-            />
+            <VcsTextField v-model="localConfig.globalSettings.infoContent" />
           </v-col>
         </v-row>
       </v-container>
     </VcsFormSection>
-    <VcsFormSection heading="vcSolar options" expandable :start-open="true">
+    <VcsFormSection
+      heading="solarRevenue.config.vcSolarSectionTitle"
+      expandable
+      :start-open="true"
+    >
       <v-container class="py-0 px-1">
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.vcSolar.efficiency') }}
+              {{ $st('solarRevenue.config.vcSolar.efficiency') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="efficiency"
               v-model="localConfig.vcSolarOptions.efficiency"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.vcSolar.costs') }}
+              {{ $st('solarRevenue.config.vcSolar.costs') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="costs"
               v-model="localConfig.vcSolarOptions.costs"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.vcSolar.degradation') }}
+              {{ $st('solarRevenue.config.vcSolar.degradation') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="degradation"
               v-model="localConfig.vcSolarOptions.degradation"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
             <VcsLabel>
-              {{ $t('solarRevenue.config.vcSolar.kwpPerArea') }}
+              {{ $st('solarRevenue.config.vcSolar.kwpPerArea') }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsTextField
-              id="kwpPerArea"
               v-model="localConfig.vcSolarOptions.kwpPerArea"
+              type="number"
+              hide-spin-buttons
             />
           </v-col>
         </v-row>
       </v-container>
     </VcsFormSection>
+    <SolarDiagramColors
+      name-space="solarRevenue.config.colors.global"
+      v-model="localConfig.colors.global"
+    />
+    <SolarDiagramColors
+      name-space="solarRevenue.config.colors.revenue"
+      v-model="localConfig.colors.revenue"
+    />
+    <SolarDiagramColors
+      name-space="solarRevenue.config.colors.liquidity"
+      v-model="localConfig.colors.liquidity"
+    />
+    <SolarDiagramColors
+      name-space="solarRevenue.config.colors.co2"
+      v-model="localConfig.colors.co2"
+    />
+    <v-divider class="mt-2" />
   </AbstractConfigEditor>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
   import {
     AbstractConfigEditor,
     VcsCheckbox,
@@ -408,45 +540,29 @@
     VcsLabel,
     VcsTextField,
   } from '@vcmap/ui';
-  import { defineComponent, PropType, Ref, ref } from 'vue';
-  import { VCol, VContainer, VRow } from 'vuetify/components';
-  import getDefaultOptions, { SolarOptions } from '../solarOptions.js';
-  import { configWithDefaults } from '../helper.js';
+  import { PropType, Ref, ref, toRaw } from 'vue';
+  import { VCol, VContainer, VRow, VDivider } from 'vuetify/components';
+  import defaultOptions, { SolarOptions } from '../solarOptions.js';
+  import { deepMerge } from '../helper.js';
+  import SolarDiagramColors from './SolarDiagramColors.vue';
+  import SolarConsumptionProfile from './SolarConsumptionProfile.vue';
 
-  export default defineComponent({
-    name: 'SolarConfigEditor',
-    title: 'Solar Editor', // heading displayed on editor window
-    components: {
-      VcsCheckbox,
-      VRow,
-      VCol,
-      VContainer,
-      VcsLabel,
-      VcsFormSection,
-      AbstractConfigEditor,
-      VcsTextField,
+  const props = defineProps({
+    getConfig: {
+      type: Function as PropType<() => SolarOptions>,
+      required: true,
     },
-    props: {
-      getConfig: {
-        type: Function as PropType<() => SolarOptions>,
-        required: true,
-      },
-      setConfig: {
-        type: Function,
-        required: true,
-      },
-    },
-    setup(props) {
-      const localConfig: Ref<SolarOptions> = ref(
-        configWithDefaults(getDefaultOptions(), props.getConfig()),
-      );
-
-      return {
-        localConfig,
-        apply(): void {
-          props.setConfig(localConfig.value);
-        },
-      };
+    setConfig: {
+      type: Function,
+      required: true,
     },
   });
+
+  const localConfig: Ref<SolarOptions> = ref(
+    deepMerge(defaultOptions(), props.getConfig()),
+  );
+
+  const apply = (): void => {
+    props.setConfig(structuredClone(toRaw(localConfig.value)));
+  };
 </script>

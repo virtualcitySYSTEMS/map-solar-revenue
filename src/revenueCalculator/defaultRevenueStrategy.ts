@@ -78,7 +78,7 @@ export default class DefaultRevenueStrategy
     const gridSupplyPrice = this.gridSupplyPrice(props);
     const directConsumptionPrice = this.directConsumptionPrice();
     const storageConsumptionPrice = this.storageConsumptionPrice(props);
-    const maintenanceCosts = this.maintenanceCosts();
+    const maintenanceCosts = this.maintenanceCosts(props);
     const gridConsumptionPrice = this.gridConsumptionPrice(props);
     const repaymentRate = this.repaymentRate(props);
     const annuity = this.annuity(props);
@@ -197,27 +197,38 @@ export default class DefaultRevenueStrategy
     return directConsumptionPriceMap;
   }
 
-  creditAmount(): number {
+  creditAmount(props: { isStorageConsumption: boolean }): number {
     return (
-      this.investmentCosts() - this._config.value.userOptions.equityCapital
+      this.investmentCosts(props) - this._config.value.userOptions.equityCapital
     );
   }
 
-  investmentCosts(): number {
+  investmentCosts(props: { isStorageConsumption: boolean }): number {
     if (!this._selectedModules.value.length) {
       return 0;
     } else {
-      return this._selectedModules.value
-        .map((mod) => moduleInvestmentCosts(mod))
-        .reduce((curr, pre) => {
-          return curr + pre;
-        });
+      return (
+        this._selectedModules.value
+          .map((mod) => moduleInvestmentCosts(mod))
+          .reduce((curr, pre) => {
+            return curr + pre;
+          }) + this.storagePrice(props)
+      );
     }
   }
 
-  maintenanceCosts(): Map<number, number> {
+  storagePrice(props: { isStorageConsumption: boolean }): number {
+    return props.isStorageConsumption
+      ? this._config.value.userOptions.storageCapacity *
+          this._config.value.adminOptions.storageCapacityPrice
+      : 0;
+  }
+
+  maintenanceCosts(props: {
+    isStorageConsumption: boolean;
+  }): Map<number, number> {
     const maintenanceCostsMap = new Map<number, number>();
-    const investmentCosts = this.investmentCosts();
+    const investmentCosts = this.investmentCosts(props);
     for (let i = 1; i <= this._amortizationPeriod; i++) {
       maintenanceCostsMap.set(
         i,
@@ -395,9 +406,12 @@ export default class DefaultRevenueStrategy
     }
   }
 
-  annuity(props: { isFinance: boolean }): Map<number, number> {
+  annuity(props: {
+    isFinance: boolean;
+    isStorageConsumption: boolean;
+  }): Map<number, number> {
     const annuityMap = new Map<number, number>();
-    const creditAmount = this.creditAmount();
+    const creditAmount = this.creditAmount(props);
     for (let t = 1; t <= this._config.value.userOptions.creditPeriod; t++) {
       annuityMap.set(
         t,
@@ -415,9 +429,12 @@ export default class DefaultRevenueStrategy
     return annuityMap;
   }
 
-  remainingDept(props: { isFinance: boolean }): Map<number, number> {
+  remainingDept(props: {
+    isFinance: boolean;
+    isStorageConsumption: boolean;
+  }): Map<number, number> {
     const remainingDeptMap = new Map<number, number>();
-    const creditAmount = this.creditAmount();
+    const creditAmount = this.creditAmount(props);
     for (let t = 1; t <= this._config.value.userOptions.creditPeriod; t++) {
       remainingDeptMap.set(
         t,
@@ -436,9 +453,12 @@ export default class DefaultRevenueStrategy
     return remainingDeptMap;
   }
 
-  repaymentRate(props: { isFinance: boolean }): Map<number, number> {
+  repaymentRate(props: {
+    isFinance: boolean;
+    isStorageConsumption: boolean;
+  }): Map<number, number> {
     const repaymentRateMap = new Map<number, number>();
-    const creditAmount = this.creditAmount();
+    const creditAmount = this.creditAmount(props);
     for (let t = 1; t <= this._config.value.userOptions.creditPeriod; t++) {
       repaymentRateMap.set(
         t,
@@ -456,9 +476,12 @@ export default class DefaultRevenueStrategy
     return repaymentRateMap;
   }
 
-  interestAmount(props: { isFinance: boolean }): Map<number, number> {
+  interestAmount(props: {
+    isFinance: boolean;
+    isStorageConsumption: boolean;
+  }): Map<number, number> {
     const interestAmountMap = new Map<number, number>();
-    const creditAmount = this.creditAmount();
+    const creditAmount = this.creditAmount(props);
     for (let t = 1; t <= this._config.value.userOptions.creditPeriod; t++) {
       interestAmountMap.set(
         t,

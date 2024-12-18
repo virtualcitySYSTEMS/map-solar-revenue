@@ -1,10 +1,10 @@
 <template>
   <v-dialog v-model="dialog" width="500px">
     <template #activator="{ props }">
-      <v-row no-gutters>
+      <v-row no-gutters class="pb-2">
         <v-col class="d-flex justify-center">
           <vcs-form-button v-bind="props" small>
-            {{ $t('solarRevenue.revenue.button') }}</vcs-form-button
+            {{ $st('solarRevenue.revenue.button') }}</vcs-form-button
           >
         </v-col>
       </v-row>
@@ -16,7 +16,7 @@
           <span
             class="d-inline-block user-select-none font-weight-bold text-primary"
           >
-            {{ $t('solarRevenue.revenue.title') }}
+            {{ $st('solarRevenue.revenue.title') }}
           </span>
         </h3>
         <VcsWizard v-model.number="currentStep">
@@ -32,7 +32,7 @@
                 <v-row no-gutters>
                   <v-col>
                     <VcsLabel>{{
-                      $t('solarRevenue.revenue.demand.person')
+                      $st('solarRevenue.revenue.demand.person')
                     }}</VcsLabel>
                   </v-col>
                 </v-row>
@@ -62,7 +62,7 @@
                 <v-row no-gutters v-if="isHeatPump">
                   <v-col class="pl-10">
                     <VcsLabel>{{
-                      $t('solarRevenue.revenue.demand.livingSpace')
+                      $st('solarRevenue.revenue.demand.livingSpace')
                     }}</VcsLabel>
                   </v-col>
                   <v-col>
@@ -87,7 +87,7 @@
                 <v-row no-gutters v-if="isCar">
                   <v-col class="pl-10">
                     <VcsLabel>{{
-                      $t('solarRevenue.revenue.demand.distance')
+                      $st('solarRevenue.revenue.demand.distance')
                     }}</VcsLabel>
                   </v-col>
                   <v-col>
@@ -107,7 +107,7 @@
                 <v-row no-gutters>
                   <v-col>
                     <VcsLabel class="font-weight-bold">{{
-                      $t('solarRevenue.revenue.demand.demand')
+                      $st('solarRevenue.revenue.demand.demand')
                     }}</VcsLabel>
                   </v-col>
                   <v-col>
@@ -117,7 +117,7 @@
                         solarOptions.userOptions.electricityDemand
                       "
                       :unit="
-                        $t('solarRevenue.revenue.demand.demandUnit').toString()
+                        $st('solarRevenue.revenue.demand.demandUnit').toString()
                       "
                     />
                   </v-col>
@@ -134,10 +134,22 @@
           >
             <template #default>
               <v-container class="px-1 py-0">
+                <v-row no-gutters class="align-center py-2">
+                  <v-col>
+                    <VcsSelect
+                      :items="consumptionProfiles"
+                      v-model="selectedConsumptionProfile"
+                      :label="
+                        $st('solarRevenue.revenue.consumption.profilesLabel')
+                      "
+                      return-object
+                    />
+                  </v-col>
+                </v-row>
                 <v-row no-gutters class="align-center">
                   <v-col>
                     <VcsLabel>{{
-                      $t('solarRevenue.revenue.consumption.directConsumption')
+                      $st('solarRevenue.revenue.consumption.directConsumption')
                     }}</VcsLabel>
                   </v-col>
                 </v-row>
@@ -151,6 +163,7 @@
                       v-model="
                         solarOptions.userOptions.directConsumptionPortion
                       "
+                      @end="clearSelectedConsumptionProfile"
                     />
                   </v-col>
                   <v-col class="d-flex justify-end">
@@ -172,17 +185,20 @@
                     />
                   </v-col>
                 </v-row>
-                <v-row no-gutters>
+                <v-row no-gutters v-if="isStorageConsumption">
                   <v-col>
                     <VcsLabel>{{
-                      $t('solarRevenue.revenue.consumption.storageConsumption')
+                      $st('solarRevenue.revenue.consumption.storageConsumption')
                     }}</VcsLabel>
                   </v-col>
                 </v-row>
-                <v-row no-gutters class="align-center">
+                <v-row
+                  no-gutters
+                  class="align-center"
+                  v-if="isStorageConsumption"
+                >
                   <v-col cols="10">
                     <VcsSlider
-                      :disabled="!isStorageConsumption"
                       :max="100"
                       :min="0"
                       type="number"
@@ -190,6 +206,7 @@
                       v-model="
                         solarOptions.userOptions.storageConsumptionPortion
                       "
+                      @end="clearSelectedConsumptionProfile"
                     />
                   </v-col>
                   <v-col class="d-flex justify-end">
@@ -203,13 +220,40 @@
                     />
                   </v-col>
                 </v-row>
+                <v-row
+                  no-gutters
+                  class="align-center"
+                  v-if="isStorageConsumption"
+                >
+                  <v-col>
+                    <VcsLabel>{{
+                      $st('solarRevenue.revenue.consumption.storageCapacity')
+                    }}</VcsLabel>
+                  </v-col>
+                  <v-col>
+                    <VcsTextField
+                      type="number"
+                      v-model.number="solarOptions.userOptions.storageCapacity"
+                      unit="kWh"
+                      show-spin-buttons
+                      step="1"
+                      :decimals="0"
+                    />
+                  </v-col>
+                </v-row>
               </v-container>
             </template>
           </VcsWizardStep>
           <VcsWizardStep
             :step="stepOrder.COSTS"
             editable
-            help-text="solarRevenue.revenue.help.costs"
+            :help-text="
+              $st('solarRevenue.revenue.help.costs', {
+                startYear: helpStartYear,
+                endYear: helpEndYear,
+                increase: helpIncrease,
+              })
+            "
             heading="solarRevenue.revenue.costs.title"
             v-model.number="currentStep"
           >
@@ -218,7 +262,7 @@
                 <v-row no-gutters class="align-center">
                   <v-col>
                     <VcsLabel>{{
-                      $t('solarRevenue.revenue.costs.consumption')
+                      $st('solarRevenue.revenue.costs.consumption')
                     }}</VcsLabel>
                   </v-col>
                   <v-col>
@@ -237,7 +281,7 @@
                 <v-row no-gutters class="align-center">
                   <v-col>
                     <VcsLabel>{{
-                      $t('solarRevenue.revenue.costs.supply')
+                      $st('solarRevenue.revenue.costs.supply')
                     }}</VcsLabel>
                   </v-col>
                   <v-col>
@@ -251,18 +295,10 @@
                     />
                   </v-col>
                 </v-row>
-                <v-row no-gutters>
-                  <v-col>
-                    <VcsCheckbox
-                      v-model="isPriceIncrease"
-                      label="solarRevenue.revenue.costs.isIncrease"
-                    />
-                  </v-col>
-                </v-row>
-                <v-row no-gutters class="align-center" v-if="isPriceIncrease">
+                <v-row no-gutters class="align-center">
                   <v-col>
                     <VcsLabel>{{
-                      $t('solarRevenue.revenue.costs.increase')
+                      $st('solarRevenue.revenue.costs.increase')
                     }}</VcsLabel>
                   </v-col>
                   <v-col>
@@ -293,7 +329,7 @@
                 <v-row no-gutters class="align-center">
                   <v-col>
                     <VcsLabel>{{
-                      $t('solarRevenue.revenue.finance.isFinance')
+                      $st('solarRevenue.revenue.finance.isFinance')
                     }}</VcsLabel>
                   </v-col>
                   <v-col class="d-flex justify-end">
@@ -303,7 +339,7 @@
                 <v-row no-gutters class="align-center font-weight-bold">
                   <v-col>
                     <VcsLabel>{{
-                      $t('solarRevenue.revenue.finance.invest')
+                      $st('solarRevenue.revenue.finance.invest')
                     }}</VcsLabel>
                   </v-col>
                   <v-col class="d-flex justify-end">
@@ -319,7 +355,7 @@
                   <v-row no-gutters class="align-center font-weight-bold">
                     <v-col>
                       <VcsLabel>{{
-                        $t('solarRevenue.revenue.finance.credit')
+                        $st('solarRevenue.revenue.finance.credit')
                       }}</VcsLabel>
                     </v-col>
                     <v-col class="d-flex justify-end">
@@ -335,7 +371,7 @@
                   <v-row no-gutters class="align-center pt-2">
                     <v-col>
                       <VcsLabel>{{
-                        $t('solarRevenue.revenue.finance.equity')
+                        $st('solarRevenue.revenue.finance.equity')
                       }}</VcsLabel>
                     </v-col>
                     <v-col>
@@ -353,7 +389,7 @@
                   <v-row no-gutters class="align-center">
                     <v-col>
                       <VcsLabel>{{
-                        $t('solarRevenue.revenue.finance.duration')
+                        $st('solarRevenue.revenue.finance.duration')
                       }}</VcsLabel>
                     </v-col>
                     <v-col>
@@ -361,7 +397,7 @@
                         type="number"
                         v-model.number="solarOptions.userOptions.creditPeriod"
                         :unit="
-                          $t(
+                          $st(
                             'solarRevenue.revenue.finance.durationUnit',
                           ).toString()
                         "
@@ -376,7 +412,7 @@
                   <v-row no-gutters class="align-center">
                     <v-col>
                       <VcsLabel>{{
-                        $t('solarRevenue.revenue.finance.interest')
+                        $st('solarRevenue.revenue.finance.interest')
                       }}</VcsLabel>
                     </v-col>
                     <v-col>
@@ -418,12 +454,13 @@
     VcsFormattedNumber,
     VcsFormButton,
     VcsLabel,
+    VcsSelect,
     VcsSlider,
     VcsTextField,
     VcsWizard,
     VcsWizardStep,
   } from '@vcmap/ui';
-  import type { SolarOptions } from '../solarOptions';
+  import type { ConsumptionProfile, SolarOptions } from '../solarOptions';
 
   const innerProps = defineProps({
     investmentCosts: {
@@ -431,6 +468,18 @@
       required: true,
     },
     creditAmount: {
+      type: Number as PropType<number>,
+      required: true,
+    },
+    helpStartYear: {
+      type: Number as PropType<number>,
+      required: true,
+    },
+    helpEndYear: {
+      type: Number as PropType<number>,
+      required: true,
+    },
+    helpIncrease: {
       type: Number as PropType<number>,
       required: true,
     },
@@ -453,7 +502,6 @@
 
   const isHeatPump: Ref<boolean> = ref(false);
   const isCar: Ref<boolean> = ref(false);
-  const isPriceIncrease: Ref<boolean> = ref(true);
   const dialog: Ref<boolean> = ref(false);
   const stepOrder = {
     DEMAND: 1,
@@ -464,6 +512,15 @@
 
   const currentStep: Ref<number> = ref(stepOrder.DEMAND);
 
+  const consumptionProfiles = ref(
+    Object.values(solarOptions.value.adminOptions.consumptionProfiles),
+  );
+
+  const selectedConsumptionProfile: Ref<ConsumptionProfile | undefined> = ref();
+
+  const clearSelectedConsumptionProfile = (): void => {
+    selectedConsumptionProfile.value = undefined;
+  };
   const calculatedElectricityDemand = (): void => {
     solarOptions.value.userOptions.electricityDemand =
       solarOptions.value.userOptions.numberOfPersons *
@@ -489,6 +546,17 @@
     );
   };
 
+  watch(
+    () => selectedConsumptionProfile.value,
+    () => {
+      if (selectedConsumptionProfile?.value) {
+        solarOptions.value.userOptions.directConsumptionPortion =
+          selectedConsumptionProfile.value.direct;
+        solarOptions.value.userOptions.storageConsumptionPortion =
+          selectedConsumptionProfile.value.storage;
+      }
+    },
+  );
   watch(
     () => solarOptions.value.userOptions.numberOfPersons,
     () => calculatedElectricityDemand(),

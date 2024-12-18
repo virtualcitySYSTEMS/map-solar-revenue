@@ -7,6 +7,10 @@
     "profitability": {
       "selectFeature": "Select one or more objects"
     },
+    "infoContent": {
+      "headerTitle": "Additional information",
+      "content": "![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAAwCAMAAABjR8XYAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAFoUExURUdwTCV9WQCfuQBUNECfdUCbdECcdgBUNECddUCddgBUNIawEECcdUGedYWyEACfvwCfuQBQMABQMABVNQBUNECfeECfcECddQBVMABTMwBTMwBSMgBUM0CddkCddUCcdQBTMwBTMwBTMwBUMwBUNABUNABUMh9qLACAgSFqKgBUMyBqKgBTM0CcdUCcdkCddkCcdQBTM0CcdkCcdgBTMwBUNABTMwBTMwB9fABTMwCChkGedAC/vwBTNIevECJrKgB8eYevEACfuQB5dkCddgB5dQBUNECddmOYGQB6dgNXN4awEBxoLCF5VS5zJwCgunuxHQCZswCgugCguSiBXgCevIazECJsKx9oLACguiV+WQB/gIWwEACguYWwECuEYABUMwCjuACgujyXcgBVMyZ/WwFWNjKNZkCddUCcdUCddgBUMwB5dABUNABUNACSowBkUgBUMwB7eABTM0CddgBUNIaxEACguiKy5ZwAAAB0dFJOUwDWgH8wQPDAwICA8LA/YAjFIBA/QCAQ7zCQ4GCwcGDg79+g8M/8cMvGwv3H/pCv0L9QoFBfT9CfxG/ITwT7QL2/IP3C376Pf8LB27/it7zEaAp218cqULrQRtbB4KHv0PMZl/Et1c/Kn8+P4cK/dndz9MOvz6OBSgAABTdJREFUaN7N2Gdj4jYYAGC52Ng4kNaA2YEAOa5NE0aSS5qm7XVce91777137frv95XkbUkWphfu/YCNkCw91kwQsudtRybefdl99cV/peKVp9D1hy3HcF5zcby+I0d5//ohVTnHN18SiPuBnOTz64dIdsgXrh+35STPcKqrOD+1pNtWWR6z3vyPzMwjOYjirifhQaA6LTauVSHEcIxsIjQGPltX6fdxsi7EfURC8in3JTuLVuzlGutDqs4JQnuJ90GiVV4XIiORW7aMIhD/fWQgSC2vC8mX7OYa1JrKa2irVlNZEK1WE0LkJAlInmQ39V7b5Dp0nCFeJPEtWWL2DPyphRkcp0IGDY65moQM75Dktp9YwV+qoadCniolSULEkt3MMFD92WhDM6DKFn1mBHEiSMWvsG3HIadBO4QQGUkKIpKkx5UKTaYL1gLRRmvQCDt64wkIGVxalZSJIPC9Eh9vviANkZCkIe6jO9LzowzvDpZaxzmOIKdIACH4ShxCXoIEJF+SgfAku8zDA50ipxFEE0NQCuJEs0UMyZVkIWwJa70akupgirQkIOrcr7EgJE/CgLAkzHXXJq0akbbkQmDrLxuGURySI2FBshLO/rGAuqkmF6L5K4McZI8FEUuYkLSEtw8eQz10fDEhVTLoQojGgIycOyyI5k+rJEQoYUPcmzsy+znsAnfnThllIe2rmo2bMa9B+JAl3F6lICd+lloE+Rn2f9iQ2nchdZmEiCQcSFwiOJeU6f6VhlTppLbDWip+1sxk11Ib4hDfG6Svwx/kJDxIJBGdr4bw3JFK214muwSB2Hhrhymh0b/uygaszyq9X1TVxOlYq5ZJDgyp0tFKrpUFzj1KQ/gSLiSQ7KIthpGBcCV8CJVs1WG3GcdojkQAcT/c2Z7DWC6XbSd+JsiRfCyAuDff3Fpn+M07Zv7NU16zR558/KEHN2yPdWkWK6hqODj/z2BJFJHD8zaV6K5+L/qLIeFDboBjY8k9gjAkXMiNhz0vV2LdKpUuGxZCnUaHJDTxF/gK6WeNOoYcNPCV5DwL8pRKJUi04HpJk0iBS1q2oETJcYgk9QOaV4/ePPli+ekmTodoIjShKQdgMv0axvTyW+xB5gZ9ouQ5BBJoUk+HMFMQaPU5Tu/j9Kmud1AfHjntwceElILfcCU9coFcXf9B/Q1Gl5Lr4EugGem54HfPeSpdJ91i9XABk5Sqk5yo47qDRIHCEiXfwZUMXNdiQ8b1ZPqUXkxcgELgl/3wl1iBwhJFwsGTwIDZv2hmIdDU/Rc68XQXz/lG4wJ3TAhxwwyzqEBhCQNy+InnyUm6ZNKepSE0/eAsDgmCCYk9qLAkCzl8zPNkJdYMz+AuWWZjEGR1cfosBpnqNCwmBFmm/6DCEkXOwZ/xzXPcomDeu+EG2J+64xhEj691WQjEakpnTUGJIungS6BhdTw2mqkWTyhw7M/seh4k+KGgRJF1MCSzEo4xrn+F532pdEEnO0nfx2sqNPei1MTOMUm0mJCgQG+D00oScvi058lLglJduhSH23xw2/e3cRPVe+FcZ0GCArMNzl0JyJHQkZGYAzx9Jys6Jyb4nuxvJpnWEzLWZnAHN/UZyWtCj6z0ASkcXMywwGqTE2QccvSSlxNvvCV+ZH2989L/eRaOQY6e83LjayGj8Q8ZT1uRKGs5vGef4B8gSUzraDuS70LIr55MvMd5Up8yBh20nVB/CPrjeSkHt0e2Hur36zi8z9B9G9/+Ao6//pZzvPMVuo/j1u9//vGATLz90RZa9x+aqmJKzSp6PgAAAABJRU5ErkJggg==) \n\n The interactive **VC Solar App** contains a yield calculator that determines the photovoltaic output on the basis of semantic areas and drawn open spaces and allows the dimensioning and evaluation of a specific solar installation. \n\n **Related links:** \n - <a href=\"https://vc.systems/en/products/vc-solar/\" target=\"_blank\">https://vc.systems/en/products/vc-solar/</a>"
+    },
     "solarSelector": {
       "noSelection": "No surface selected or drawn",
       "noVCSolar": "This surface was not pre-calculated via VC Solar. Use the draw areas option",
@@ -17,13 +21,14 @@
       "selectArea": "Select solar potential area",
       "drawArea": "Draw solar potential area",
       "helpMethod": "Select a method for calculating the solar irradiation in the toolbar.",
-      "helpMethod2": "You can either select an area that has already been calculated or draw a free area.",
+      "helpMethod2": "You can either select an area that has already been calculated or draw a free area. Double-click to end the drawing of an area.",
       "helpMethodArea": "To calculate the solar irradiation on a surface, activate the drawing mode in the toolbar and draw an arbitrary surface.",
       "modulesList": "Step 2 - Calculate yield of the areas",
       "helpModulesList": "All selected or drawn areas are displayed here. For drawn areas, the solar irradiation must be calculated using the (Calculate solar yield) button.",
       "total": "Total",
-      "results": "Step 3 - Adjust consumption data / results",
-      "helpResults": "After you have selected or drawn one or more areas and calculated the solar yield for drawn areas, you can customize your consumption data. The results are adapted directly to your inputs.",
+      "results": "Step 4 - Results",
+      "consumptionData": "Step 3 - Adjust consumption data",
+      "consumptionDataHelp": "After you have selected or drawn one or more areas and calculated the solar yield for drawn areas, you can customize your consumption data. The results are adapted directly to your inputs.",
       "coTwoSavings": "CO2 savings",
       "revenueCalculation": "Profitability calculation",
       "finance": "Financing plan",
@@ -40,9 +45,9 @@
     "revenue": {
       "help": {
         "demand": "In this section, you can specify your personal electricity demand. The calculated electricity demand is automatically adjusted to your inputs. However, if you know your exact electricity demand, you can type it directly into the corresponding field.",
-        "consumption": "Depending on your consumption behavior, more electricity from the solar system can be used directly. For example, if you consume more electricity during the day, the proportion of direct consumption will increase. The same applies to storage consumption. You can now specify the proportion of solar power that you consume directly. The default values reflect an average household.",
-        "costs": "In this section, you can specify your energy costs. To do this, you need to provide the current electricity costs from your supplier. You can also take into account a forecast increase in electricity prices.",
-        "finance": "In this section you can choose whether you would like to finance the solar system. You can enter details about the equity capital, the duration and the interest rate."
+        "consumption": "Depending on your consumption behavior, more electricity from the solar system can be used directly. For example, if you consume more electricity during the day, the proportion of direct consumption will increase. The same applies to storage consumption. You can now specify the proportion of solar power that you consume directly. You have the option of defining the values using predefined consumption profiles.",
+        "costs": "In this section, you can specify your energy costs. To do this, you need to provide the current electricity costs from your supplier. You can also take into account a forecast increase in electricity prices. The average electricity price increase in the period from {startYear} to {endYear} was {increase}%. Further increases are expected in the future.",
+        "finance": "In this section you can choose whether you would like to finance the solar system. You can enter details about the equity capital, the duration and the interest rate. As current interest rates are subject to continuous fluctuations, you will need to carry out your own research."
       },
       "title": "Profitability calculator",
       "button": "Customize consumption data",
@@ -60,7 +65,16 @@
         "title": "Self-consumption",
         "directConsumption": "Direct consumption",
         "storageConsumption": "Storage consumption",
-        "isStorageConsumption": "Include power storage"
+        "isStorageConsumption": "Include power storage",
+        "storageCapacity": "Storage capacity",
+        "profilesLabel": "Select consumption profile",
+        "profiles": {
+          "balanced": "Balanced",
+          "day": "Active during the day",
+          "evening": "Active in the evening",
+          "high": "High energy consumption",
+          "optimal": "Conscious solar power users"
+        }
       },
       "costs": {
         "title": "Energy costs",
@@ -98,7 +112,10 @@
     },
     "prof": {
       "title": "Profitability",
-      "description": "The income and expense plan compares the annual income and expenses over an assumed lifetime of the PV systems of {lifeTime} years.",
+      "description": {
+        "revenue": "The income and expense plan compares the annual income and expenses over an assumed lifetime of the PV systems of {lifeTime} years.",
+        "liquidity": "The liquidity trend over {lifeTime} years shows how the initial costs of a solar system are offset over time by savings and income. This reveals when the investment becomes financially profitable."
+      },
       "typeLabel": "Select the desired result:",
       "type": {
         "liquidity": "Liquidity trend",
@@ -155,7 +172,15 @@
         "directConsumptionPrice": "Direct consumption",
         "storageConsumptionPrice": "Storage consumption",
         "gridSupplyPrice": "Grid feed-in",
-        "liquidity": "Liquidity"
+        "liquidity": "Liquidity",
+        "tooltip": {
+          "maintenanceCosts": "Ongoing costs for maintenance and operation of the solar system. Corresponds to {maintenancePortion}% of the investment costs.",
+          "gridConsumptionPrice": "Costs for the amount of electricity drawn from the public grid.",
+          "directConsumptionPrice": "Costs for the direct consumption portion if no solar system is available and this would have to be drawn from the public grid.",
+          "storageConsumptionPrice": "Costs for the storage consumption share if no solar system is available and this would have to be drawn from the public grid.",
+          "gridSupplyPrice": "Yield for the amount of solar power that is fed into the public grid.",
+          "liquidity": "The cumulative liquidity for each year is calculated by adding the annual cash flow to the previous cumulative amount. "
+        }
       },
       "energyHeader": {
         "year": "Year",
@@ -165,14 +190,36 @@
         "directConsumption": "Direct consumption",
         "storageConsumption": "Storage consumption",
         "gridConsumption": "Grid consumption",
-        "gridSupply": "Grid supply"
+        "gridSupply": "Grid supply",
+        "tooltip": {
+          "solarPowerYield": "Total amount of generated solar power.",
+          "electricityDemand": "Electricity demand for the household.",
+          "storageLosses": "A portion of the energy is lost as conversion losses when storing solar power.",
+          "directConsumption": "Amount of solar power consumed directly during generation.",
+          "storageConsumption": "Amount of solar power used to fill a storage system.",
+          "gridConsumption": "Amount of electricity taken from the public grid to meet energy demand.",
+          "gridSupply": "Amount of surplus solar power fed into the public grid."
+        }
       },
       "environmentalBalanceHeader": {
         "year": "Year",
-        "coTwoSavings": "CO2 savings"
+        "coTwoSavings": "CO2 savings",
+        "tooltip": {
+          "coTwoSavings": "The CO2 savings correspond to the calculated comparison with the CO2 emissions that would result from purchasing the same amount of electricity from the German electricity mix. "
+        }
       }
     },
     "config": {
+      "adminSectionTitle": "Static parameter",
+      "userSectionTitle": "Default values",
+      "globalSectionTitle": "Global settings",
+      "vcSolarSectionTitle": "VC Solar Backend settings",
+      "colorSectionTitle": "color",
+      "profile": {
+        "sectionTitle": "Consumption profiles",
+        "direct": "Direktverbrauch",
+        "storage": "Speicherbrauch"
+      },
       "admin": {
         "germanPowerMix": "german power mix",
         "germanPowerMixYear": "german power mix (year)",
@@ -183,7 +230,10 @@
         "storageDegradation": "storage degradation",
         "storageLosses": "storage losses",
         "amortizationPeriod": "amortization periode",
-        "maintenancePortion": "maintenance portion"
+        "maintenancePortion": "maintenance portion",
+        "helpPriceIncreaseStart": "Energy price increase (start)",
+        "helpPriceIncreaseEnd": "Energy price increase (end)",
+        "helpPriceIncreasePercentage": "Energy price increase (percentage)"
       },
       "user": {
         "numberOfPersons": "number of persons",
@@ -202,13 +252,46 @@
       "global": {
         "solarLayerName": "solar layer name",
         "isVcSolar": "VC Solar Layer available",
-        "isDebug": "Create debug features"
+        "isDebug": "Create debug features",
+        "isPaginated": "Split tables into pages",
+        "itemsPerPage": "Number of rows per table",
+        "infoContent": "i18n String for info page"
       },
       "vcSolar": {
         "efficiency": "efficiency",
         "costs": "costs",
         "degradation": "degradation",
         "kwpPerArea": "kWp per area"
+      },
+      "colors": {
+        "hexPattern": "Please enter a valid hex color code (e.g., #RRGGBB or #RGB)",
+        "lightThemeTitle": "Color theme light",
+        "darkThemeTitle": "Color theme dark",
+        "sync": "Synchronize colors",
+        "global": {
+          "title": "Global diagram colors",
+          "strokeColorColor": "Outline color"
+        },
+        "revenue": {
+          "title": "Diagramm colors - Revenue/expenditure plan",
+          "maintenanceCostsColor": "Operating costs",
+          "gridConsumptionPriceColor": "Purchase costs",
+          "repaymentRateColor": "Repayment",
+          "interestAmountColor": "Interest",
+          "directConsumptionPriceColor": "Direct consumption",
+          "storageConsumptionPriceColor": "Storage consumption",
+          "gridSupplyPriceColor": "Grid feed-in"
+        },
+        "liquidity": {
+          "title": "Diagram colors - Liquidity trend",
+          "positiveLiquidityColor": "Positive liquidity",
+          "negativeLiquidityColor": "Negative liquidity"
+        },
+        "co2": {
+          "title": "Diagram colors - CO2 savings",
+          "coTwoSavingsColor": "Savings",
+          "coTwoCostsColor": "Manufacturing emissions"
+        }
       }
     }
   }

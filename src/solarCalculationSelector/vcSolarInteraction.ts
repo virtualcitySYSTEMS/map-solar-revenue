@@ -6,7 +6,7 @@ import {
   VectorLayer,
   VectorStyleItem,
 } from '@vcmap/core';
-import { Cesium3DTileFeature } from '@vcmap-cesium/engine';
+import { Cesium3DTileFeature, ColorBlendMode } from '@vcmap-cesium/engine';
 import { NotificationType, VcsUiApp } from '@vcmap/ui';
 import { reactive, Ref } from 'vue';
 import type { SolarModule } from '../solarInputTypes.js';
@@ -38,7 +38,7 @@ class VcSolarInteraction extends AbstractInteraction {
 
   _app: VcsUiApp;
 
-  _localFeatureTrack: number[];
+  _localFeatureTrack: (number | symbol | string)[];
 
   _vcSolarOptions: VcSolarOptions;
 
@@ -59,41 +59,50 @@ class VcSolarInteraction extends AbstractInteraction {
     this.setActive(true);
   }
 
-  _highlightFeature(feature: Cesium3DTileFeature): void {
-    this.solarLayer?.featureVisibility.highlight({
-      [feature.getId()]: new VectorStyleItem({
-        fill: { color: [0, 0, 0, 0.5] },
-        stroke: { color: [0, 0, 255, 1.0], width: 100.0, lineDashOffset: 10 },
-      }),
-    });
+  _highlightFeature(featureId: number | string | null): void {
+    if (featureId !== null) {
+      this.solarLayer?.featureVisibility.highlight({
+        [featureId]: new VectorStyleItem({
+          colorBlendMode: ColorBlendMode.REPLACE,
+          fill: { color: [255, 0, 255, 1.0] },
+        }),
+      });
+    }
+  }
+
+  highlightSelectedFeature(featureId: number | string | undefined): void {
+    this.highlightFeatures();
+    if (featureId != null) {
+      this.solarLayer?.featureVisibility.highlight({
+        [featureId]: new VectorStyleItem({
+          colorBlendMode: ColorBlendMode.REPLACE,
+          fill: { color: [255, 0, 255, 1] },
+        }),
+      });
+    }
   }
 
   highlightFeatures(): void {
     this._selectedModules.value.forEach((solarModule) => {
-      this.solarLayer?.featureVisibility.highlight({
-        [solarModule.id]: new VectorStyleItem({
-          fill: { color: [0, 0, 0, 0.5] },
-          stroke: { color: [0, 0, 255, 1.0], width: 100.0, lineDashOffset: 10 },
-        }),
-      });
+      this._highlightFeature(solarModule.featureId);
     });
   }
 
   _unHighLightFeatures(): void {
     this._selectedModules.value.forEach((solarModule) => {
-      this.solarLayer?.featureVisibility.unHighlight([solarModule.id]);
+      this.solarLayer?.featureVisibility.unHighlight([solarModule.featureId]);
     });
   }
 
   _removeFeature(feature: Cesium3DTileFeature): void {
     this._selectedModules.value = this._selectedModules.value.filter(
       (solarModule) => {
-        return solarModule.featureId !== feature.featureId;
+        return solarModule.featureId !== feature.getId();
       },
     );
 
     this._localFeatureTrack = this._localFeatureTrack.filter(
-      (id) => id !== feature.featureId,
+      (featureId) => featureId !== feature.featureId,
     );
     this.solarLayer?.featureVisibility.unHighlight([feature.getId()]);
   }
@@ -103,8 +112,8 @@ class VcSolarInteraction extends AbstractInteraction {
       const attributes = feature.getProperty('attributes');
       if (attributes.solarArea) {
         const moduleFeature = reactive<SolarModule>({
-          id: feature.getId(),
-          featureId: feature.featureId,
+          type: 'vcsolar',
+          featureId: feature.getId(),
           area: attributes.solarArea || -9999,
           efficiency: this._vcSolarOptions.efficiency,
           costs: this._vcSolarOptions.costs,
@@ -130,7 +139,7 @@ class VcSolarInteraction extends AbstractInteraction {
         }) as SolarModule;
         this._selectedModules.value.push(moduleFeature);
         this._localFeatureTrack.push(feature.featureId);
-        this._highlightFeature(feature);
+        this._highlightFeature(feature.getId());
       } else {
         this._app.notifier.add({
           type: NotificationType.INFO,

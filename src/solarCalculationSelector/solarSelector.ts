@@ -3,6 +3,7 @@ import {
   createToggleAction,
   ToolboxType,
   VcsAction,
+  VcsTextPage,
   VcsUiApp,
   WindowSlot,
 } from '@vcmap/ui';
@@ -30,8 +31,36 @@ import { SolarModule } from '../solarInputTypes.js';
 import { VcSolarOptions } from '../solarOptions.js';
 
 export const solarSelectorId = 'solar-selector';
+export const solarInfoActionId = 'solar-info-action-id';
 
-export default function createSolarNavbar(vcsUiApp: VcsUiApp): () => void {
+export default function createSolarNavbar(
+  vcsUiApp: VcsUiApp,
+  infoContent: string,
+): () => void {
+  const infoAction = createToggleAction(
+    {
+      name: 'solar-revenue-info-action',
+      icon: 'mdi-information',
+    },
+    {
+      id: solarInfoActionId,
+      component: VcsTextPage,
+      slot: WindowSlot.DYNAMIC_RIGHT,
+      state: {
+        headerTitle: 'solarRevenue.infoContent.headerTitle',
+      },
+      position: {
+        width: '600px',
+        height: '800px',
+      },
+      props: {
+        content: infoContent,
+      },
+    },
+    vcsUiApp.windowManager,
+    name,
+  );
+
   const { action } = createToggleAction(
     {
       name: 'solarRevenue.name',
@@ -44,6 +73,8 @@ export default function createSolarNavbar(vcsUiApp: VcsUiApp): () => void {
       slot: WindowSlot.DYNAMIC_LEFT,
       state: {
         headerTitle: 'solarRevenue.name',
+        headerIcon: 'mdi-solar-power',
+        headerActions: [infoAction.action],
       },
       position: {
         width: '430px',
@@ -80,9 +111,8 @@ export function createSolarAreaToolbox(
   selectedModules: Ref<SolarModule[]>,
   vcSolarOptions: VcSolarOptions,
   isDebug: boolean,
-): () => void {
+): { removeSolarAreaToolbox: () => void; action: VcsAction } {
   let currentFeatureId: string | number | undefined;
-  let areaId = 1;
   let session: CreateFeatureSession<GeometryType.Polygon>;
 
   const layer = app.layers.getByKey('_solarAreaLayer')
@@ -106,7 +136,7 @@ export function createSolarAreaToolbox(
           session.finish();
           layer.removeFeaturesById([currentFeatureId]);
           selectedModules.value = selectedModules.value.filter(
-            (selectedModule) => selectedModule.id !== currentFeatureId,
+            (selectedModule) => selectedModule.featureId !== currentFeatureId,
           );
         }
       }
@@ -117,17 +147,17 @@ export function createSolarAreaToolbox(
     currentFeatureId = currentFeature.getId();
   };
 
-  const solarAreaAction: VcsAction = reactive({
+  const action: VcsAction = reactive({
     name: 'areaAction',
     title: 'solarRevenue.solarSelector.drawArea',
     icon: 'mdi-view-grid-plus-outline',
     active: false,
     async callback(): Promise<void> {
-      if (solarAreaAction.active) {
+      if (action.active) {
         session.stop();
         window.removeEventListener('keydown', escapeListener);
         app.maps.eventHandler.featureInteraction.pullPickedPosition = 0.0;
-        solarAreaAction.active = false;
+        action.active = false;
       } else {
         await layer.activate();
         window.addEventListener('keydown', escapeListener);
@@ -135,14 +165,13 @@ export function createSolarAreaToolbox(
         session = startCreateFeatureSession(app, layer, GeometryType.Polygon);
         session.featureCreated.addEventListener(currentFeatureIdListener);
         session.stopped.addEventListener(() => {
-          solarAreaAction.active = false;
+          action.active = false;
         });
         session.creationFinished.addEventListener((feature) => {
           if (feature) {
             const solarSurface = createSolarSurface(feature, app);
             const moduleFeature = reactive<SolarModule>({
-              id: feature.getId() || 0,
-              featureId: areaId,
+              featureId: feature.getId() || 0,
               area: solarSurface.solarArea,
               efficiency: vcSolarOptions.efficiency,
               costs: vcSolarOptions.costs,
@@ -156,6 +185,7 @@ export function createSolarAreaToolbox(
                 progress: 0,
               },
               actions: [],
+              type: 'area',
             }) as SolarModule;
 
             const removeModuleAction = {
@@ -169,7 +199,7 @@ export function createSolarAreaToolbox(
                   ]);
                 }
                 selectedModules.value = selectedModules.value.filter((x) => {
-                  return x.id !== feature.getId();
+                  return x.featureId !== feature.getId();
                 });
               },
             };
@@ -188,7 +218,6 @@ export function createSolarAreaToolbox(
               calculateModuleAction,
             );
             selectedModules.value.push(moduleFeature);
-            areaId += 1;
           }
         });
         this.active = true;
@@ -200,25 +229,29 @@ export function createSolarAreaToolbox(
     {
       id: 'solarArea',
       type: ToolboxType.SINGLE,
-      action: solarAreaAction,
+      action,
     },
     name,
   );
-  return (): void => {
+  const removeSolarAreaToolbox = (): void => {
     session.stop();
     app.layers.remove(layer);
     window.removeEventListener('keydown', escapeListener);
+  };
+  return {
+    removeSolarAreaToolbox,
+    action,
   };
 }
 
 export function createVcSolarToolBox(
   app: VcsUiApp,
   solarInteraction: VcSolarInteraction,
-): () => void {
+): { removeSolarInteraction: () => void; action: VcsAction } {
   let removeSolarInteraction: () => void = () => {};
   const { eventHandler } = app.maps;
 
-  const vcSolarAction: VcsAction = {
+  const action: VcsAction = reactive({
     name: 'vcSolarAction',
     title: 'solarRevenue.solarSelector.selectArea',
     icon: 'mdi-home-roof',
@@ -230,7 +263,6 @@ export function createVcSolarToolBox(
       } else {
         app.featureInfo.clear();
         solarInteraction.setActive(true);
-        solarInteraction.highlightFeatures();
         removeSolarInteraction = eventHandler.addExclusiveInteraction(
           solarInteraction,
           () => {
@@ -244,18 +276,19 @@ export function createVcSolarToolBox(
         }
       }
     },
-  };
+  });
 
   app.toolboxManager.add(
     {
       id: 'vcSolar',
       type: ToolboxType.SINGLE,
-      action: vcSolarAction,
+      action,
     },
     name,
   );
 
-  return (): void => {
-    removeSolarInteraction();
+  return {
+    removeSolarInteraction,
+    action,
   };
 }

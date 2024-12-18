@@ -7,6 +7,10 @@
     "profitability": {
       "selectFeature": "Selektieren Sie ein oder mehrere Objekte"
     },
+    "infoContent": {
+      "headerTitle": "Zusätzliche Informationen",
+      "content": "![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAAwCAMAAABjR8XYAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAFoUExURUdwTCV9WQCfuQBUNECfdUCbdECcdgBUNECddUCddgBUNIawEECcdUGedYWyEACfvwCfuQBQMABQMABVNQBUNECfeECfcECddQBVMABTMwBTMwBSMgBUM0CddkCddUCcdQBTMwBTMwBTMwBUMwBUNABUNABUMh9qLACAgSFqKgBUMyBqKgBTM0CcdUCcdkCddkCcdQBTM0CcdkCcdgBTMwBUNABTMwBTMwB9fABTMwCChkGedAC/vwBTNIevECJrKgB8eYevEACfuQB5dkCddgB5dQBUNECddmOYGQB6dgNXN4awEBxoLCF5VS5zJwCgunuxHQCZswCgugCguSiBXgCevIazECJsKx9oLACguiV+WQB/gIWwEACguYWwECuEYABUMwCjuACgujyXcgBVMyZ/WwFWNjKNZkCddUCcdUCddgBUMwB5dABUNABUNACSowBkUgBUMwB7eABTM0CddgBUNIaxEACguiKy5ZwAAAB0dFJOUwDWgH8wQPDAwICA8LA/YAjFIBA/QCAQ7zCQ4GCwcGDg79+g8M/8cMvGwv3H/pCv0L9QoFBfT9CfxG/ITwT7QL2/IP3C376Pf8LB27/it7zEaAp218cqULrQRtbB4KHv0PMZl/Et1c/Kn8+P4cK/dndz9MOvz6OBSgAABTdJREFUaN7N2Gdj4jYYAGC52Ng4kNaA2YEAOa5NE0aSS5qm7XVce91777137frv95XkbUkWphfu/YCNkCw91kwQsudtRybefdl99cV/peKVp9D1hy3HcF5zcby+I0d5//ohVTnHN18SiPuBnOTz64dIdsgXrh+35STPcKqrOD+1pNtWWR6z3vyPzMwjOYjirifhQaA6LTauVSHEcIxsIjQGPltX6fdxsi7EfURC8in3JTuLVuzlGutDqs4JQnuJ90GiVV4XIiORW7aMIhD/fWQgSC2vC8mX7OYa1JrKa2irVlNZEK1WE0LkJAlInmQ39V7b5Dp0nCFeJPEtWWL2DPyphRkcp0IGDY65moQM75Dktp9YwV+qoadCniolSULEkt3MMFD92WhDM6DKFn1mBHEiSMWvsG3HIadBO4QQGUkKIpKkx5UKTaYL1gLRRmvQCDt64wkIGVxalZSJIPC9Eh9vviANkZCkIe6jO9LzowzvDpZaxzmOIKdIACH4ShxCXoIEJF+SgfAku8zDA50ipxFEE0NQCuJEs0UMyZVkIWwJa70akupgirQkIOrcr7EgJE/CgLAkzHXXJq0akbbkQmDrLxuGURySI2FBshLO/rGAuqkmF6L5K4McZI8FEUuYkLSEtw8eQz10fDEhVTLoQojGgIycOyyI5k+rJEQoYUPcmzsy+znsAnfnThllIe2rmo2bMa9B+JAl3F6lICd+lloE+Rn2f9iQ2nchdZmEiCQcSFwiOJeU6f6VhlTppLbDWip+1sxk11Ib4hDfG6Svwx/kJDxIJBGdr4bw3JFK214muwSB2Hhrhymh0b/uygaszyq9X1TVxOlYq5ZJDgyp0tFKrpUFzj1KQ/gSLiSQ7KIthpGBcCV8CJVs1WG3GcdojkQAcT/c2Z7DWC6XbSd+JsiRfCyAuDff3Fpn+M07Zv7NU16zR558/KEHN2yPdWkWK6hqODj/z2BJFJHD8zaV6K5+L/qLIeFDboBjY8k9gjAkXMiNhz0vV2LdKpUuGxZCnUaHJDTxF/gK6WeNOoYcNPCV5DwL8pRKJUi04HpJk0iBS1q2oETJcYgk9QOaV4/ePPli+ekmTodoIjShKQdgMv0axvTyW+xB5gZ9ouQ5BBJoUk+HMFMQaPU5Tu/j9Kmud1AfHjntwceElILfcCU9coFcXf9B/Q1Gl5Lr4EugGem54HfPeSpdJ91i9XABk5Sqk5yo47qDRIHCEiXfwZUMXNdiQ8b1ZPqUXkxcgELgl/3wl1iBwhJFwsGTwIDZv2hmIdDU/Rc68XQXz/lG4wJ3TAhxwwyzqEBhCQNy+InnyUm6ZNKepSE0/eAsDgmCCYk9qLAkCzl8zPNkJdYMz+AuWWZjEGR1cfosBpnqNCwmBFmm/6DCEkXOwZ/xzXPcomDeu+EG2J+64xhEj691WQjEakpnTUGJIungS6BhdTw2mqkWTyhw7M/seh4k+KGgRJF1MCSzEo4xrn+F532pdEEnO0nfx2sqNPei1MTOMUm0mJCgQG+D00oScvi058lLglJduhSH23xw2/e3cRPVe+FcZ0GCArMNzl0JyJHQkZGYAzx9Jys6Jyb4nuxvJpnWEzLWZnAHN/UZyWtCj6z0ASkcXMywwGqTE2QccvSSlxNvvCV+ZH2989L/eRaOQY6e83LjayGj8Q8ZT1uRKGs5vGef4B8gSUzraDuS70LIr55MvMd5Up8yBh20nVB/CPrjeSkHt0e2Hur36zi8z9B9G9/+Ao6//pZzvPMVuo/j1u9//vGATLz90RZa9x+aqmJKzSp6PgAAAABJRU5ErkJggg==) \n\n Die interaktive **VC Solar App** enthält einen Ertragsrechner, der die Photovoltaikleistung auf Basis von semantischen Flächen und gezeichneten Freiflächen ermittelt und eine Dimensionierung und Bewertung einer konkreten Solaranlage erlaubt. \n\n **Weiterführende Links:** \n - <a href=\"https://vc.systems/products/vc-solar/\" target=\"_blank\">https://vc.systems/products/vc-solar/</a>"
+    },
     "solarSelector": {
       "noSelection": "Keine Flächen gezeichnet oder ausgewählt",
       "noVCSolar": "Diese Fläche wurde über VC Solar nicht vorgerechnet. Verwenden Sie die Option Flächen Zeichnen",
@@ -17,13 +21,14 @@
       "selectArea": "Solarpotentialfläche selektieren",
       "drawArea": "Solarpotentialfläche zeichnen",
       "helpMethod": "Wählen Sie eine Methode für die Berechnung der solaren  Einstrahlung in der Werkzeugleiste aus.",
-      "helpMethod2": "Sie können entweder eine bereits berechnete Fläche selektieren oder eine Freifläche zeichnen.",
+      "helpMethod2": "Sie können entweder eine bereits berechnete Fläche selektieren oder eine Freifläche zeichnen. Das Zeichnen einer Fläche wird durch Doppelklick beendet.",
       "helpMethodArea": "Für die Berechnung der solaren Einstrahlung auf eine Fläche aktivieren Sie den Zeichnungsmodus in der Werkzeugleiste und zeichnen eine beliebige Fläche.",
       "modulesList": "Schritt 2 - Ertrag der Flächen berechnen",
       "helpModulesList": "Hier werden alle selektierten oder gezeichneten Flächen angezeigt. Bei gezeichneten Flächen muss die solare Einstrahlung über den Button (Solarertrag berechnen) berechnet werden.",
       "total": "Gesamt",
-      "results": "Schritt 3 - Verbrauchsdaten anpassen / Ergebnisse",
-      "helpResults": "Nachdem Sie eine oder mehrere Flächen selektiert bzw. gezeichnet haben und für freie Flächen den Solarertrag berechnet haben, können Sie ihre Verbrauchsdaten anpassen. Die Ergebnisse werden direkt an Ihre Eingaben angepasst.",
+      "results": "Schritt 4 - Ergebnisse",
+      "consumptionData": "Schritt 3 - Verbrauchsdaten anpassen",
+      "consumptionDataHelp": "Nachdem Sie eine oder mehrere Flächen selektiert bzw. gezeichnet haben und für freie Flächen den Solarertrag berechnet haben, können Sie ihre Verbrauchsdaten anpassen. Die Ergebnisse werden direkt an Ihre Eingaben angepasst.",
       "coTwoSavings": "CO2-Einsparung",
       "revenueCalculation": "Wirtschaftlichkeitsberechnung",
       "finance": "Finanzierungsplan",
@@ -40,9 +45,9 @@
     "revenue": {
       "help": {
         "demand": "In diesem Bereich können Sie die Angaben über Ihren persönlichen Strombedarf vornehmen. Der errechnete Strombedarf passt sich dabei automatisch an Ihre Eingaben an. Sollten Sie Ihren Strombedarf jedoch exakt kennen, können Sie diesen direkt in das entsprechende Feld eingeben.",
-        "consumption": "Abhängig von Ihrem Verbrauchverhalten kann mehr Strom aus der Solaranlage direkt genutzt werden. Verbrauchen Sie beispielsweise tagsüber mehr Strom wird der Direktverbrauchsanteil steigen. Gleiches gilt für den Speicherverbrauch. Hier können Sie nun angeben, welchen Anteil am Solarstrom Sie direkt verbrauchen. Die voreingestellten Werte spiegeln einen durchschnittlichen Haushalt wider.",
-        "costs": "In diesem Bereich können Sie Angaben über die Energiekosten machen. Dazu geben Sie die aktuellen Stromkosten von Ihrem Anbieter an. Zusätzlich können Sie eine prognostizierte Strompreissteigerung berücksichtigen.",
-        "finance": "In diesem Bereich können Sie auswählen, ob Sie die Solaranlage finanzieren möchten. Dazu können Sie Angaben über das Eigenkapital, die Laufzeit und den Zinssatz machen."
+        "consumption": "Abhängig von Ihrem Verbrauchverhalten kann mehr Strom aus der Solaranlage direkt genutzt werden. Verbrauchen Sie beispielsweise tagsüber mehr Strom wird der Direktverbrauchsanteil steigen. Gleiches gilt für den Speicherverbrauch. Hier können Sie nun angeben, welchen Anteil am Solarstrom Sie direkt verbrauchen. Sie haben die Möglichkeit die Werte durch vordefinierte Verbrauchsprofile zu definieren.",
+        "costs": "In diesem Bereich können Sie Angaben über die Energiekosten machen. Dazu geben Sie die aktuellen Stromkosten von Ihrem Anbieter an. Zusätzlich können Sie die prognostizierte Strompreissteigerung anpassen. Die durchschnittliche Strompreissteigerung im Zeitraum von {startYear} bis {endYear} lag bei {increase}%. Zukünftig sind weitere Steigerungen zu erwarten.",
+        "finance": "In diesem Bereich können Sie auswählen, ob Sie die Solaranlage finanzieren möchten. Dazu können Sie Angaben über das Eigenkapital, die Laufzeit und den Zinssatz machen. Da die aktuellen Zinssätze kontinuierlichen Schwankungen unterliegen, bedarf es einer eigenen Recherche."
       },
       "title": "Wirtschaftlichkeitsrechner",
       "button": "Verbrauchsdaten anpassen",
@@ -60,7 +65,16 @@
         "title": "Eigenverbrauch",
         "directConsumption": "Direktverbrauch",
         "storageConsumption": "Speicherverbrauch",
-        "isStorageConsumption": "Stromspeicher einbeziehen"
+        "isStorageConsumption": "Stromspeicher einbeziehen",
+        "storageCapacity": "Speicherkapazität",
+        "profilesLabel": "Verbrauchsprofil auswählen",
+        "profiles": {
+          "balanced": "Ausgewogen",
+          "day": "Tagsüber aktiv",
+          "evening": "Abends aktiv",
+          "high": "Hoher Strombedarf",
+          "optimal": "Bewusste Solarstromnutzer"
+        }
       },
       "costs": {
         "title": "Energiekosten",
@@ -98,7 +112,10 @@
     },
     "prof": {
       "title": "Wirtschaftlichkeit",
-      "description": "Der Einnahmen- und Ausgabenplan stellt die jährlichen Einnahmen und Ausgaben über eine angenommene Laufzeit der PV-Anlage von {lifeTime} Jahren gegenüber.",
+      "description": {
+        "revenue": "Der Einnahmen- und Ausgabenplan stellt die jährlichen Einnahmen und Ausgaben über eine angenommene Laufzeit der PV-Anlage von {lifeTime} Jahren gegenüber.",
+        "liquidity": "Der Liquiditätsverlauf über {lifeTime} Jahre zeigt, wie sich die Anschaffungskosten einer Solaranlage langfristig durch Einsparungen und Einnahmen ausgleichen. So wird sichtbar, ab wann die Investition finanziell rentabel ist."
+      },
       "typeLabel": "Wählen Sie das gewünschte Ergebnis:",
       "type": {
         "liquidity": "Liquiditätsverlauf",
@@ -155,7 +172,15 @@
         "directConsumptionPrice": "Direktverbrauch",
         "storageConsumptionPrice": "Speicherverbrauch",
         "gridSupplyPrice": "Netzeinspeisung",
-        "liquidity": "kum. Liquidität"
+        "liquidity": "kum. Liquidität",
+        "tooltip": {
+          "maintenanceCosts": "Laufende Kosten zur Wartung und für den Betrieb der Solaranlage. Entspricht {maintenancePortion}% der Investitionskosten.",
+          "gridConsumptionPrice": "Kosten für die Menga an Strom, die aus dem öffentlichen Netz bezogen wird.",
+          "directConsumptionPrice": "Kosten für den Direktverbrauchsanteil, wenn keine Solaranlage vorhanden ist und dieser aus dem öffentlichen Netz bezogen werden müsste.",
+          "storageConsumptionPrice": "Kosten für den Speicherverbrauchsanteil, wenn keine Solaranlage vorhanden ist und dieser aus dem öffentlichen Netz bezogen werden müsste.",
+          "gridSupplyPrice": "Ertrag für die Menga an Solarstrom, die in das öffentliche Netz eingespeist wird.",
+          "liquidity": "Die kumulierte Liquidität für jedes Jahr wird berechnet, indem der jährliche Cashflow zum vorherigen kumulierten Betrag hinzugefügt wird. "
+        }
       },
       "energyHeader": {
         "year": "Jahr",
@@ -165,14 +190,36 @@
         "directConsumption": "Direktverbrauch",
         "storageConsumption": "Speicherverbrauch",
         "gridConsumption": "Netzbezug",
-        "gridSupply": "Netzeinspeisung"
+        "gridSupply": "Netzeinspeisung",
+        "tooltip": {
+          "solarPowerYield": "Gesamtmenge des erzeugten Solarstroms.",
+          "electricityDemand": "Strombedarf für den Haushalt.",
+          "storageLosses": "Bei der Speicherung von Solarstrom geht ein Anteil der Energie als Umwandlungsverluste verloren.",
+          "directConsumption": "Menge an Solarstrom, die direkt währen der Erzeugung verbraucht wird.",
+          "storageConsumption": "Menge an Solarstrom, die für die Füllung eines Stromspeichers verbraucht wird.",
+          "gridConsumption": "Menge an Strom, die für die Deckung des Energiebedarfs aus dem öffentlichen Netz bezogen wird.",
+          "gridSupply": "Menge an überschüssigem Solarstrom, die in des öffentliche Netz eingespeist wird."
+        }
       },
       "environmentalBalanceHeader": {
         "year": "Jahr",
-        "coTwoSavings": "CO2-Einsparung"
+        "coTwoSavings": "CO2-Einsparung",
+        "tooltip": {
+          "coTwoSavings": "Die CO2-Einsparung entspricht dem rechnerischen Vergleich mit der CO2-Emission, welche durch den Bezug der gleichen Strommenge aus dem deutschen Strommix entstehen würde."
+        }
       }
     },
     "config": {
+      "adminSectionTitle": "Statische Parameter",
+      "userSectionTitle": "Defaultwerte",
+      "globalSectionTitle": "Globale Einstellungen",
+      "vcSolarSectionTitle": "VC Solar Backend Einstellungen",
+      "colorSectionTitle": "color",
+      "profile": {
+        "sectionTitle": "Verbrauchsprofile",
+        "direct": "Direktverbrauch",
+        "storage": "Speicherbrauch"
+      },
       "admin": {
         "germanPowerMix": "Deutscher Strommix",
         "germanPowerMixYear": "Deutscher Strommix Stand",
@@ -183,7 +230,10 @@
         "storageDegradation": "Speicherdegradation",
         "storageLosses": "Speicherverluste",
         "amortizationPeriod": "Amortisierungszeitraum",
-        "maintenancePortion": "Anteil Betriebskosten"
+        "maintenancePortion": "Anteil Betriebskosten",
+        "helpPriceIncreaseStart": "Energiepreissteigerung (Start)",
+        "helpPriceIncreaseEnd": "Energiepreissteigerung (Ende)",
+        "helpPriceIncreasePercentage": "Energiepreissteigerung (Prozent)"
       },
       "user": {
         "numberOfPersons": "Personen im Haushalt",
@@ -202,13 +252,46 @@
       "global": {
         "solarLayerName": "Solar Ebene Name",
         "isVcSolar": "VC Solar Ebene vorhanden",
-        "isDebug": "Debug Feature erzeugen"
+        "isDebug": "Debug Feature erzeugen",
+        "isPaginated": "Tabellen in Seiten aufteilen",
+        "itemsPerPage": "Anzahl der Zeilen pro Tabelle",
+        "infoContent": "i18n String für Informationsseite"
       },
       "vcSolar": {
         "efficiency": "Effizienz",
         "costs": "Kosten",
         "degradation": "Degradation",
         "kwpPerArea": "kWp pro m²"
+      },
+      "colors": {
+        "hexPattern": "Bitte geben Sie einen gültigen Hex-Farbcode ein (z. B. #RRGGBB oder #RGB)",
+        "lightThemeTitle": "Farbschema hell",
+        "darkThemeTitle": "Farbschema dunkel",
+        "sync": "Farben synchronisieren",
+        "global": {
+          "title": "Globale Diagrammfarben",
+          "strokeColor": "Konturfarbe"
+        },
+        "revenue": {
+          "title": "Diagrammfarben - Einnahmen-/Ausgabenplan",
+          "maintenanceCostsColor": "Betriebskosten",
+          "gridConsumptionPriceColor": "Bezugskosten",
+          "repaymentRateColor": "Tilgung",
+          "interestAmountColor": "Zinsen",
+          "directConsumptionPriceColor": "Direktverbrauch",
+          "storageConsumptionPriceColor": "Speicherverbrauch",
+          "gridSupplyPriceColor": "Netzeinspeisung"
+        },
+        "liquidity": {
+          "title": "Diagrammfarben - Liquiditätsverlauf",
+          "positiveLiquidityColor": "Positive Liquidität",
+          "negativeLiquidityColor": "Negative Liquidität"
+        },
+        "co2": {
+          "title": "Diagrammfarben - CO2-Einsparung",
+          "coTwoSavingsColor": "Einsparung",
+          "coTwoCostsColor": "Herstellungsemission"
+        }
       }
     }
   }

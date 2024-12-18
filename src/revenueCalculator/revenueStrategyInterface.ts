@@ -29,4 +29,5 @@ export default interface RevenueStrategyInterface<T, U> {
   // one-time values
   investmentCosts(props?: unknown): number;
   creditAmount(props?: unknown): number;
+  storagePrice(props?: unknown): number;
 }

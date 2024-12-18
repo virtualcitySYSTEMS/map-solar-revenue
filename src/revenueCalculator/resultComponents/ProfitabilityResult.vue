@@ -14,7 +14,7 @@
           <span
             class="d-inline-block user-select-none font-weight-bold text-primary"
           >
-            {{ $t('solarRevenue.prof.title') }}
+            {{ $st('solarRevenue.prof.title') }}
           </span>
         </h3>
         <v-row>
@@ -23,15 +23,32 @@
               class="my-1 elevation-0 rounded-0 borderCard justify-center d-flex pa-1"
               variant="outlined"
               width="600px"
+              v-if="selectedChartType === 'revenue'"
             >
-              {{ $t('solarRevenue.prof.description', { lifeTime: lifeTime }) }}
+              {{
+                $st('solarRevenue.prof.description.revenue', {
+                  lifeTime: lifeTime,
+                })
+              }}
+            </v-card>
+            <v-card
+              class="my-1 elevation-0 rounded-0 borderCard justify-center d-flex pa-1"
+              variant="outlined"
+              width="600px"
+              v-if="selectedChartType === 'liquidity'"
+            >
+              {{
+                $st('solarRevenue.prof.description.liquidity', {
+                  lifeTime: lifeTime,
+                })
+              }}
             </v-card>
           </v-col>
         </v-row>
         <v-row no-gutters class="px-0 py-1 d-flex justify-center">
           <v-col cols="5">
             <VcsLabel class="font-weight-bold">
-              {{ $t('solarRevenue.prof.typeLabel') }}
+              {{ $st('solarRevenue.prof.typeLabel') }}
             </VcsLabel>
           </v-col>
           <v-col cols="4">
@@ -73,15 +90,7 @@
 
 <script setup lang="ts">
   import { useTheme } from 'vuetify';
-  import {
-    computed,
-    getCurrentInstance,
-    inject,
-    onUnmounted,
-    PropType,
-    Ref,
-    ref,
-  } from 'vue';
+  import { computed, getCurrentInstance, inject, PropType, ref } from 'vue';
   import {
     VDialog,
     VRow,
@@ -90,15 +99,15 @@
     VIcon,
     VCol,
   } from 'vuetify/components';
-  import {
-    getColorByKey,
-    VcsButton,
-    VcsUiApp,
-    VcsSelect,
-    VcsLabel,
-  } from '@vcmap/ui';
+  import { VcsButton, VcsUiApp, VcsSelect, VcsLabel } from '@vcmap/ui';
   import VueApexCharts from 'vue3-apexcharts';
-  import { downloadSVG } from '../../helper.js';
+  import { downloadSVG, getSolarColorByKey } from '../../helper.js';
+  import { SolarColors } from '../../solarOptions.js';
+
+  const dialog = defineModel('dialog', {
+    type: Boolean as PropType<boolean>,
+    required: true,
+  });
 
   const innerProps = defineProps({
     maintenanceCosts: {
@@ -145,44 +154,93 @@
       type: Number as PropType<number>,
       required: true,
     },
+    colorOptions: {
+      type: Object as PropType<SolarColors>,
+      required: true,
+    },
   });
   const app: VcsUiApp = inject<VcsUiApp>('vcsApp')!;
   const vm = getCurrentInstance()?.proxy;
-  const dialog: Ref<boolean> = ref(false);
 
   const chartTypes = computed(() => [
-    { key: 'revenue', title: vm?.$t('solarRevenue.prof.type.revenue') },
+    { key: 'revenue', title: vm?.$st('solarRevenue.prof.type.revenue') },
     {
       key: 'liquidity',
-      title: vm?.$t('solarRevenue.prof.type.liquidity'),
+      title: vm?.$st('solarRevenue.prof.type.liquidity'),
     },
   ]);
   const selectedChartType = ref('revenue');
 
-  const primary = ref(getColorByKey(app, 'primary'));
-  const primaryLighten1 = ref(getColorByKey(app, 'primary', 'lighten-1'));
-  const primaryDarken1 = ref(getColorByKey(app, 'primary', 'darken-1'));
-  const primaryDarken2 = ref(getColorByKey(app, 'primary', 'darken-2'));
-  const baseLighten4 = ref(getColorByKey(app, 'base', 'lighten-4'));
-  const baseDarken1 = ref(getColorByKey(app, 'base', 'darken-1'));
-  const baseDarken2 = ref(getColorByKey(app, 'base', 'darken-2'));
-  const baseDarken3 = ref(getColorByKey(app, 'base', 'darken-3'));
-  const baseDarken4 = ref(getColorByKey(app, 'base', 'darken-4'));
-  const themeChangedListener = app.themeChanged.addEventListener(() => {
-    primary.value = getColorByKey(app, 'primary');
-    primaryLighten1.value = getColorByKey(app, 'primary', 'lighten-1');
-    primaryDarken1.value = getColorByKey(app, 'primary', 'darken-1');
-    primaryDarken2.value = getColorByKey(app, 'primary', 'darken-2');
-    baseLighten4.value = getColorByKey(app, 'base', 'lighten-4');
-    baseDarken1.value = getColorByKey(app, 'base', 'darken-1');
-    baseDarken2.value = getColorByKey(app, 'base', 'darken-2');
-    baseDarken3.value = getColorByKey(app, 'base', 'darken-3');
-    baseDarken4.value = getColorByKey(app, 'base', 'darken-4');
-  });
+  const positiveLiquidityColor = computed(() =>
+    getSolarColorByKey(
+      app,
+      innerProps.colorOptions.liquidity,
+      'positiveLiquidityColor',
+    ),
+  );
+  const negativeLiquidityColor = computed(() =>
+    getSolarColorByKey(
+      app,
+      innerProps.colorOptions.liquidity,
+      'negativeLiquidityColor',
+    ),
+  );
+  const directConsumptionPriceColor = computed(() =>
+    getSolarColorByKey(
+      app,
+      innerProps.colorOptions.revenue,
+      'directConsumptionPriceColor',
+    ),
+  );
+  const storageConsumptionPriceColor = computed(() =>
+    getSolarColorByKey(
+      app,
+      innerProps.colorOptions.revenue,
+      'storageConsumptionPriceColor',
+    ),
+  );
+  const gridSupplyPriceColor = computed(() =>
+    getSolarColorByKey(
+      app,
+      innerProps.colorOptions.revenue,
+      'gridSupplyPriceColor',
+    ),
+  );
+  const maintenanceCostsColor = computed(() =>
+    getSolarColorByKey(
+      app,
+      innerProps.colorOptions.revenue,
+      'maintenanceCostsColor',
+    ),
+  );
+  const gridConsumptionPriceColor = computed(() =>
+    getSolarColorByKey(
+      app,
+      innerProps.colorOptions.revenue,
+      'gridConsumptionPriceColor',
+    ),
+  );
+  const repaymentRateColor = computed(() =>
+    getSolarColorByKey(
+      app,
+      innerProps.colorOptions.revenue,
+      'repaymentRateColor',
+    ),
+  );
+  const interestAmountColor = computed(() =>
+    getSolarColorByKey(
+      app,
+      innerProps.colorOptions.revenue,
+      'interestAmountColor',
+    ),
+  );
+  const strokeColor = computed(() =>
+    getSolarColorByKey(app, innerProps.colorOptions.global, 'strokeColor'),
+  );
 
   const liquiditySeries = computed(() => [
     {
-      name: vm?.$t('solarRevenue.prof.chart.liquidity.series'),
+      name: vm?.$st('solarRevenue.prof.chart.liquidity.series'),
       data: [...innerProps.liquidity.values()].map((v) => v | 0),
     },
   ]);
@@ -190,14 +248,14 @@
   const series = computed(() => {
     const noFinanceExpenses = [
       {
-        name: vm?.$t('solarRevenue.prof.chart.plan.maintenanceCosts'),
+        name: vm?.$st('solarRevenue.prof.chart.plan.maintenanceCosts'),
         group: 'expenses',
         data: [...innerProps.maintenanceCosts.values()]
           .map((v) => v | 0)
           .map(Math.abs),
       },
       {
-        name: vm?.$t('solarRevenue.prof.chart.plan.gridConsumptionPrice'),
+        name: vm?.$st('solarRevenue.prof.chart.plan.gridConsumptionPrice'),
         group: 'expenses',
         data: [...innerProps.gridConsumptionPrice.values()]
           .map((v) => v | 0)
@@ -207,15 +265,15 @@
 
     const financeExpenses = [
       {
-        name: vm?.$t('solarRevenue.prof.chart.plan.repaymentRate'),
+        name: vm?.$st('solarRevenue.prof.chart.plan.repaymentRate'),
         group: 'expenses',
         data: [...innerProps.repaymentRate.values()]
           .map((v) => v | 0)
           .map(Math.abs),
-        color: baseDarken3.value,
+        color: repaymentRateColor.value,
       },
       {
-        name: vm?.$t('solarRevenue.prof.chart.plan.interestAmount'),
+        name: vm?.$st('solarRevenue.prof.chart.plan.interestAmount'),
         group: 'expenses',
         data: [...innerProps.interestAmount.values()]
           .map((v) => v | 0)
@@ -224,21 +282,21 @@
     ];
     const earnings = [
       {
-        name: vm?.$t('solarRevenue.prof.chart.plan.directConsumptionPrice'),
+        name: vm?.$st('solarRevenue.prof.chart.plan.directConsumptionPrice'),
         group: 'income',
         data: [...innerProps.directConsumptionPrice.values()]
           .map((v) => v | 0)
           .map(Math.abs),
       },
       {
-        name: vm?.$t('solarRevenue.prof.chart.plan.storageConsumptionPrice'),
+        name: vm?.$st('solarRevenue.prof.chart.plan.storageConsumptionPrice'),
         group: 'income',
         data: [...innerProps.storageConsumptionPrice.values()]
           .map((v) => v | 0)
           .map(Math.abs),
       },
       {
-        name: vm?.$t('solarRevenue.prof.chart.plan.gridSupplyPrice'),
+        name: vm?.$st('solarRevenue.prof.chart.plan.gridSupplyPrice'),
         group: 'income',
         data: [...innerProps.gridSupplyPrice.values()]
           .map((v) => v | 0)
@@ -273,9 +331,9 @@
       colors: [
         function chColor({ value }: { value: number }): string {
           if (value < 0) {
-            return baseDarken1.value;
+            return negativeLiquidityColor.value;
           } else {
-            return primary.value;
+            return positiveLiquidityColor.value;
           }
         },
       ],
@@ -294,7 +352,7 @@
         labels: {
           formatter(val: string): string {
             return `${val}. ${vm
-              ?.$t('solarRevenue.prof.chart.yUnit')
+              ?.$st('solarRevenue.prof.chart.yUnit')
               .toString()}`;
           },
         },
@@ -315,6 +373,11 @@
       grid: {
         show: false,
       },
+      stroke: {
+        show: true,
+        colors: [strokeColor.value],
+        width: 1,
+      },
       legend: {
         position: 'top',
         horizontalAlign: 'left',
@@ -322,21 +385,22 @@
           useSeriesColors: true,
         },
       },
-      stroke: {
-        show: true,
-        width: 1,
-        colors: [baseLighten4.value],
-      },
     };
   });
 
   const revenueColors = computed(() => {
-    const noFinanceExpenses = [baseDarken1.value, baseDarken2.value];
-    const financeExpenses = [baseDarken3.value, baseDarken4.value];
+    const noFinanceExpenses = [
+      maintenanceCostsColor.value,
+      gridConsumptionPriceColor.value,
+    ];
+    const financeExpenses = [
+      repaymentRateColor.value,
+      interestAmountColor.value,
+    ];
     const earnings = [
-      primaryLighten1.value,
-      primaryDarken1.value,
-      primaryDarken2.value,
+      directConsumptionPriceColor.value,
+      storageConsumptionPriceColor.value,
+      gridSupplyPriceColor.value,
     ];
     return innerProps.isFinance
       ? [...noFinanceExpenses, ...financeExpenses, ...earnings]
@@ -380,7 +444,7 @@
         labels: {
           formatter(val: string): string {
             return `${val}. ${vm
-              ?.$t('solarRevenue.prof.chart.yUnit')
+              ?.$st('solarRevenue.prof.chart.yUnit')
               .toString()}`;
           },
         },
@@ -401,6 +465,11 @@
       grid: {
         show: false,
       },
+      stroke: {
+        show: true,
+        colors: [strokeColor.value],
+        width: 1,
+      },
       legend: {
         position: 'top',
         horizontalAlign: 'left',
@@ -408,15 +477,6 @@
           useSeriesColors: true,
         },
       },
-      stroke: {
-        show: true,
-        width: 1,
-        colors: [baseLighten4.value],
-      },
     };
-  });
-
-  onUnmounted(() => {
-    themeChangedListener();
   });
 </script>

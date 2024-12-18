@@ -7,35 +7,50 @@
     >
       <template #default>
         <v-container>
-          <v-row no-gutters class="pb-2">
+          <v-row no-gutters>
             <v-col v-if="solarOptions.globalSettings.isVcSolar">
-              {{ $t('solarRevenue.solarSelector.helpMethod') }}
+              {{ $st('solarRevenue.solarSelector.helpMethod') }}
             </v-col>
             <v-col v-if="!solarOptions.globalSettings.isVcSolar">
-              {{ $t('solarRevenue.solarSelector.helpMethodArea') }}
+              {{ $st('solarRevenue.solarSelector.helpMethodArea') }}
             </v-col>
           </v-row>
-          <v-row no-gutters>
+          <v-row no-gutters class="pt-2">
+            <v-col v-if="solarOptions.globalSettings.isVcSolar">
+              {{ $st('solarRevenue.solarSelector.helpMethod2') }}
+            </v-col>
+          </v-row>
+          <v-row no-gutters class="pt-2">
             <v-col
               class="font-weight-bold"
               cols="4"
               v-if="solarOptions.globalSettings.isVcSolar"
             >
-              {{ $t('solarRevenue.solarSelector.selectArea') }}
+              {{ $st('solarRevenue.solarSelector.selectArea') }}
             </v-col>
-            <v-col v-if="solarOptions.globalSettings.isVcSolar">
-              <v-icon>mdi-home-roof</v-icon>
+            <v-col
+              v-if="solarOptions.globalSettings.isVcSolar"
+              class="vcs-tool-button-wrapper"
+            >
+              <VcsToolButton
+                :active="vcSolarAction.active"
+                :disabled="vcSolarAction.disabled"
+                :has-update="vcSolarAction.hasUpdate"
+                :icon="vcSolarAction.icon"
+                @click="vcSolarAction.callback($event)"
+              />
             </v-col>
             <v-col class="font-weight-bold" cols="4">
-              {{ $t('solarRevenue.solarSelector.drawArea') }}
+              {{ $st('solarRevenue.solarSelector.drawArea') }}
             </v-col>
-            <v-col>
-              <v-icon>mdi-view-grid-plus-outline</v-icon>
-            </v-col>
-          </v-row>
-          <v-row no-gutters class="pt-2">
-            <v-col v-if="solarOptions.globalSettings.isVcSolar">
-              {{ $t('solarRevenue.solarSelector.helpMethod2') }}
+            <v-col class="vcs-tool-button-wrapper">
+              <VcsToolButton
+                :active="solarAreaAction.active"
+                :disabled="solarAreaAction.disabled"
+                :has-update="solarAreaAction.hasUpdate"
+                :icon="solarAreaAction.icon"
+                @click="solarAreaAction.callback($event)"
+              />
             </v-col>
           </v-row>
         </v-container>
@@ -57,7 +72,8 @@
           :show-searchbar="false"
           :headers="headers"
           density="compact"
-          :no-data-text="$t('solarRevenue.solarSelector.noSelection')"
+          :no-data-text="$st('solarRevenue.solarSelector.noSelection')"
+          :items-per-page="itemsPerPage"
         >
           <template
             v-for="(header, index) in headers"
@@ -65,7 +81,7 @@
             #[`header.${header.key}`]
           >
             <span>
-              {{ $t(header.title) }}
+              {{ $st(header.title) }}
               <v-tooltip
                 location="bottom"
                 v-if="header.toolTip !== undefined"
@@ -75,8 +91,13 @@
             </span>
           </template>
           <template #item="{ item }">
-            <tr>
-              <td>{{ item.featureId }}</td>
+            <tr
+              @click="selectRow(item)"
+              :class="{
+                'highlighted-row':
+                  item.featureId === selectedSolarModule?.featureId,
+              }"
+            >
               <td>
                 <VcsFormattedNumber
                   class="px-0"
@@ -117,7 +138,6 @@
           </template>
           <template #body.append>
             <tr class="font-weight-bold text-primary">
-              <td>{{ $t('solarRevenue.solarSelector.total') }}</td>
               <td>
                 <VcsFormattedNumber
                   class="px-0"
@@ -142,27 +162,29 @@
                   :fraction-digits="0"
                 />
               </td>
+              <td></td>
+              <td>{{ $st('solarRevenue.solarSelector.total') }}</td>
             </tr>
           </template>
         </vcs-data-table>
+        <v-divider />
+        <v-row no-gutters>
+          <v-col class="py-3 justify-center d-flex">
+            <vcs-form-button
+              small
+              @click="calculateSolarIrradiation()"
+              :loading="calculateLoading"
+              :disabled="isCalculate"
+            >
+              {{ $st('solarRevenue.solarSelector.calculate') }}
+            </vcs-form-button>
+          </v-col>
+        </v-row>
       </template>
     </VcsFormSection>
-    <v-divider />
-    <v-row no-gutters>
-      <v-col class="py-3 justify-center d-flex">
-        <vcs-form-button
-          small
-          @click="calculateSolarIrradiation()"
-          :loading="calculateLoading"
-        >
-          {{ $t('solarRevenue.solarSelector.calculate') }}
-        </vcs-form-button>
-      </v-col>
-    </v-row>
-    <!-- hier calculate-->
     <VcsFormSection
-      heading="solarRevenue.solarSelector.results"
-      help-text="solarRevenue.solarSelector.helpResults"
+      heading="solarRevenue.solarSelector.consumptionData"
+      help-text="solarRevenue.solarSelector.consumptionDataHelp"
       start-open
       expandable
     >
@@ -174,16 +196,35 @@
             v-model:solar-options="solarOptions"
             :credit-amount="creditAmount"
             :investment-costs="investmentCosts"
+            :help-start-year="solarOptions.adminOptions.helpPriceIncreaseStart"
+            :help-end-year="solarOptions.adminOptions.helpPriceIncreaseEnd"
+            :help-increase="
+              solarOptions.adminOptions.helpPriceIncreasePercentage
+            "
           />
-          <v-row no-gutters>
-            <v-col>
-              <VcsLabel html-for="selectInput">
+        </v-container>
+      </template>
+    </VcsFormSection>
+    <VcsFormSection
+      heading="solarRevenue.solarSelector.results"
+      start-open
+      expandable
+    >
+      <template #default>
+        <v-container>
+          <v-row
+            no-gutters
+            :class="{ 'highlighted-result': hasSelectedModules }"
+            @click="hasSelectedModules && (profitabilityResultDialog = true)"
+          >
+            <v-col class="d-flex justify-start align-center">
+              <VcsLabel class="pl-0">
                 {{
-                  $t('solarRevenue.solarSelector.revenueCalculation')
+                  $st('solarRevenue.solarSelector.revenueCalculation')
                 }}</VcsLabel
               >
             </v-col>
-            <v-col class="d-flex justify-end">
+            <v-col class="d-flex justify-end align-center">
               <ProfitabilityResult
                 :maintenance-costs="maintenanceCosts"
                 :grid-consumption-price="gridConsumptionPrice"
@@ -196,16 +237,22 @@
                 :is-finance="isFinance"
                 :has-selected-modules="hasSelectedModules"
                 :life-time="solarOptions.adminOptions.amortizationPeriod"
+                :color-options="solarOptions.colors"
+                v-model:dialog="profitabilityResultDialog"
               />
             </v-col>
           </v-row>
-          <v-row no-gutters>
-            <v-col>
-              <VcsLabel html-for="selectInput">
-                {{ $t('solarRevenue.solarSelector.finance') }}
+          <v-row
+            no-gutters
+            :class="{ 'highlighted-result': hasSelectedModules }"
+            @click="hasSelectedModules && (financeResultDialog = true)"
+          >
+            <v-col class="d-flex justify-start align-center">
+              <VcsLabel class="pl-0">
+                {{ $st('solarRevenue.solarSelector.finance') }}
               </VcsLabel>
             </v-col>
-            <v-col class="d-flex justify-end">
+            <v-col class="d-flex justify-end align-center">
               <FinanceResult
                 :credit-amount="creditAmount"
                 :credit-interest="solarOptions.userOptions.creditInterest"
@@ -216,16 +263,22 @@
                 :remaining-dept="remainingDept"
                 :repayment-rate="repaymentRate"
                 :has-selected-modules="hasSelectedModules"
+                :items-per-page="itemsPerPage"
+                v-model:dialog="financeResultDialog"
               />
             </v-col>
           </v-row>
-          <v-row no-gutters>
-            <v-col>
-              <VcsLabel html-for="selectInput">
-                {{ $t('solarRevenue.solarSelector.coTwoSavings') }}
+          <v-row
+            no-gutters
+            :class="{ 'highlighted-result': hasSelectedModules }"
+            @click="hasSelectedModules && (coTwoResultDialog = true)"
+          >
+            <v-col class="d-flex justify-start align-center">
+              <VcsLabel class="pl-0">
+                {{ $st('solarRevenue.solarSelector.coTwoSavings') }}
               </VcsLabel>
             </v-col>
-            <v-col class="d-flex justify-end">
+            <v-col class="d-flex justify-end align-center">
               <CoTwoResult
                 :co-two-savings="coTwoSavings"
                 :co-two-costs="coTwoCosts"
@@ -233,16 +286,22 @@
                 :german-power-mix-year="
                   solarOptions.adminOptions.germanPowerMixYear
                 "
+                :color-options="solarOptions.colors"
+                v-model:dialog="coTwoResultDialog"
               />
             </v-col>
           </v-row>
-          <v-row no-gutters>
-            <v-col>
-              <VcsLabel html-for="selectInput">
-                {{ $t('solarRevenue.solarSelector.keyData') }}
+          <v-row
+            no-gutters
+            :class="{ 'highlighted-result': hasSelectedModules }"
+            @click="hasSelectedModules && (keyDataResultDialog = true)"
+          >
+            <v-col class="d-flex justify-start align-center">
+              <VcsLabel class="pl-0">
+                {{ $st('solarRevenue.solarSelector.keyData') }}
               </VcsLabel>
             </v-col>
-            <v-col class="d-flex justify-end">
+            <v-col class="d-flex justify-end align-center">
               <KeyDataResult
                 :co-two-savings="coTwoSavings"
                 :solar-power-yield="solarPowerYield"
@@ -259,6 +318,12 @@
                 :storage-consumption-price="storageConsumptionPrice"
                 :grid-supply-price="gridSupplyPrice"
                 :liquidity="liquidity"
+                :items-per-page="itemsPerPage"
+                :is-paginated="solarOptions.globalSettings.isPaginated"
+                :maintenance-portion="
+                  solarOptions.adminOptions.maintenancePortion
+                "
+                v-model:dialog="keyDataResultDialog"
               />
             </v-col>
           </v-row>
@@ -278,12 +343,12 @@
     VcsFormButton,
     VcsFormSection,
     VcsLabel,
+    VcsToolButton,
     VcsUiApp,
   } from '@vcmap/ui';
   import {
     VContainer,
     VCol,
-    VIcon,
     VRow,
     VSheet,
     VProgressLinear,
@@ -292,6 +357,7 @@
   } from 'vuetify/components';
 
   import { computed, inject, ref, watch } from 'vue';
+  import { VectorLayer } from '@vcmap/core';
   import SolarRevenue from '../revenueCalculator/SolarRevenue.vue';
   import CoTwoResult from '../revenueCalculator/resultComponents/CoTwoResult.vue';
   import ProfitabilityResult from '../revenueCalculator/resultComponents/ProfitabilityResult.vue';
@@ -303,13 +369,13 @@
   import { name } from '../../package.json';
   import { sumValues } from '../helper.js';
   import { SolarOptions } from '../solarOptions.js';
-  import { calculateSolarAreaModules } from '../revenueCalculator/areaSelector/areaSelector.js';
+  import {
+    calculateSolarAreaModules,
+    highlightSelectedAreaModule,
+  } from '../revenueCalculator/areaSelector/areaSelector.js';
+  import { SolarModule } from '../solarInputTypes.js';
 
   const headers = [
-    {
-      title: 'solarRevenue.solarSelector.table.id',
-      key: 'featureId',
-    },
     {
       title: 'solarRevenue.solarSelector.table.area',
       key: 'area',
@@ -332,8 +398,11 @@
     },
   ];
   const app: VcsUiApp = inject<VcsUiApp>('vcsApp')!;
-  const primary = ref(getColorByKey(app, 'primary'));
+  const primary = computed(() => getColorByKey(app, 'primary'));
   const solarPlugin = app.plugins.getByKey(name) as SolarPlugin;
+  const { selectedSolarModule } = solarPlugin;
+  const { solarAreaAction } = solarPlugin;
+  const { vcSolarAction } = solarPlugin;
   const { selectedModules } = solarPlugin;
   const { vcSolarInteraction } = solarPlugin;
   const solarOptions = ref(
@@ -349,6 +418,19 @@
     solarOptions,
   );
   const solarContext = new RevenueStrategyContext(defaultStrategy);
+
+  const coTwoResultDialog = ref(false);
+  const financeResultDialog = ref(false);
+  const keyDataResultDialog = ref(false);
+  const profitabilityResultDialog = ref(false);
+
+  const itemsPerPage = computed(() => {
+    if (solarOptions.value.globalSettings.isPaginated) {
+      return solarOptions.value.globalSettings.itemsPerPage;
+    } else {
+      return Number.MAX_VALUE;
+    }
+  });
 
   const calculateSolarIrradiation = async (): Promise<void> => {
     calculateLoading.value = true;
@@ -368,6 +450,14 @@
     calculateLoading.value = false;
   };
 
+  const selectRow = (selectFeature: SolarModule): void => {
+    if (selectedSolarModule.value?.featureId === selectFeature.featureId) {
+      selectedSolarModule.value = null;
+    } else {
+      selectedSolarModule.value = selectFeature;
+    }
+  };
+
   const coTwoSavings = computed(() => {
     return solarContext.coTwoSavings();
   });
@@ -378,11 +468,9 @@
   const solarPowerYield = computed(() => {
     return solarContext.solarPowerYield();
   });
-
   const directConsumptionPrice = computed(() => {
     return solarContext.directConsumptionPrice();
   });
-
   const storageConsumptionPrice = computed(() => {
     return solarContext.storageConsumptionPrice({
       isStorageConsumption: isStorageConsumption.value,
@@ -420,25 +508,43 @@
     return solarContext.electricityDemand();
   });
   const investmentCosts = computed(() => {
-    return solarContext.investmentCosts();
+    return solarContext.investmentCosts({
+      isStorageConsumption: isStorageConsumption.value,
+    });
   });
   const creditAmount = computed(() => {
-    return solarContext.creditAmount();
+    return solarContext.creditAmount({
+      isStorageConsumption: isStorageConsumption.value,
+    });
   });
   const annuity = computed(() => {
-    return solarContext.annuity({ isFinance: isFinance.value });
+    return solarContext.annuity({
+      isFinance: isFinance.value,
+      isStorageConsumption: isStorageConsumption.value,
+    });
   });
   const remainingDept = computed(() => {
-    return solarContext.remainingDept({ isFinance: isFinance.value });
+    return solarContext.remainingDept({
+      isFinance: isFinance.value,
+      isStorageConsumption: isStorageConsumption.value,
+    });
   });
   const repaymentRate = computed(() => {
-    return solarContext.repaymentRate({ isFinance: isFinance.value });
+    return solarContext.repaymentRate({
+      isFinance: isFinance.value,
+      isStorageConsumption: isStorageConsumption.value,
+    });
   });
   const interestAmount = computed(() => {
-    return solarContext.interestAmount({ isFinance: isFinance.value });
+    return solarContext.interestAmount({
+      isFinance: isFinance.value,
+      isStorageConsumption: isStorageConsumption.value,
+    });
   });
   const maintenanceCosts = computed(() => {
-    return solarContext.maintenanceCosts();
+    return solarContext.maintenanceCosts({
+      isStorageConsumption: isStorageConsumption.value,
+    });
   });
   const gridConsumptionPrice = computed(() => {
     return solarContext.gridConsumptionPrice({
@@ -484,6 +590,14 @@
     }
   };
 
+  const isCalculate = computed(() => {
+    return !selectedModules.value.some(
+      (selectedModule) => selectedModule.type === 'area',
+    );
+  });
+
+  const solarAreaLayer = app.layers.getByKey('_solarAreaLayer') as VectorLayer;
+
   watch(
     () => solarOptions.value.userOptions.directConsumptionPortion,
     () => adaptStorageConsumptionPortion(),
@@ -492,11 +606,55 @@
     () => solarOptions.value.userOptions.storageConsumptionPortion,
     () => adaptDirectConsumptionPortion(),
   );
+  watch(
+    () => selectedSolarModule.value,
+    () => {
+      if (selectedSolarModule.value !== null) {
+        highlightSelectedAreaModule(
+          selectedSolarModule.value.featureId,
+          selectedModules.value,
+          solarAreaLayer,
+        );
+        vcSolarInteraction.highlightSelectedFeature(
+          selectedSolarModule.value.featureId,
+        );
+      } else {
+        vcSolarInteraction.highlightFeatures();
+        solarAreaLayer.featureVisibility.clearHighlighting();
+      }
+    },
+  );
 </script>
 
 <style lang="scss" scoped>
   .d-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+  .vcs-tool-button-wrapper :deep(.v-btn__overlay) {
+    --v-hover-opacity: 0.1 !important;
+  }
+  .vcs-data-table .v-table__wrapper table tbody tr:not(.highlighted-row):hover {
+    background-color: rgb(var(--v-theme-base-lighten-3)) !important;
+    cursor: pointer;
+  }
+  .vcs-data-table .v-table__wrapper table tbody tr.highlighted-row {
+    background-color: rgb(var(--v-theme-base-lighten-1)) !important;
+    cursor: pointer;
+  }
+  .vcs-data-table .v-table__wrapper table tbody tr:last-child {
+    background-color: transparent !important;
+    cursor: default !important;
+  }
+  .vcs-data-table .v-table__wrapper table tbody tr:last-child:hover {
+    background-color: transparent !important;
+  }
+  .v-row.highlighted-result {
+    &:hover {
+      color: rgb(var(--v-theme-primary)) !important;
+    }
+  }
+  .v-row.highlighted-result * {
+    cursor: pointer !important;
   }
 </style>

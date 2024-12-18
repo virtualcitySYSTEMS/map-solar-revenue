@@ -4,6 +4,8 @@ import {
   CesiumMap,
   mercatorToCartesian,
   Projection,
+  VectorLayer,
+  VectorStyleItem,
 } from '@vcmap/core';
 import { Camera, Cartesian3, Matrix3, Plane } from '@vcmap-cesium/engine';
 import { Feature } from 'ol';
@@ -603,5 +605,23 @@ export async function calculateSolarAreaModules(
   for (const solarAreaModule of selectedModules) {
     // eslint-disable-next-line no-await-in-loop
     await calculateSolarAreaModule(solarAreaModule, app, isDebug);
+  }
+}
+
+export function highlightSelectedAreaModule(
+  featureId: number | string | symbol,
+  selectedModules: SolarModule[],
+  layer: VectorLayer,
+): void {
+  selectedModules.forEach((solarModule) => {
+    layer.featureVisibility.unHighlight([solarModule.featureId]);
+  });
+  if (featureId !== null) {
+    layer.featureVisibility.highlight({
+      [featureId]: new VectorStyleItem({
+        fill: { color: [255, 0, 255, 1.0] },
+        stroke: { color: [255, 0, 255, 1.0], width: 1 },
+      }),
+    });
   }
 }

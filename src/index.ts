@@ -1,10 +1,9 @@
-import { PluginConfigEditor, VcsPlugin, VcsUiApp } from '@vcmap/ui';
+import { PluginConfigEditor, VcsAction, VcsPlugin, VcsUiApp } from '@vcmap/ui';
 import { Component, ref, Ref } from 'vue';
 import { name, version, mapVersion } from '../package.json';
 import de from './i18n/de.json';
 import en from './i18n/en.json';
 
-import getDefaultOptions from './solarOptions.js';
 import type { SolarOptions } from './solarOptions.js';
 import { deepDiff, deepMerge } from './helper.js';
 import type { DeepPartial } from './helper.js';
@@ -16,11 +15,15 @@ import createSolarNavbar, {
 import type { SolarModule } from './solarInputTypes.js';
 import VcSolarInteraction from './solarCalculationSelector/vcSolarInteraction.js';
 import SolarConfigEditor from './solarCalculationSelector/SolarConfigEditor.vue';
+import getDefaultOptions from './solarOptions.js';
 
 export type SolarPlugin = VcsPlugin<DeepPartial<SolarOptions>, never> & {
   readonly config: SolarOptions;
   selectedModules: Ref<SolarModule[]>;
   vcSolarInteraction: VcSolarInteraction;
+  solarAreaAction: VcsAction;
+  vcSolarAction: VcsAction;
+  selectedSolarModule: Ref<SolarModule | null>;
 };
 
 export default function solarRevenuePlugin(
@@ -29,8 +32,11 @@ export default function solarRevenuePlugin(
   let app: VcsUiApp;
   let selectedModules: Ref<SolarModule[]>;
   let vcSolarInteraction: VcSolarInteraction;
+  let solarAreaAction: VcsAction;
+  let vcSolarAction: VcsAction;
   const destroyFunctions: (() => void)[] = [];
   const config = deepMerge(getDefaultOptions(), configInput) as SolarOptions;
+  let selectedSolarModule: Ref<SolarModule | null>;
 
   return {
     get name(): string {
@@ -48,13 +54,23 @@ export default function solarRevenuePlugin(
     get selectedModules(): Ref<SolarModule[]> {
       return selectedModules;
     },
+    get selectedSolarModule(): Ref<SolarModule | null> {
+      return selectedSolarModule;
+    },
     get vcSolarInteraction(): VcSolarInteraction {
       return vcSolarInteraction;
+    },
+    get solarAreaAction(): VcsAction {
+      return solarAreaAction;
+    },
+    get vcSolarAction(): VcsAction {
+      return vcSolarAction;
     },
     initialize(vcsUiApp: VcsUiApp): void {
       const solarRevenueId = 'solar-revenue';
       app = vcsUiApp;
       selectedModules = ref([]);
+      selectedSolarModule = ref(null);
       vcSolarInteraction = new VcSolarInteraction(
         app,
         selectedModules,
@@ -68,6 +84,7 @@ export default function solarRevenuePlugin(
             app?.toolboxManager.remove('solarArea');
             app?.toolboxManager.remove('vcSolar');
             app?.windowManager.remove(solarRevenueId);
+            app?.maps.eventHandler.removeExclusive();
           }
         },
       );
@@ -76,32 +93,35 @@ export default function solarRevenuePlugin(
         ({ id }) => {
           if (id === solarSelectorId) {
             if (this.config.globalSettings.isVcSolar) {
-              const vcSolarToolboxListener = createVcSolarToolBox(
-                app,
-                vcSolarInteraction,
-              );
-              destroyFunctions.push(vcSolarToolboxListener);
+              const { removeSolarInteraction, action: vcSolarActionInit } =
+                createVcSolarToolBox(app, vcSolarInteraction);
+              vcSolarAction = vcSolarActionInit;
+              destroyFunctions.push(removeSolarInteraction);
             }
 
-            const removeSolarAreaToolbox = createSolarAreaToolbox(
-              app,
-              selectedModules,
-              this.config.vcSolarOptions,
-              this.config.globalSettings.isDebug,
-            );
+            const { removeSolarAreaToolbox, action: solarAreaActionInit } =
+              createSolarAreaToolbox(
+                app,
+                selectedModules,
+                this.config.vcSolarOptions,
+                this.config.globalSettings.isDebug,
+              );
+            solarAreaAction = solarAreaActionInit;
             destroyFunctions.push(removeSolarAreaToolbox);
           }
         },
       );
 
-      const vcSolarInteractionListener = createSolarNavbar(app);
+      const vcSolarInteractionListener = createSolarNavbar(
+        app,
+        config.globalSettings.infoContent,
+      );
 
       destroyFunctions.push(removedListener);
       destroyFunctions.push(vcSolarInteractionListener);
       destroyFunctions.push(toolboxAddedListener);
     },
     getDefaultOptions,
-
     toJSON(): DeepPartial<SolarOptions> {
       return deepDiff(getDefaultOptions(), config);
     },

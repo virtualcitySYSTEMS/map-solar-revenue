@@ -14,7 +14,7 @@
           <span
             class="d-inline-block user-select-none font-weight-bold text--primary"
           >
-            {{ $t('solarRevenue.finance.title') }}
+            {{ $st('solarRevenue.finance.title') }}
           </span>
         </h3>
         <v-row no-gutters class="px-0 py-3">
@@ -27,7 +27,7 @@
               <v-row no-gutters class="align-center font-weight-bold">
                 <v-col>
                   <VcsLabel
-                    >{{ $t('solarRevenue.finance.creditAmount') }}:</VcsLabel
+                    >{{ $st('solarRevenue.finance.creditAmount') }}:</VcsLabel
                   >
                 </v-col>
                 <v-col cols="9">
@@ -42,7 +42,7 @@
               <v-row no-gutters class="align-center font-weight-bold">
                 <v-col>
                   <VcsLabel
-                    >{{ $t('solarRevenue.finance.creditInterest') }}:</VcsLabel
+                    >{{ $st('solarRevenue.finance.creditInterest') }}:</VcsLabel
                   >
                 </v-col>
                 <v-col cols="9">
@@ -52,12 +52,12 @@
               <v-row no-gutters class="align-center font-weight-bold">
                 <v-col>
                   <VcsLabel
-                    >{{ $t('solarRevenue.finance.creditPeriod') }}:</VcsLabel
+                    >{{ $st('solarRevenue.finance.creditPeriod') }}:</VcsLabel
                   >
                 </v-col>
                 <v-col cols="9">
                   {{ creditPeriod }}
-                  {{ $t('solarRevenue.finance.creditPeriodUnit') }}</v-col
+                  {{ $st('solarRevenue.finance.creditPeriodUnit') }}</v-col
                 >
               </v-row>
             </v-card>
@@ -74,6 +74,7 @@
               :headers="headers"
               v-model="localFinance"
               density="compact"
+              :items-per-page="itemsPerPage"
             >
               <template #item="{ item }">
                 <tr>
@@ -120,7 +121,7 @@
         <v-divider />
         <v-row no-gutters class="px-0 pt-3 font-weight-bold">
           <v-col class="d-flex justify-start">
-            <VcsLabel>{{ $t('solarRevenue.finance.creditTotal') }}</VcsLabel>
+            <VcsLabel>{{ $st('solarRevenue.finance.creditTotal') }}</VcsLabel>
           </v-col>
           <v-col class="d-flex justify-end">
             <VcsLabel>
@@ -135,7 +136,7 @@
         </v-row>
         <v-row no-gutters class="px-0 py-3">
           <v-col class="d-flex text-justify">
-            {{ $t('solarRevenue.finance.text') }}</v-col
+            {{ $st('solarRevenue.finance.text') }}</v-col
           >
         </v-row>
       </v-container>
@@ -151,7 +152,7 @@
 </style>
 
 <script setup lang="ts">
-  import { computed, PropType, Ref, ref } from 'vue';
+  import { computed, PropType } from 'vue';
   import {
     VDialog,
     VRow,
@@ -167,6 +168,11 @@
     VcsFormattedNumber,
     VcsLabel,
   } from '@vcmap/ui';
+
+  const dialog = defineModel('dialog', {
+    type: Boolean as PropType<boolean>,
+    required: true,
+  });
 
   const innerProps = defineProps({
     annuity: {
@@ -205,6 +211,10 @@
       type: Boolean as PropType<boolean>,
       required: true,
     },
+    itemsPerPage: {
+      type: Number as PropType<number>,
+      default: 10,
+    },
   });
 
   const headers = [
@@ -237,8 +247,6 @@
     repaymentRate: number;
     interestAmount: number;
   };
-
-  const dialog: Ref<boolean> = ref(false);
 
   const localFinance = computed(() => {
     const finance: FinanceValues[] = [];
