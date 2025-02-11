@@ -65,8 +65,8 @@
         <VueApexCharts
           v-if="selectedChartType === 'revenue'"
           type="bar"
-          :options="options"
-          :series="series"
+          :options="revenueOptions"
+          :series="revenueSeries"
           height="600"
         />
         <VueApexCharts
@@ -89,7 +89,6 @@
 </style>
 
 <script setup lang="ts">
-  import { useTheme } from 'vuetify';
   import { computed, getCurrentInstance, inject, PropType, ref } from 'vue';
   import {
     VDialog,
@@ -245,7 +244,7 @@
     },
   ]);
 
-  const series = computed(() => {
+  const revenueSeries = computed(() => {
     const noFinanceExpenses = [
       {
         name: vm?.$st('solarRevenue.prof.chart.plan.maintenanceCosts'),
@@ -312,13 +311,17 @@
     return {
       chart: {
         id: 'liquidity',
-        background: 'rgba(0, 0, 0, 0)',
+        type: 'bar',
         toolbar: {
           tools: {
             download: downloadSVG,
           },
         },
+        animations: {
+          enabled: false,
+        },
       },
+      series: liquiditySeries.value,
       dataLabels: {
         enabled: false,
       },
@@ -368,7 +371,7 @@
         },
       },
       theme: {
-        mode: useTheme().global.name.value,
+        mode: app.vuetify.theme.current.value.dark ? 'dark' : 'light',
       },
       grid: {
         show: false,
@@ -407,18 +410,22 @@
       : [...noFinanceExpenses, ...earnings];
   });
 
-  const options = computed(() => {
+  const revenueOptions = computed(() => {
     return {
       chart: {
         id: 'revenueChart',
+        type: 'bar',
         stacked: true,
-        background: 'rgba(0, 0, 0, 0)',
         toolbar: {
           tools: {
             download: downloadSVG,
           },
         },
+        animations: {
+          enabled: false,
+        },
       },
+      series: revenueSeries.value,
       dataLabels: {
         enabled: false,
       },
@@ -460,7 +467,7 @@
         },
       },
       theme: {
-        mode: useTheme().global.name.value,
+        mode: app.vuetify.theme.current.value.dark ? 'dark' : 'light',
       },
       grid: {
         show: false,
@@ -478,5 +485,10 @@
         },
       },
     };
+  });
+
+  defineExpose({
+    revenueOptions,
+    liquidityOptions,
   });
 </script>

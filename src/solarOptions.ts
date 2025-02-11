@@ -60,6 +60,7 @@ export type GlobalSettings = {
   itemsPerPage: number;
   isPaginated: boolean;
   infoContent: string;
+  startInfoOpen: boolean;
 };
 
 export type SolarColor = {
@@ -77,12 +78,21 @@ export type SolarColors = {
   revenue: SolarDiagramColors;
 };
 
+export type PDFOptions = {
+  footerLineOne: string;
+  footerLineTwo: string;
+  primaryColor: string;
+  onPrimaryColor: string;
+  infoContent: string;
+};
+
 export type SolarOptions = {
   adminOptions: AdminOptions;
   userOptions: UserOptions;
   globalSettings: GlobalSettings;
   vcSolarOptions: VcSolarOptions;
   colors: SolarColors;
+  pdf: PDFOptions;
 };
 
 export default (): SolarOptions => ({
@@ -151,6 +161,7 @@ export default (): SolarOptions => ({
     itemsPerPage: 10,
     isPaginated: true,
     infoContent: 'solarRevenue.infoContent.content',
+    startInfoOpen: false,
   },
   vcSolarOptions: {
     efficiency: 20,
@@ -170,18 +181,49 @@ export default (): SolarOptions => ({
       directConsumptionPriceColor: { default: 'primary-lighten-1' },
       storageConsumptionPriceColor: { default: 'primary-darken-1' },
       gridSupplyPriceColor: { default: 'primary-darken-2' },
-      maintenanceCostsColor: { default: 'base-darken-1' },
-      gridConsumptionPriceColor: { default: 'base-darken-2' },
-      repaymentRateColor: { default: 'base-darken-3' },
-      interestAmountColor: { default: 'base-darken-4' },
+      maintenanceCostsColor: {
+        light: '#FFE664',
+        dark: '#FFE664',
+        default: 'base-darken-1',
+      },
+      gridConsumptionPriceColor: {
+        light: '#FFD600',
+        dark: '#FFD600',
+        default: 'base-darken-2',
+      },
+      repaymentRateColor: {
+        light: '#C6A600',
+        dark: '#C6A600',
+        default: 'base-darken-3',
+      },
+      interestAmountColor: {
+        light: '#9B8200',
+        dark: '#9B8200',
+        default: 'base-darken-4',
+      },
     },
     liquidity: {
       positiveLiquidityColor: { default: 'primary' },
-      negativeLiquidityColor: { default: 'base-darken-1' },
+      negativeLiquidityColor: {
+        light: '#FFD600',
+        dark: '#FFD600',
+        default: 'base-darken-1',
+      },
     },
     co2: {
       coTwoSavingsColor: { default: 'primary' },
-      coTwoCostsColor: { default: 'base-darken-1' },
+      coTwoCostsColor: {
+        light: '#FFD600',
+        dark: '#FFD600',
+        default: 'base-darken-1',
+      },
     },
+  },
+  pdf: {
+    footerLineOne: 'Musterstadt',
+    footerLineTwo: 'Musterstraße 1, 00000 Musterstadt',
+    primaryColor: 'primary',
+    onPrimaryColor: 'on-primary',
+    infoContent: 'solarRevenue.pdf.lastPage.infoContent',
   },
 });

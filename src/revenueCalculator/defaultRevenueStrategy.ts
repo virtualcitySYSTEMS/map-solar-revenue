@@ -75,28 +75,36 @@ export default class DefaultRevenueStrategy
     isFinance: boolean;
   }): Map<number, number> {
     let pre = 0;
+    const investmentCosts = this.investmentCosts({
+      isStorageConsumption: props.isStorageConsumption,
+    });
     const gridSupplyPrice = this.gridSupplyPrice(props);
     const directConsumptionPrice = this.directConsumptionPrice();
     const storageConsumptionPrice = this.storageConsumptionPrice(props);
     const maintenanceCosts = this.maintenanceCosts(props);
-    const gridConsumptionPrice = this.gridConsumptionPrice(props);
-    const repaymentRate = this.repaymentRate(props);
     const annuity = this.annuity(props);
     const liquidityMap = new Map<number, number>();
     for (let i = 1; i <= this._amortizationPeriod; i++) {
-      const einnahmen =
+      const positive =
         (gridSupplyPrice.get(i) || 0) +
         (directConsumptionPrice.get(i) || 0) +
         (storageConsumptionPrice.get(i) || 0);
 
-      const ausgaben =
-        (maintenanceCosts.get(i) || 0) +
-        (gridConsumptionPrice.get(i) || 0) +
-        (repaymentRate.get(i) || 0) +
-        (annuity.get(i) || 0);
+      const negative = props.isFinance
+        ? (maintenanceCosts.get(i) || 0) + (annuity.get(i) || 0)
+        : maintenanceCosts.get(i) || 0;
 
-      liquidityMap.set(i, pre + einnahmen - ausgaben);
-      pre = einnahmen - ausgaben;
+      const cashFlow = positive - negative;
+
+      const firstYearCapital = props.isFinance
+        ? this._config.value.userOptions.equityCapital
+        : investmentCosts;
+
+      const currentLiquidity =
+        i === 1 ? pre + cashFlow - firstYearCapital : pre + cashFlow;
+
+      liquidityMap.set(i, currentLiquidity);
+      pre = currentLiquidity;
     }
     return liquidityMap;
   }
@@ -348,7 +356,10 @@ export default class DefaultRevenueStrategy
         props.isStorageConsumption
           ? (storageConsumptionYear(
               i,
-              this._config.value.userOptions.electricityDemand,
+              Math.min(
+                this._config.value.userOptions.electricityDemand,
+                this.solarPowerYield().get(i)!,
+              ),
               this._config.value.userOptions.storageConsumptionPortion,
               this._config.value.adminOptions.storageDegradation,
             ) *
@@ -370,7 +381,10 @@ export default class DefaultRevenueStrategy
         props.isStorageConsumption
           ? storageConsumptionYear(
               i,
-              this._config.value.userOptions.electricityDemand,
+              Math.min(
+                this._config.value.userOptions.electricityDemand,
+                this.solarPowerYield().get(i)!,
+              ),
               this._config.value.userOptions.storageConsumptionPortion,
               this._config.value.adminOptions.storageDegradation,
             )
@@ -386,21 +400,31 @@ export default class DefaultRevenueStrategy
     } else {
       const directConsumptionMap = new Map<number, number>();
       for (let i = 1; i <= this._amortizationPeriod; i++) {
-        directConsumptionMap.set(
-          i,
-          this._selectedModules.value
-            .map((filteredModule) =>
-              moduleDirectConsumption(
-                this._config.value.userOptions.electricityDemand,
-                filteredModule,
-                this._config.value.userOptions.directConsumptionPortion,
-                i,
-              ),
-            )
-            .reduce((a, b) => {
-              return a + b;
-            }),
-        );
+        const energyYield = this._selectedModules.value
+          .map((filteredModule) =>
+            moduleDirectConsumption(
+              modulePowerYield(filteredModule, i),
+              filteredModule,
+              this._config.value.userOptions.directConsumptionPortion,
+              i,
+            ),
+          )
+          .reduce((a, b) => {
+            return a + b;
+          });
+        const energyDemand = this._selectedModules.value
+          .map((filteredModule) =>
+            moduleDirectConsumption(
+              this._config.value.userOptions.electricityDemand,
+              filteredModule,
+              this._config.value.userOptions.directConsumptionPortion,
+              i,
+            ),
+          )
+          .reduce((a, b) => {
+            return a + b;
+          });
+        directConsumptionMap.set(i, Math.min(energyYield, energyDemand));
       }
       return directConsumptionMap;
     }

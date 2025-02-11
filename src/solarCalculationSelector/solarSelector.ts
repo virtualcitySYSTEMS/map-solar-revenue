@@ -14,6 +14,7 @@ import {
   markVolatile,
   maxZIndex,
   mercatorProjection,
+  mercatorToCartesian,
   startCreateFeatureSession,
   VectorLayer,
 } from '@vcmap/core';
@@ -29,6 +30,7 @@ import {
 } from '../revenueCalculator/areaSelector/areaSelector.js';
 import { SolarModule } from '../solarInputTypes.js';
 import { VcSolarOptions } from '../solarOptions.js';
+import { calculateBoundingSphere } from '../helper.js';
 
 export const solarSelectorId = 'solar-selector';
 export const solarInfoActionId = 'solar-info-action-id';
@@ -36,7 +38,7 @@ export const solarInfoActionId = 'solar-info-action-id';
 export default function createSolarNavbar(
   vcsUiApp: VcsUiApp,
   infoContent: string,
-): () => void {
+): { removeSolarNavbar: () => void; infoAction: VcsAction } {
   const infoAction = createToggleAction(
     {
       name: 'solar-revenue-info-action',
@@ -78,7 +80,7 @@ export default function createSolarNavbar(
       },
       position: {
         width: '430px',
-        height: '800px',
+        height: 'auto',
       },
     },
     vcsUiApp.windowManager,
@@ -94,16 +96,19 @@ export default function createSolarNavbar(
     ButtonLocation.TOOL,
   );
 
-  return vcsUiApp.maps.mapActivated.addEventListener((map) => {
-    if (!(map instanceof CesiumMap)) {
-      if (vcsUiApp.windowManager.has(solarSelectorId)) {
-        vcsUiApp.windowManager.remove(solarSelectorId);
+  const removeSolarNavbar = vcsUiApp.maps.mapActivated.addEventListener(
+    (map) => {
+      if (!(map instanceof CesiumMap)) {
+        if (vcsUiApp.windowManager.has(solarSelectorId)) {
+          vcsUiApp.windowManager.remove(solarSelectorId);
+        }
+        action.disabled = true;
+      } else {
+        action.disabled = false;
       }
-      action.disabled = true;
-    } else {
-      action.disabled = false;
-    }
-  });
+    },
+  );
+  return { removeSolarNavbar, infoAction: infoAction.action };
 }
 
 export function createSolarAreaToolbox(
@@ -168,7 +173,8 @@ export function createSolarAreaToolbox(
           action.active = false;
         });
         session.creationFinished.addEventListener((feature) => {
-          if (feature) {
+          if (feature && app.maps.activeMap instanceof CesiumMap) {
+            const camera = app.maps.activeMap.getScene()?.camera;
             const solarSurface = createSolarSurface(feature, app);
             const moduleFeature = reactive<SolarModule>({
               featureId: feature.getId() || 0,
@@ -187,6 +193,17 @@ export function createSolarAreaToolbox(
               actions: [],
               type: 'area',
             }) as SolarModule;
+
+            const flatCoordinates = feature.getGeometry()?.getFlatCoordinates();
+            if (camera && flatCoordinates) {
+              const boundingSphere = calculateBoundingSphere(flatCoordinates);
+              moduleFeature.screenshotInfo = {
+                position: mercatorToCartesian(boundingSphere.center),
+                heading: camera.heading,
+                pitch: camera.pitch,
+                distance: boundingSphere.radius,
+              };
+            }
 
             const removeModuleAction = {
               name: 'removeSolarModule',

@@ -9,7 +9,7 @@
     },
     "infoContent": {
       "headerTitle": "Zusätzliche Informationen",
-      "content": "![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAAwCAMAAABjR8XYAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAFoUExURUdwTCV9WQCfuQBUNECfdUCbdECcdgBUNECddUCddgBUNIawEECcdUGedYWyEACfvwCfuQBQMABQMABVNQBUNECfeECfcECddQBVMABTMwBTMwBSMgBUM0CddkCddUCcdQBTMwBTMwBTMwBUMwBUNABUNABUMh9qLACAgSFqKgBUMyBqKgBTM0CcdUCcdkCddkCcdQBTM0CcdkCcdgBTMwBUNABTMwBTMwB9fABTMwCChkGedAC/vwBTNIevECJrKgB8eYevEACfuQB5dkCddgB5dQBUNECddmOYGQB6dgNXN4awEBxoLCF5VS5zJwCgunuxHQCZswCgugCguSiBXgCevIazECJsKx9oLACguiV+WQB/gIWwEACguYWwECuEYABUMwCjuACgujyXcgBVMyZ/WwFWNjKNZkCddUCcdUCddgBUMwB5dABUNABUNACSowBkUgBUMwB7eABTM0CddgBUNIaxEACguiKy5ZwAAAB0dFJOUwDWgH8wQPDAwICA8LA/YAjFIBA/QCAQ7zCQ4GCwcGDg79+g8M/8cMvGwv3H/pCv0L9QoFBfT9CfxG/ITwT7QL2/IP3C376Pf8LB27/it7zEaAp218cqULrQRtbB4KHv0PMZl/Et1c/Kn8+P4cK/dndz9MOvz6OBSgAABTdJREFUaN7N2Gdj4jYYAGC52Ng4kNaA2YEAOa5NE0aSS5qm7XVce91777137frv95XkbUkWphfu/YCNkCw91kwQsudtRybefdl99cV/peKVp9D1hy3HcF5zcby+I0d5//ohVTnHN18SiPuBnOTz64dIdsgXrh+35STPcKqrOD+1pNtWWR6z3vyPzMwjOYjirifhQaA6LTauVSHEcIxsIjQGPltX6fdxsi7EfURC8in3JTuLVuzlGutDqs4JQnuJ90GiVV4XIiORW7aMIhD/fWQgSC2vC8mX7OYa1JrKa2irVlNZEK1WE0LkJAlInmQ39V7b5Dp0nCFeJPEtWWL2DPyphRkcp0IGDY65moQM75Dktp9YwV+qoadCniolSULEkt3MMFD92WhDM6DKFn1mBHEiSMWvsG3HIadBO4QQGUkKIpKkx5UKTaYL1gLRRmvQCDt64wkIGVxalZSJIPC9Eh9vviANkZCkIe6jO9LzowzvDpZaxzmOIKdIACH4ShxCXoIEJF+SgfAku8zDA50ipxFEE0NQCuJEs0UMyZVkIWwJa70akupgirQkIOrcr7EgJE/CgLAkzHXXJq0akbbkQmDrLxuGURySI2FBshLO/rGAuqkmF6L5K4McZI8FEUuYkLSEtw8eQz10fDEhVTLoQojGgIycOyyI5k+rJEQoYUPcmzsy+znsAnfnThllIe2rmo2bMa9B+JAl3F6lICd+lloE+Rn2f9iQ2nchdZmEiCQcSFwiOJeU6f6VhlTppLbDWip+1sxk11Ib4hDfG6Svwx/kJDxIJBGdr4bw3JFK214muwSB2Hhrhymh0b/uygaszyq9X1TVxOlYq5ZJDgyp0tFKrpUFzj1KQ/gSLiSQ7KIthpGBcCV8CJVs1WG3GcdojkQAcT/c2Z7DWC6XbSd+JsiRfCyAuDff3Fpn+M07Zv7NU16zR558/KEHN2yPdWkWK6hqODj/z2BJFJHD8zaV6K5+L/qLIeFDboBjY8k9gjAkXMiNhz0vV2LdKpUuGxZCnUaHJDTxF/gK6WeNOoYcNPCV5DwL8pRKJUi04HpJk0iBS1q2oETJcYgk9QOaV4/ePPli+ekmTodoIjShKQdgMv0axvTyW+xB5gZ9ouQ5BBJoUk+HMFMQaPU5Tu/j9Kmud1AfHjntwceElILfcCU9coFcXf9B/Q1Gl5Lr4EugGem54HfPeSpdJ91i9XABk5Sqk5yo47qDRIHCEiXfwZUMXNdiQ8b1ZPqUXkxcgELgl/3wl1iBwhJFwsGTwIDZv2hmIdDU/Rc68XQXz/lG4wJ3TAhxwwyzqEBhCQNy+InnyUm6ZNKepSE0/eAsDgmCCYk9qLAkCzl8zPNkJdYMz+AuWWZjEGR1cfosBpnqNCwmBFmm/6DCEkXOwZ/xzXPcomDeu+EG2J+64xhEj691WQjEakpnTUGJIungS6BhdTw2mqkWTyhw7M/seh4k+KGgRJF1MCSzEo4xrn+F532pdEEnO0nfx2sqNPei1MTOMUm0mJCgQG+D00oScvi058lLglJduhSH23xw2/e3cRPVe+FcZ0GCArMNzl0JyJHQkZGYAzx9Jys6Jyb4nuxvJpnWEzLWZnAHN/UZyWtCj6z0ASkcXMywwGqTE2QccvSSlxNvvCV+ZH2989L/eRaOQY6e83LjayGj8Q8ZT1uRKGs5vGef4B8gSUzraDuS70LIr55MvMd5Up8yBh20nVB/CPrjeSkHt0e2Hur36zi8z9B9G9/+Ao6//pZzvPMVuo/j1u9//vGATLz90RZa9x+aqmJKzSp6PgAAAABJRU5ErkJggg==) \n\n Die interaktive **VC Solar App** enthält einen Ertragsrechner, der die Photovoltaikleistung auf Basis von semantischen Flächen und gezeichneten Freiflächen ermittelt und eine Dimensionierung und Bewertung einer konkreten Solaranlage erlaubt. \n\n **Weiterführende Links:** \n - <a href=\"https://vc.systems/products/vc-solar/\" target=\"_blank\">https://vc.systems/products/vc-solar/</a>"
+      "content": "![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAAwCAMAAABjR8XYAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAFoUExURUdwTCV9WQCfuQBUNECfdUCbdECcdgBUNECddUCddgBUNIawEECcdUGedYWyEACfvwCfuQBQMABQMABVNQBUNECfeECfcECddQBVMABTMwBTMwBSMgBUM0CddkCddUCcdQBTMwBTMwBTMwBUMwBUNABUNABUMh9qLACAgSFqKgBUMyBqKgBTM0CcdUCcdkCddkCcdQBTM0CcdkCcdgBTMwBUNABTMwBTMwB9fABTMwCChkGedAC/vwBTNIevECJrKgB8eYevEACfuQB5dkCddgB5dQBUNECddmOYGQB6dgNXN4awEBxoLCF5VS5zJwCgunuxHQCZswCgugCguSiBXgCevIazECJsKx9oLACguiV+WQB/gIWwEACguYWwECuEYABUMwCjuACgujyXcgBVMyZ/WwFWNjKNZkCddUCcdUCddgBUMwB5dABUNABUNACSowBkUgBUMwB7eABTM0CddgBUNIaxEACguiKy5ZwAAAB0dFJOUwDWgH8wQPDAwICA8LA/YAjFIBA/QCAQ7zCQ4GCwcGDg79+g8M/8cMvGwv3H/pCv0L9QoFBfT9CfxG/ITwT7QL2/IP3C376Pf8LB27/it7zEaAp218cqULrQRtbB4KHv0PMZl/Et1c/Kn8+P4cK/dndz9MOvz6OBSgAABTdJREFUaN7N2Gdj4jYYAGC52Ng4kNaA2YEAOa5NE0aSS5qm7XVce91777137frv95XkbUkWphfu/YCNkCw91kwQsudtRybefdl99cV/peKVp9D1hy3HcF5zcby+I0d5//ohVTnHN18SiPuBnOTz64dIdsgXrh+35STPcKqrOD+1pNtWWR6z3vyPzMwjOYjirifhQaA6LTauVSHEcIxsIjQGPltX6fdxsi7EfURC8in3JTuLVuzlGutDqs4JQnuJ90GiVV4XIiORW7aMIhD/fWQgSC2vC8mX7OYa1JrKa2irVlNZEK1WE0LkJAlInmQ39V7b5Dp0nCFeJPEtWWL2DPyphRkcp0IGDY65moQM75Dktp9YwV+qoadCniolSULEkt3MMFD92WhDM6DKFn1mBHEiSMWvsG3HIadBO4QQGUkKIpKkx5UKTaYL1gLRRmvQCDt64wkIGVxalZSJIPC9Eh9vviANkZCkIe6jO9LzowzvDpZaxzmOIKdIACH4ShxCXoIEJF+SgfAku8zDA50ipxFEE0NQCuJEs0UMyZVkIWwJa70akupgirQkIOrcr7EgJE/CgLAkzHXXJq0akbbkQmDrLxuGURySI2FBshLO/rGAuqkmF6L5K4McZI8FEUuYkLSEtw8eQz10fDEhVTLoQojGgIycOyyI5k+rJEQoYUPcmzsy+znsAnfnThllIe2rmo2bMa9B+JAl3F6lICd+lloE+Rn2f9iQ2nchdZmEiCQcSFwiOJeU6f6VhlTppLbDWip+1sxk11Ib4hDfG6Svwx/kJDxIJBGdr4bw3JFK214muwSB2Hhrhymh0b/uygaszyq9X1TVxOlYq5ZJDgyp0tFKrpUFzj1KQ/gSLiSQ7KIthpGBcCV8CJVs1WG3GcdojkQAcT/c2Z7DWC6XbSd+JsiRfCyAuDff3Fpn+M07Zv7NU16zR558/KEHN2yPdWkWK6hqODj/z2BJFJHD8zaV6K5+L/qLIeFDboBjY8k9gjAkXMiNhz0vV2LdKpUuGxZCnUaHJDTxF/gK6WeNOoYcNPCV5DwL8pRKJUi04HpJk0iBS1q2oETJcYgk9QOaV4/ePPli+ekmTodoIjShKQdgMv0axvTyW+xB5gZ9ouQ5BBJoUk+HMFMQaPU5Tu/j9Kmud1AfHjntwceElILfcCU9coFcXf9B/Q1Gl5Lr4EugGem54HfPeSpdJ91i9XABk5Sqk5yo47qDRIHCEiXfwZUMXNdiQ8b1ZPqUXkxcgELgl/3wl1iBwhJFwsGTwIDZv2hmIdDU/Rc68XQXz/lG4wJ3TAhxwwyzqEBhCQNy+InnyUm6ZNKepSE0/eAsDgmCCYk9qLAkCzl8zPNkJdYMz+AuWWZjEGR1cfosBpnqNCwmBFmm/6DCEkXOwZ/xzXPcomDeu+EG2J+64xhEj691WQjEakpnTUGJIungS6BhdTw2mqkWTyhw7M/seh4k+KGgRJF1MCSzEo4xrn+F532pdEEnO0nfx2sqNPei1MTOMUm0mJCgQG+D00oScvi058lLglJduhSH23xw2/e3cRPVe+FcZ0GCArMNzl0JyJHQkZGYAzx9Jys6Jyb4nuxvJpnWEzLWZnAHN/UZyWtCj6z0ASkcXMywwGqTE2QccvSSlxNvvCV+ZH2989L/eRaOQY6e83LjayGj8Q8ZT1uRKGs5vGef4B8gSUzraDuS70LIr55MvMd5Up8yBh20nVB/CPrjeSkHt0e2Hur36zi8z9B9G9/+Ao6//pZzvPMVuo/j1u9//vGATLz90RZa9x+aqmJKzSp6PgAAAABJRU5ErkJggg==) \n\n Die interaktive **VC Solar App** enthält einen Ertragsrechner, der die Photovoltaikleistung auf Basis von semantischen Flächen und gezeichneten Freiflächen ermittelt und eine Dimensionierung und Bewertung einer konkreten Solaranlage erlaubt. \n\n **Wissenschaftliche Quellen**\n - <a href=\"https://mediatum.ub.tum.de/doc/1276236/1276236.pdf\" target=\"_blank\">Zahn, Wolfgang: Sonneneinstrahlungsanalyse auf und Informationsanreicherung von großen 3D-Stadtmodellen im CityGML-Schema. Masterarbeit, 2015</a>\n - <a href=\"https://mediatum.ub.tum.de/doc/1367334/1367334.pdf\" target=\"_blank\">Chaturvedi, Kanishk; Willenborg, Bruno; Sindram, Maximilian; Kolbe, Thomas H.: Solar Potential Analysis and Integration of the Time-dependent Simulation Results for Semantic 3D City Models Using Dynamizers. Proceedings of the 12th International 3D GeoInfo Conference 2017 (ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences), ISPRS, 2017, 25-32</a> \n\n  **Weiterführende Links:** \n - <a href=\"https://vc.systems/products/vc-solar/\" target=\"_blank\">https://vc.systems/products/vc-solar/</a>\n"
     },
     "solarSelector": {
       "noSelection": "Keine Flächen gezeichnet oder ausgewählt",
@@ -17,12 +17,12 @@
       "recalculate": "Neu berechnen",
       "remove": "Entfernen",
       "calculate": "Solarertrag berechnen",
-      "method": "Schritt 1 - Potentialflächen erfassen",
-      "selectArea": "Solarpotentialfläche selektieren",
-      "drawArea": "Solarpotentialfläche zeichnen",
+      "method": "Schritt 1 - Potenzialflächen erfassen",
+      "selectArea": "Solarpotenzialfläche selektieren",
+      "drawArea": "Solarpotenzialfläche zeichnen",
       "helpMethod": "Wählen Sie eine Methode für die Berechnung der solaren  Einstrahlung in der Werkzeugleiste aus.",
       "helpMethod2": "Sie können entweder eine bereits berechnete Fläche selektieren oder eine Freifläche zeichnen. Das Zeichnen einer Fläche wird durch Doppelklick beendet.",
-      "helpMethodArea": "Für die Berechnung der solaren Einstrahlung auf eine Fläche aktivieren Sie den Zeichnungsmodus in der Werkzeugleiste und zeichnen eine beliebige Fläche.",
+      "helpMethodArea": "Für die Berechnung der solaren Einstrahlung auf eine Fläche aktivieren Sie den Zeichnungsmodus in der Werkzeugleiste und zeichnen eine beliebige Fläche. Das Zeichnen einer Fläche wird durch Doppelklick beendet.",
       "modulesList": "Schritt 2 - Ertrag der Flächen berechnen",
       "helpModulesList": "Hier werden alle selektierten oder gezeichneten Flächen angezeigt. Bei gezeichneten Flächen muss die solare Einstrahlung über den Button (Solarertrag berechnen) berechnet werden.",
       "total": "Gesamt",
@@ -40,7 +40,8 @@
         "calculated": "Berechnet",
         "actions": "Aktionen"
       },
-      "selection": "Selektion aufheben"
+      "selection": "Erfasste Flächen verwerfen",
+      "exportPdf": "Bericht erzeugen"
     },
     "revenue": {
       "help": {
@@ -101,7 +102,7 @@
       "text1": "Eine Solaranlage stößt bei der Erzeugung von Strom kein CO2 aus. Lediglich bei der Produktion von Solarmodulen wird CO2 durch die benötigte Herstellungsenergie ausgestoßen.",
       "text2": "Der CO2-Ausstoß amortisiert sich in Ihrem individuellen Fall nach einer Laufzeit von:",
       "unit": "Jahren",
-      "text3": "Die Herstellungsemissionen der Solarmodule übersteigen die potentielle C02-Einsparung",
+      "text3": "Die Herstellungsemissionen der Solarmodule übersteigen die potenzielle C02-Einsparung",
       "text4": "Die CO2-Einsparung entspricht dem rechnerischen Vergleich mit der CO2-Emission, welche durch den Bezug der gleichen Strommenge aus dem deutschen Strommix (Stand: %{germanPowerMixYear}) entstehen würde. ",
       "chart": {
         "yUnit": "Jahr",
@@ -114,7 +115,7 @@
       "title": "Wirtschaftlichkeit",
       "description": {
         "revenue": "Der Einnahmen- und Ausgabenplan stellt die jährlichen Einnahmen und Ausgaben über eine angenommene Laufzeit der PV-Anlage von {lifeTime} Jahren gegenüber.",
-        "liquidity": "Der Liquiditätsverlauf über {lifeTime} Jahre zeigt, wie sich die Anschaffungskosten einer Solaranlage langfristig durch Einsparungen und Einnahmen ausgleichen. So wird sichtbar, ab wann die Investition finanziell rentabel ist."
+        "liquidity": "Der kumulierte Liquiditätsverlauf zeigt über den Zeitraum von {lifeTime} Jahren an, wie sich die verfügbaren Mittel im Laufe der Zeit aufgrund der Anschaffung und des Betriebs der Solaranlage verändern."
       },
       "typeLabel": "Wählen Sie das gewünschte Ergebnis:",
       "type": {
@@ -155,7 +156,7 @@
     },
     "keydata": {
       "title": "Kennzahlenbericht",
-      "description": "Der Kennzahlenbericht umfasst jeweils eine tabellarische Übersicht der Energiebilanz (in kWh), der Energiekostenbilanz (in €) sowie eine Umweltbilanz (CO2 in kg). Die angegebenen Werte errechnen sich aus dem Energieertrag der Potentialflächen sowie den personalisierten Verbrauchs- und Energiekostenangaben.",
+      "description": "Der Kennzahlenbericht umfasst jeweils eine tabellarische Übersicht der Energiebilanz (in kWh), der Energiekostenbilanz (in €) sowie eine Umweltbilanz (CO2 in kg). Die angegebenen Werte errechnen sich aus dem Energieertrag der Potenzialflächen sowie den personalisierten Verbrauchs- und Energiekostenangaben.",
       "typeLabel": "Wählen Sie das gewünschte Ergebnis:",
       "hint": "* Bitte Beachten Sie: ",
       "hintText": "Die Gesamtsumme ergibt sich aus den Einträgen aller Seiten der Tabelle.",
@@ -220,6 +221,14 @@
         "direct": "Direktverbrauch",
         "storage": "Speicherbrauch"
       },
+      "pdf": {
+        "title": "PDF-Export",
+        "footerOne": "Erste Fußzeile",
+        "footerTwo": "Zweite Fußzeile",
+        "primaryColor": "Primärfarbe",
+        "onPrimaryColor": "Hintergrundfarbe für Primärfelder",
+        "infoPage": "i18n String für Informationsseite"
+      },
       "admin": {
         "germanPowerMix": "Deutscher Strommix",
         "germanPowerMixYear": "Deutscher Strommix Stand",
@@ -233,7 +242,8 @@
         "maintenancePortion": "Anteil Betriebskosten",
         "helpPriceIncreaseStart": "Energiepreissteigerung (Start)",
         "helpPriceIncreaseEnd": "Energiepreissteigerung (Ende)",
-        "helpPriceIncreasePercentage": "Energiepreissteigerung (Prozent)"
+        "helpPriceIncreasePercentage": "Energiepreissteigerung (Prozent)",
+        "storageCapacityPrice": "Investitionskosten pro kWh Speicher"
       },
       "user": {
         "numberOfPersons": "Personen im Haushalt",
@@ -241,6 +251,7 @@
         "annualDrivingDistance": "Jährliche Fahrstrecke",
         "directConsumptionPortion": "Direktverbrauchsanteil",
         "storageConsumptionPortion": "Speicherverbrauchsanteil",
+        "storageCapacity": "Speicherkapazität",
         "gridPurchaseCosts": "Netzbezugskosten",
         "feedInTariff": "Einspeisetarif",
         "electricityPriceIncrease": "Strompreissteigerung",
@@ -255,7 +266,8 @@
         "isDebug": "Debug Feature erzeugen",
         "isPaginated": "Tabellen in Seiten aufteilen",
         "itemsPerPage": "Anzahl der Zeilen pro Tabelle",
-        "infoContent": "i18n String für Informationsseite"
+        "infoContent": "i18n String für Informationsseite",
+        "startInfoOpen": "Informationsseite beim Start öffnen"
       },
       "vcSolar": {
         "efficiency": "Effizienz",
@@ -292,6 +304,112 @@
           "coTwoSavingsColor": "Einsparung",
           "coTwoCostsColor": "Herstellungsemission"
         }
+      }
+    },
+    "pdf": {
+      "general": {
+        "totalTable": "Gesamt:",
+        "subTitle": "Rentabilität für Solaranlagen",
+        "years": "Jahre",
+        "kwhYear": "kWh / Jahr",
+        "yes": "ja",
+        "no": "nein",
+        "person": "Personen"
+      },
+      "titlePage": {
+        "title": "Bericht",
+        "subTitle1": "Rentabilität für",
+        "subTitle2": "Solaranlagen"
+      },
+      "overviewPage": {
+        "title": "Übersicht",
+        "totalEnergy": "Gesamtenergieertrag",
+        "totalSavings": "Gesamtersparnis",
+        "coTwoSavings": "CO2-Einsparung",
+        "period": "Referenzzeitraum: {period} Jahre",
+        "gainKey": "GEWINN",
+        "gainText1": "{value} Vergütung",
+        "gainText2": "für Netzeinspeisung",
+        "gainText3": "{value} Kostenersparnis",
+        "gainText4": "durch Eigenverbrauch",
+        "investKey": "INVESTITION",
+        "investText1": "{value} Anlagenkosten",
+        "investText2": "zzgl. {value} Betriebskosten / Jahr",
+        "investText3": "{value} Kreditkosten / {value2} Zinsanteil",
+        "investText4": "bei {value} Finanzierungsbedarf",
+        "investText5": "entspricht einer Annuität von {value}",
+        "areaKey": "FLÄCHENVERBRAUCH",
+        "areaText": "{value} Gesamtfläche"
+      },
+      "user": {
+        "title": "Eingaben",
+        "subtitleModules": "Erfasste Potenzialflächen",
+        "potSub": "Fläche: {area} Ertrag: {yield}",
+        "subtitleConsumption": "Verbrauchsangaben Wirtschaftlichkeitsrechner",
+        "demandTitle": "Strombedarf",
+        "demandText1": "Dieser Bereich enthält Ihre Angaben über Ihren persönlichen Strombedarf, der sich entweder aus Ihren Angaben (Haushaltsgröße und weitere Verbrauchsbestandteile) ergibt oder durch die exakte Angabe Ihres Strombedarfs.",
+        "demandPeople": "Haushaltsgröße:",
+        "demandDemand": "Errechneter Strombedarf:",
+        "demandHeat": "Wärmepumpe vorhanden:",
+        "demandArea": "Wohnraumgröße:",
+        "demandAreaNo": "Nur für Wärmepumpe relevant",
+        "demandCar": "E-Auto vorhanden:",
+        "demandCarDistance": "Strecke / Jahr",
+        "demandCarNo": "Nur für E-Auto relevant",
+        "consTitle": "Eigenverbrauch",
+        "consText1": "Abhängig von Ihrem Verbrauchsverhalten kann mehr Strom aus der Solaranlage direkt genutzt werden. Verbrauchen Sie beispielsweise tagsüber mehr Strom, wird der Direktverbrauchsanteil steigen. Gleiches gilt für den Speicherverbrauch. Dieser Bereich enthält Ihre Angaben, welchen Anteil am Solarstrom Sie direkt verbrauchen. Ggf. haben Sie die Werte durch Auswahl eines vordefinierten Verbrauchsprofils definiert.",
+        "consProfile": "Verbrauchsprofil:",
+        "consProfileNo": "Kein Verbrauchsprofil ausgewählt",
+        "consDirect": "Direktverbrauch:",
+        "consIsStorage": "Stromspeicher einbeziehen:",
+        "consStorage": "Speicherverbrauch:",
+        "consCapa": "Speicherkapazität:",
+        "consStorageNo": "Nur für Speicherverbrauch relevant",
+        "costTitle": "Energiekosten",
+        "costText1": "In diesem Bereich sind Ihre Angaben über die Energiekosten aufgeführt. Diese sollten den aktuellen Stromkosten von Ihrem Anbieter entsprechen. Der Betrag zur Einspeisevergütung definiert die Höhe der Vergütung des nicht direkt verbrauchten und ins öffentliche Stromnetz eingespeisten Anteils an erzeugtem Solarstrom. Zusätzlich konnten Sie die prognostizierte Strompreissteigerung anpassen. Die durchschnittliche Strompreissteigerung in deutschen Privathaushalten im Zeitraum von {start} bis {end} lag bei ca. {value} %. Zukünftig sind weitere Steigerungen zu erwarten.",
+        "costConsumption": "Bezugskosten pro kWh:",
+        "costCompensation": "Vergütung pro kWh:",
+        "costIncrease": "Strompreissteigerung pro Jahr:",
+        "financeTitle": "Finanzierung",
+        "financeText1": "In diesem Bereich sind Ihre Angaben zu einer potenziellen Finanzierung enthalten. Dazu haben Sie Angaben über das Eigenkapital, die Laufzeit und den Zinssatz gemacht. Da die aktuellen Zinssätze kontinuierlichen Schwankungen unterliegen, bedarf es einer eigenen Recherche.",
+        "financeIs": "Finanzierung vorgesehen:",
+        "financeInvest": "Investitionskosten:",
+        "financeEquity": "Eigenkapital:",
+        "financeCredit": "Kreditbetrag:",
+        "financeDuration": "Laufzeit:",
+        "financeInterest": "Zinssatz:",
+        "financeNo": "Nur bei Finanzierung relevant"
+      },
+      "result": {
+        "title": "Ergebnisse",
+        "financeTitle": "Finanzierungsplan",
+        "financeText": "Neben einer Finanzierung über ein Kreditinstitut bestehen weitere Fördermöglichkeiten von staatlicher Seite. Weitere Informationen finden Sie bei der KfW. Für die Ermittlung der Investitionskosten wird ein definierter Preis je installiertem Kilowatt Peak (kWp) angesetzt.",
+        "financeCreditAmount": "Kreditbetrag",
+        "financeDuration": "Laufzeit",
+        "financeInterestRate": "Zinssatz",
+        "financeFooter": "Kreditkosten, gesamt",
+        "financeNo": "Sie haben keine Angaben zur Finanzierung erfasst.",
+        "revTitle": "Wirtschaftlichkeitsberechnung",
+        "revExpTitle": "Einnahmen-/Ausgabenplan",
+        "revExpText": "Der Einnahmen- und Ausgabenplan stellt die jährlichen Einnahmen und Ausgaben über eine angenommene Laufzeit der PV-Anlage von {lifeTime} Jahren gegenüber.",
+        "liqTitle": "Liquiditätsverlauf",
+        "liqText": "Der kumulierte Liquiditätsverlauf zeigt über den Zeitraum von {lifeTime} Jahren an, wie sich die verfügbaren Mittel im Laufe der Zeit aufgrund der Anschaffung und des Betriebs der Solaranlage verändern.",
+        "envTitle": "Umweltbilanz",
+        "co2Title": "CO2-Einsparung",
+        "co2Text1": "Eine Solaranlage stößt bei der Erzeugung von Strom kein CO2 aus. Lediglich bei der Produktion von Solarmodulen wird CO2 durch die benötigte Herstellungsenergie ausgestoßen.",
+        "co2Text2": "Der CO2-Ausstoß amortisiert sich in Ihrem individuellen Fall nach einer Laufzeit von:",
+        "co2Text3": "Die CO2-Einsparung entspricht dem rechnerischen Vergleich mit der CO2-Emission, welche durch den Bezug der gleichen Strommenge aus dem deutschen Strommix (Stand: {year}) entstehen würde.",
+        "co2Text4": "Ihre Gesamt-CO2-Einsparung über eine Laufzeit von {lifeTime} Jahren beträgt:",
+        "co2TextNoSavings": "Die Herstellungsemissionen der Solarmodule übersteigen die potenzielle C02-Einsparung.",
+        "keyTitle": "Kennzahlenbericht",
+        "keyText": "Die angegebenen Werte errechnen sich aus dem Energieertrag der Potenzialflächen sowie den personalisierten Verbrauchs- und Energiekostenangaben.",
+        "keyText2": "Die angegebenen Werte errechnen sich aus dem Energieertrag der Potenzialflächen sowie den personalisierten Verbrauchsangaben.",
+        "keyCostTitle": "Energiekostenbilanz",
+        "keyEnergyTitle": "Energiebilanz"
+      },
+      "lastPage": {
+        "title": "Informationen",
+        "infoContent": "Herkömmliche Solarkataster berechnen die Sonneneinstrahlung für Dächer in der Regel in 2.5D auf Basis eines Oberflächenmodells. Das Potenzial von Fassadenflächen und die Analyse von geplanten Bebauungen wird durch die herkömmlichen Kataster nicht abgebildet.\n\nMit VC Solar präsentieren wir Ihnen eine umfassende Lösung zur Ermittlung und Analyse der Sonneneinstrahlung und Photovoltaikleistung für sämtliche Gebäude- und Freiflächen in 3D. Mit VC Solar können Sie die solare Eignung interaktiv im Browser für beliebige Flächen in 3D berechnen, egal ob Sie als Basis ein CityGML basiertes Gebäudemodell, ein 3D-Meshmodell oder ein Planungsszenario verwenden. Dabei werden Verschattungs- und Planungsobjekte berücksichtig und Sie können die Berechnung von Ertrag, CO2-Einsparungen und der Wirtschaftlichkeit individuell auf ihre Situation anpassen."
       }
     }
   }

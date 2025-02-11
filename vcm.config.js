@@ -76,7 +76,13 @@ export default {
         ],
         styles: [],
         categories: [],
-        uiConfig: [],
+        uiConfig: [
+          {
+            name: 'logo',
+            value:
+              'https://upload.wikimedia.org/wikipedia/commons/b/b0/NewTux.svg',
+          },
+        ],
         featureInfo: [
           {
             type: 'TableFeatureInfoView',

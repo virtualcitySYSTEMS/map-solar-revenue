@@ -443,6 +443,7 @@
     VcsFormattedNumber,
   } from '@vcmap/ui';
   import { sumValues } from '../../helper.js';
+  import { Header } from '../../solarCalculationSelector/SolarSelector.vue';
 
   const dialog = defineModel('dialog', {
     type: Boolean as PropType<boolean>,
@@ -550,7 +551,7 @@
     liquidity: number;
   };
 
-  const energyHeaders = [
+  const energyHeaders: Header[] = [
     {
       title: 'solarRevenue.keydata.energyHeader.year',
       key: 'year',
@@ -592,7 +593,7 @@
     },
   ];
 
-  const environmentalBalanceHeaders = [
+  const environmentalBalanceHeaders: Header[] = [
     {
       title: 'solarRevenue.keydata.environmentalBalanceHeader.year',
       key: 'year',
@@ -605,7 +606,7 @@
     },
   ];
 
-  const energyPriceHeaders = [
+  const energyPriceHeaders: Header[] = [
     {
       title: 'solarRevenue.keydata.energyPriceHeader.year',
       key: 'year',
@@ -709,5 +710,12 @@
       });
     });
     return energyPriceBalance;
+  });
+
+  defineExpose({
+    localEnergyBalance,
+    localEnergyPriceBalance,
+    energyHeaders,
+    energyPriceHeaders,
   });
 </script>

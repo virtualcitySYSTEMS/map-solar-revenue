@@ -10,6 +10,7 @@ import type { DeepPartial } from './helper.js';
 import createSolarNavbar, {
   createSolarAreaToolbox,
   createVcSolarToolBox,
+  solarInfoActionId,
   solarSelectorId,
 } from './solarCalculationSelector/solarSelector.js';
 import type { SolarModule } from './solarInputTypes.js';
@@ -78,12 +79,18 @@ export default function solarRevenuePlugin(
         this.config.globalSettings.solarLayerName,
       );
 
+      const solarNavbar = createSolarNavbar(
+        app,
+        config.globalSettings.infoContent,
+      );
+
       const removedListener = app.windowManager.removed.addEventListener(
         ({ id }) => {
           if (id === solarSelectorId) {
             app?.toolboxManager.remove('solarArea');
             app?.toolboxManager.remove('vcSolar');
             app?.windowManager.remove(solarRevenueId);
+            app?.windowManager.remove(solarInfoActionId);
             app?.maps.eventHandler.removeExclusive();
           }
         },
@@ -92,6 +99,10 @@ export default function solarRevenuePlugin(
       const toolboxAddedListener = app.windowManager.added.addEventListener(
         ({ id }) => {
           if (id === solarSelectorId) {
+            if (this.config.globalSettings.startInfoOpen) {
+              // eslint-disable-next-line no-void
+              void solarNavbar.infoAction.callback();
+            }
             if (this.config.globalSettings.isVcSolar) {
               const { removeSolarInteraction, action: vcSolarActionInit } =
                 createVcSolarToolBox(app, vcSolarInteraction);
@@ -112,13 +123,8 @@ export default function solarRevenuePlugin(
         },
       );
 
-      const vcSolarInteractionListener = createSolarNavbar(
-        app,
-        config.globalSettings.infoContent,
-      );
-
       destroyFunctions.push(removedListener);
-      destroyFunctions.push(vcSolarInteractionListener);
+      destroyFunctions.push(solarNavbar.removeSolarNavbar);
       destroyFunctions.push(toolboxAddedListener);
     },
     getDefaultOptions,

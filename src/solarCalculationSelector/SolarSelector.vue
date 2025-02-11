@@ -1,5 +1,13 @@
 <template>
   <v-sheet>
+    <v-overlay
+      :model-value="isPDFrunning"
+      persistent
+      opacity="0.7"
+      class="d-flex justify-center align-center"
+    >
+      <v-icon size="x-large" color="primary">$vcsProgress</v-icon>
+    </v-overlay>
     <VcsFormSection
       heading="solarRevenue.solarSelector.method"
       start-open
@@ -191,6 +199,7 @@
       <template #default>
         <v-container>
           <SolarRevenue
+            ref="solarRevenueRef"
             v-model:is-storage-consumption="isStorageConsumption"
             v-model:is-finance="isFinance"
             v-model:solar-options="solarOptions"
@@ -219,13 +228,12 @@
           >
             <v-col class="d-flex justify-start align-center">
               <VcsLabel class="pl-0">
-                {{
-                  $st('solarRevenue.solarSelector.revenueCalculation')
-                }}</VcsLabel
-              >
+                {{ $st('solarRevenue.solarSelector.revenueCalculation') }}
+              </VcsLabel>
             </v-col>
             <v-col class="d-flex justify-end align-center">
               <ProfitabilityResult
+                ref="profitabilityResultRef"
                 :maintenance-costs="maintenanceCosts"
                 :grid-consumption-price="gridConsumptionPrice"
                 :repayment-rate="repaymentRate"
@@ -254,6 +262,7 @@
             </v-col>
             <v-col class="d-flex justify-end align-center">
               <FinanceResult
+                ref="financeResultRef"
                 :credit-amount="creditAmount"
                 :credit-interest="solarOptions.userOptions.creditInterest"
                 :credit-period="solarOptions.userOptions.creditPeriod"
@@ -280,6 +289,7 @@
             </v-col>
             <v-col class="d-flex justify-end align-center">
               <CoTwoResult
+                ref="coTwoSavingsRef"
                 :co-two-savings="coTwoSavings"
                 :co-two-costs="coTwoCosts"
                 :has-selected-modules="hasSelectedModules"
@@ -303,6 +313,7 @@
             </v-col>
             <v-col class="d-flex justify-end align-center">
               <KeyDataResult
+                ref="keyDataRef"
                 :co-two-savings="coTwoSavings"
                 :solar-power-yield="solarPowerYield"
                 :electricity-demand="electricityDemand"
@@ -325,6 +336,18 @@
                 "
                 v-model:dialog="keyDataResultDialog"
               />
+            </v-col>
+          </v-row>
+          <v-divider />
+          <v-row no-gutters class="pt-2">
+            <v-col class="d-flex justify-end">
+              <VcsFormButton
+                variant="filled"
+                @click="max()"
+                :disabled="selectedModules.length === 0"
+              >
+                {{ $st('solarRevenue.solarSelector.exportPdf') }}
+              </VcsFormButton>
             </v-col>
           </v-row>
         </v-container>
@@ -354,9 +377,11 @@
     VProgressLinear,
     VTooltip,
     VDivider,
+    VOverlay,
+    VIcon,
   } from 'vuetify/components';
 
-  import { computed, inject, ref, watch } from 'vue';
+  import { computed, getCurrentInstance, inject, ref, watch } from 'vue';
   import { VectorLayer } from '@vcmap/core';
   import SolarRevenue from '../revenueCalculator/SolarRevenue.vue';
   import CoTwoResult from '../revenueCalculator/resultComponents/CoTwoResult.vue';
@@ -374,8 +399,16 @@
     highlightSelectedAreaModule,
   } from '../revenueCalculator/areaSelector/areaSelector.js';
   import { SolarModule } from '../solarInputTypes.js';
+  import generatePDF from '../generatePDF.js';
 
-  const headers = [
+  export type Header = {
+    title: string;
+    key?: string;
+    sortable?: boolean;
+    toolTip?: string;
+  };
+
+  const headers: Header[] = [
     {
       title: 'solarRevenue.solarSelector.table.area',
       key: 'area',
@@ -397,7 +430,9 @@
       sortable: false,
     },
   ];
+
   const app: VcsUiApp = inject<VcsUiApp>('vcsApp')!;
+  const vm = getCurrentInstance();
   const primary = computed(() => getColorByKey(app, 'primary'));
   const solarPlugin = app.plugins.getByKey(name) as SolarPlugin;
   const { selectedSolarModule } = solarPlugin;
@@ -408,6 +443,7 @@
   const solarOptions = ref(
     JSON.parse(JSON.stringify(solarPlugin.config)) as SolarOptions,
   );
+  const isPDFrunning = ref(false);
   const isFinance = ref(true);
   const isStorageConsumption = ref(true);
   const hasSelectedModules = computed(() => selectedModules.value.length > 0);
@@ -598,6 +634,42 @@
 
   const solarAreaLayer = app.layers.getByKey('_solarAreaLayer') as VectorLayer;
 
+  const keyDataRef = ref();
+  const coTwoSavingsRef = ref();
+  const profitabilityResultRef = ref();
+  const financeResultRef = ref();
+  const solarRevenueRef = ref();
+
+  const max = async (): Promise<void> => {
+    await generatePDF(
+      app,
+      selectedModules.value,
+      solarOptions.value,
+      isFinance.value,
+      financeResultRef.value.localFinance,
+      financeResultRef.value.headers,
+      creditAmount.value,
+      financeResultRef.value.creditCosts,
+      investmentCosts.value,
+      keyDataRef.value.localEnergyBalance,
+      keyDataRef.value.energyHeaders,
+      keyDataRef.value.localEnergyPriceBalance,
+      keyDataRef.value.energyPriceHeaders,
+      vm,
+      coTwoSavingsRef.value.totalCoTwoSavings,
+      coTwoSavingsRef.value.amortization,
+      profitabilityResultRef.value.revenueOptions,
+      profitabilityResultRef.value.liquidityOptions,
+      solarRevenueRef.value.isHeatPump,
+      solarRevenueRef.value.isCar,
+      solarRevenueRef.value.selectedConsumptionProfile,
+      isStorageConsumption.value,
+      solarAreaLayer,
+      vcSolarInteraction,
+      isPDFrunning,
+    );
+  };
+
   watch(
     () => solarOptions.value.userOptions.directConsumptionPortion,
     () => adaptStorageConsumptionPortion(),
@@ -631,29 +703,36 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+
   .vcs-tool-button-wrapper :deep(.v-btn__overlay) {
     --v-hover-opacity: 0.1 !important;
   }
+
   .vcs-data-table .v-table__wrapper table tbody tr:not(.highlighted-row):hover {
     background-color: rgb(var(--v-theme-base-lighten-3)) !important;
     cursor: pointer;
   }
+
   .vcs-data-table .v-table__wrapper table tbody tr.highlighted-row {
     background-color: rgb(var(--v-theme-base-lighten-1)) !important;
     cursor: pointer;
   }
+
   .vcs-data-table .v-table__wrapper table tbody tr:last-child {
     background-color: transparent !important;
     cursor: default !important;
   }
+
   .vcs-data-table .v-table__wrapper table tbody tr:last-child:hover {
     background-color: transparent !important;
   }
+
   .v-row.highlighted-result {
     &:hover {
       color: rgb(var(--v-theme-primary)) !important;
     }
   }
+
   .v-row.highlighted-result * {
     cursor: pointer !important;
   }

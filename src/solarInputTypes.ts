@@ -1,6 +1,8 @@
 import { VcsAction } from '@vcmap/ui';
 import { SolarSurface } from './revenueCalculator/areaSelector/areaSelector.js';
 
+import { PDFScreenshotInfo } from './pdfHelper.js';
+
 export type ModuleMaterial = 'mono' | 'poly' | 'cigs' | 'cdte';
 export type SolarCalculationProgress = {
   numberTotalRays: number;
@@ -22,4 +24,6 @@ export type SolarModule = {
   actions?: VcsAction[];
   calculatedProgress: SolarCalculationProgress;
   type: 'area' | 'vcsolar';
+  screenshotInfo?: PDFScreenshotInfo;
+  screenShot?: string;
 };

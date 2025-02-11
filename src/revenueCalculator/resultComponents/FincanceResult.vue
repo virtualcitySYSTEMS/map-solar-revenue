@@ -265,4 +265,10 @@
   const creditCosts = computed(() => {
     return [...innerProps.annuity.values()].reduce((acc, val) => acc + val);
   });
+
+  defineExpose({
+    localFinance,
+    headers,
+    creditCosts,
+  });
 </script>

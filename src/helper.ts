@@ -209,3 +209,63 @@ export function getSolarColorByKey(
     '#000000'
   );
 }
+
+type BoundingSphere = {
+  center: Coordinate;
+  radius: number;
+};
+
+export function calculateBoundingSphere(coords: number[]): BoundingSphere {
+  if (coords.length % 3 !== 0 || coords.length === 0) {
+    throw new Error(
+      'Can not calculate bounding sphere. Wrong number of coordinates',
+    );
+  }
+
+  let minX = Number.POSITIVE_INFINITY;
+  let minY = Number.POSITIVE_INFINITY;
+  let minZ = Number.POSITIVE_INFINITY;
+  let maxX = Number.NEGATIVE_INFINITY;
+  let maxY = Number.NEGATIVE_INFINITY;
+  let maxZ = Number.NEGATIVE_INFINITY;
+
+  for (let i = 0; i < coords.length; i += 3) {
+    const x = coords[i];
+    const y = coords[i + 1];
+    const z = coords[i + 2];
+
+    minX = Math.min(minX, x);
+    minY = Math.min(minY, y);
+    minZ = Math.min(minZ, z);
+
+    maxX = Math.max(maxX, x);
+    maxY = Math.max(maxY, y);
+    maxZ = Math.max(maxZ, z);
+  }
+
+  const centerX = (minX + maxX) / 2;
+  const centerY = (minY + maxY) / 2;
+  const centerZ = (minZ + maxZ) / 2;
+
+  let maxDistanceSquared = 0;
+
+  for (let i = 0; i < coords.length; i += 3) {
+    const x = coords[i];
+    const y = coords[i + 1];
+    const z = coords[i + 2];
+
+    const dx = x - centerX;
+    const dy = y - centerY;
+    const dz = z - centerZ;
+
+    const distanceSquared = dx * dx + dy * dy + dz * dz;
+    maxDistanceSquared = Math.max(maxDistanceSquared, distanceSquared);
+  }
+
+  const radius = Math.sqrt(maxDistanceSquared);
+
+  return {
+    center: [centerX, centerY, centerZ],
+    radius,
+  };
+}

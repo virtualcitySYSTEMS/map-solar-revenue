@@ -9,7 +9,7 @@
     },
     "infoContent": {
       "headerTitle": "Additional information",
-      "content": "![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAAwCAMAAABjR8XYAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAFoUExURUdwTCV9WQCfuQBUNECfdUCbdECcdgBUNECddUCddgBUNIawEECcdUGedYWyEACfvwCfuQBQMABQMABVNQBUNECfeECfcECddQBVMABTMwBTMwBSMgBUM0CddkCddUCcdQBTMwBTMwBTMwBUMwBUNABUNABUMh9qLACAgSFqKgBUMyBqKgBTM0CcdUCcdkCddkCcdQBTM0CcdkCcdgBTMwBUNABTMwBTMwB9fABTMwCChkGedAC/vwBTNIevECJrKgB8eYevEACfuQB5dkCddgB5dQBUNECddmOYGQB6dgNXN4awEBxoLCF5VS5zJwCgunuxHQCZswCgugCguSiBXgCevIazECJsKx9oLACguiV+WQB/gIWwEACguYWwECuEYABUMwCjuACgujyXcgBVMyZ/WwFWNjKNZkCddUCcdUCddgBUMwB5dABUNABUNACSowBkUgBUMwB7eABTM0CddgBUNIaxEACguiKy5ZwAAAB0dFJOUwDWgH8wQPDAwICA8LA/YAjFIBA/QCAQ7zCQ4GCwcGDg79+g8M/8cMvGwv3H/pCv0L9QoFBfT9CfxG/ITwT7QL2/IP3C376Pf8LB27/it7zEaAp218cqULrQRtbB4KHv0PMZl/Et1c/Kn8+P4cK/dndz9MOvz6OBSgAABTdJREFUaN7N2Gdj4jYYAGC52Ng4kNaA2YEAOa5NE0aSS5qm7XVce91777137frv95XkbUkWphfu/YCNkCw91kwQsudtRybefdl99cV/peKVp9D1hy3HcF5zcby+I0d5//ohVTnHN18SiPuBnOTz64dIdsgXrh+35STPcKqrOD+1pNtWWR6z3vyPzMwjOYjirifhQaA6LTauVSHEcIxsIjQGPltX6fdxsi7EfURC8in3JTuLVuzlGutDqs4JQnuJ90GiVV4XIiORW7aMIhD/fWQgSC2vC8mX7OYa1JrKa2irVlNZEK1WE0LkJAlInmQ39V7b5Dp0nCFeJPEtWWL2DPyphRkcp0IGDY65moQM75Dktp9YwV+qoadCniolSULEkt3MMFD92WhDM6DKFn1mBHEiSMWvsG3HIadBO4QQGUkKIpKkx5UKTaYL1gLRRmvQCDt64wkIGVxalZSJIPC9Eh9vviANkZCkIe6jO9LzowzvDpZaxzmOIKdIACH4ShxCXoIEJF+SgfAku8zDA50ipxFEE0NQCuJEs0UMyZVkIWwJa70akupgirQkIOrcr7EgJE/CgLAkzHXXJq0akbbkQmDrLxuGURySI2FBshLO/rGAuqkmF6L5K4McZI8FEUuYkLSEtw8eQz10fDEhVTLoQojGgIycOyyI5k+rJEQoYUPcmzsy+znsAnfnThllIe2rmo2bMa9B+JAl3F6lICd+lloE+Rn2f9iQ2nchdZmEiCQcSFwiOJeU6f6VhlTppLbDWip+1sxk11Ib4hDfG6Svwx/kJDxIJBGdr4bw3JFK214muwSB2Hhrhymh0b/uygaszyq9X1TVxOlYq5ZJDgyp0tFKrpUFzj1KQ/gSLiSQ7KIthpGBcCV8CJVs1WG3GcdojkQAcT/c2Z7DWC6XbSd+JsiRfCyAuDff3Fpn+M07Zv7NU16zR558/KEHN2yPdWkWK6hqODj/z2BJFJHD8zaV6K5+L/qLIeFDboBjY8k9gjAkXMiNhz0vV2LdKpUuGxZCnUaHJDTxF/gK6WeNOoYcNPCV5DwL8pRKJUi04HpJk0iBS1q2oETJcYgk9QOaV4/ePPli+ekmTodoIjShKQdgMv0axvTyW+xB5gZ9ouQ5BBJoUk+HMFMQaPU5Tu/j9Kmud1AfHjntwceElILfcCU9coFcXf9B/Q1Gl5Lr4EugGem54HfPeSpdJ91i9XABk5Sqk5yo47qDRIHCEiXfwZUMXNdiQ8b1ZPqUXkxcgELgl/3wl1iBwhJFwsGTwIDZv2hmIdDU/Rc68XQXz/lG4wJ3TAhxwwyzqEBhCQNy+InnyUm6ZNKepSE0/eAsDgmCCYk9qLAkCzl8zPNkJdYMz+AuWWZjEGR1cfosBpnqNCwmBFmm/6DCEkXOwZ/xzXPcomDeu+EG2J+64xhEj691WQjEakpnTUGJIungS6BhdTw2mqkWTyhw7M/seh4k+KGgRJF1MCSzEo4xrn+F532pdEEnO0nfx2sqNPei1MTOMUm0mJCgQG+D00oScvi058lLglJduhSH23xw2/e3cRPVe+FcZ0GCArMNzl0JyJHQkZGYAzx9Jys6Jyb4nuxvJpnWEzLWZnAHN/UZyWtCj6z0ASkcXMywwGqTE2QccvSSlxNvvCV+ZH2989L/eRaOQY6e83LjayGj8Q8ZT1uRKGs5vGef4B8gSUzraDuS70LIr55MvMd5Up8yBh20nVB/CPrjeSkHt0e2Hur36zi8z9B9G9/+Ao6//pZzvPMVuo/j1u9//vGATLz90RZa9x+aqmJKzSp6PgAAAABJRU5ErkJggg==) \n\n The interactive **VC Solar App** contains a yield calculator that determines the photovoltaic output on the basis of semantic areas and drawn open spaces and allows the dimensioning and evaluation of a specific solar installation. \n\n **Related links:** \n - <a href=\"https://vc.systems/en/products/vc-solar/\" target=\"_blank\">https://vc.systems/en/products/vc-solar/</a>"
+      "content": "![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAAwCAMAAABjR8XYAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAFoUExURUdwTCV9WQCfuQBUNECfdUCbdECcdgBUNECddUCddgBUNIawEECcdUGedYWyEACfvwCfuQBQMABQMABVNQBUNECfeECfcECddQBVMABTMwBTMwBSMgBUM0CddkCddUCcdQBTMwBTMwBTMwBUMwBUNABUNABUMh9qLACAgSFqKgBUMyBqKgBTM0CcdUCcdkCddkCcdQBTM0CcdkCcdgBTMwBUNABTMwBTMwB9fABTMwCChkGedAC/vwBTNIevECJrKgB8eYevEACfuQB5dkCddgB5dQBUNECddmOYGQB6dgNXN4awEBxoLCF5VS5zJwCgunuxHQCZswCgugCguSiBXgCevIazECJsKx9oLACguiV+WQB/gIWwEACguYWwECuEYABUMwCjuACgujyXcgBVMyZ/WwFWNjKNZkCddUCcdUCddgBUMwB5dABUNABUNACSowBkUgBUMwB7eABTM0CddgBUNIaxEACguiKy5ZwAAAB0dFJOUwDWgH8wQPDAwICA8LA/YAjFIBA/QCAQ7zCQ4GCwcGDg79+g8M/8cMvGwv3H/pCv0L9QoFBfT9CfxG/ITwT7QL2/IP3C376Pf8LB27/it7zEaAp218cqULrQRtbB4KHv0PMZl/Et1c/Kn8+P4cK/dndz9MOvz6OBSgAABTdJREFUaN7N2Gdj4jYYAGC52Ng4kNaA2YEAOa5NE0aSS5qm7XVce91777137frv95XkbUkWphfu/YCNkCw91kwQsudtRybefdl99cV/peKVp9D1hy3HcF5zcby+I0d5//ohVTnHN18SiPuBnOTz64dIdsgXrh+35STPcKqrOD+1pNtWWR6z3vyPzMwjOYjirifhQaA6LTauVSHEcIxsIjQGPltX6fdxsi7EfURC8in3JTuLVuzlGutDqs4JQnuJ90GiVV4XIiORW7aMIhD/fWQgSC2vC8mX7OYa1JrKa2irVlNZEK1WE0LkJAlInmQ39V7b5Dp0nCFeJPEtWWL2DPyphRkcp0IGDY65moQM75Dktp9YwV+qoadCniolSULEkt3MMFD92WhDM6DKFn1mBHEiSMWvsG3HIadBO4QQGUkKIpKkx5UKTaYL1gLRRmvQCDt64wkIGVxalZSJIPC9Eh9vviANkZCkIe6jO9LzowzvDpZaxzmOIKdIACH4ShxCXoIEJF+SgfAku8zDA50ipxFEE0NQCuJEs0UMyZVkIWwJa70akupgirQkIOrcr7EgJE/CgLAkzHXXJq0akbbkQmDrLxuGURySI2FBshLO/rGAuqkmF6L5K4McZI8FEUuYkLSEtw8eQz10fDEhVTLoQojGgIycOyyI5k+rJEQoYUPcmzsy+znsAnfnThllIe2rmo2bMa9B+JAl3F6lICd+lloE+Rn2f9iQ2nchdZmEiCQcSFwiOJeU6f6VhlTppLbDWip+1sxk11Ib4hDfG6Svwx/kJDxIJBGdr4bw3JFK214muwSB2Hhrhymh0b/uygaszyq9X1TVxOlYq5ZJDgyp0tFKrpUFzj1KQ/gSLiSQ7KIthpGBcCV8CJVs1WG3GcdojkQAcT/c2Z7DWC6XbSd+JsiRfCyAuDff3Fpn+M07Zv7NU16zR558/KEHN2yPdWkWK6hqODj/z2BJFJHD8zaV6K5+L/qLIeFDboBjY8k9gjAkXMiNhz0vV2LdKpUuGxZCnUaHJDTxF/gK6WeNOoYcNPCV5DwL8pRKJUi04HpJk0iBS1q2oETJcYgk9QOaV4/ePPli+ekmTodoIjShKQdgMv0axvTyW+xB5gZ9ouQ5BBJoUk+HMFMQaPU5Tu/j9Kmud1AfHjntwceElILfcCU9coFcXf9B/Q1Gl5Lr4EugGem54HfPeSpdJ91i9XABk5Sqk5yo47qDRIHCEiXfwZUMXNdiQ8b1ZPqUXkxcgELgl/3wl1iBwhJFwsGTwIDZv2hmIdDU/Rc68XQXz/lG4wJ3TAhxwwyzqEBhCQNy+InnyUm6ZNKepSE0/eAsDgmCCYk9qLAkCzl8zPNkJdYMz+AuWWZjEGR1cfosBpnqNCwmBFmm/6DCEkXOwZ/xzXPcomDeu+EG2J+64xhEj691WQjEakpnTUGJIungS6BhdTw2mqkWTyhw7M/seh4k+KGgRJF1MCSzEo4xrn+F532pdEEnO0nfx2sqNPei1MTOMUm0mJCgQG+D00oScvi058lLglJduhSH23xw2/e3cRPVe+FcZ0GCArMNzl0JyJHQkZGYAzx9Jys6Jyb4nuxvJpnWEzLWZnAHN/UZyWtCj6z0ASkcXMywwGqTE2QccvSSlxNvvCV+ZH2989L/eRaOQY6e83LjayGj8Q8ZT1uRKGs5vGef4B8gSUzraDuS70LIr55MvMd5Up8yBh20nVB/CPrjeSkHt0e2Hur36zi8z9B9G9/+Ao6//pZzvPMVuo/j1u9//vGATLz90RZa9x+aqmJKzSp6PgAAAABJRU5ErkJggg==) \n\n The interactive **VC Solar App** contains a yield calculator that determines the photovoltaic output on the basis of semantic areas and drawn open spaces and allows the dimensioning and evaluation of a specific solar installation. \n\n  **Scientific literature**\n - <a href=\"https://mediatum.ub.tum.de/doc/1276236/1276236.pdf\" target=\"_blank\">Zahn, Wolfgang: Sonneneinstrahlungsanalyse auf und Informationsanreicherung von großen 3D-Stadtmodellen im CityGML-Schema. Masterarbeit, 2015</a>\n - <a href=\"https://mediatum.ub.tum.de/doc/1367334/1367334.pdf\" target=\"_blank\">Chaturvedi, Kanishk; Willenborg, Bruno; Sindram, Maximilian; Kolbe, Thomas H.: Solar Potential Analysis and Integration of the Time-dependent Simulation Results for Semantic 3D City Models Using Dynamizers. Proceedings of the 12th International 3D GeoInfo Conference 2017 (ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences), ISPRS, 2017, 25-32</a> \n\n **Related links:** \n - <a href=\"https://vc.systems/en/products/vc-solar/\" target=\"_blank\">https://vc.systems/en/products/vc-solar/</a>"
     },
     "solarSelector": {
       "noSelection": "No surface selected or drawn",
@@ -22,7 +22,7 @@
       "drawArea": "Draw solar potential area",
       "helpMethod": "Select a method for calculating the solar irradiation in the toolbar.",
       "helpMethod2": "You can either select an area that has already been calculated or draw a free area. Double-click to end the drawing of an area.",
-      "helpMethodArea": "To calculate the solar irradiation on a surface, activate the drawing mode in the toolbar and draw an arbitrary surface.",
+      "helpMethodArea": "To calculate the solar irradiation on a surface, activate the drawing mode in the toolbar and draw an arbitrary surface. Double-click to end the drawing of an area.",
       "modulesList": "Step 2 - Calculate yield of the areas",
       "helpModulesList": "All selected or drawn areas are displayed here. For drawn areas, the solar irradiation must be calculated using the (Calculate solar yield) button.",
       "total": "Total",
@@ -40,7 +40,8 @@
         "calculated": "Calculated",
         "actions": "Actions"
       },
-      "selection": "Deselect all"
+      "selection": "Discard captured areas",
+      "exportPdf": "Generate report"
     },
     "revenue": {
       "help": {
@@ -114,12 +115,12 @@
       "title": "Profitability",
       "description": {
         "revenue": "The income and expense plan compares the annual income and expenses over an assumed lifetime of the PV systems of {lifeTime} years.",
-        "liquidity": "The liquidity trend over {lifeTime} years shows how the initial costs of a solar system are offset over time by savings and income. This reveals when the investment becomes financially profitable."
+        "liquidity": "The cumulative liquidity progression shows how the available funds change over time due to the acquisition and operation of the solar system over a period of {lifeTime} years."
       },
       "typeLabel": "Select the desired result:",
       "type": {
         "liquidity": "Liquidity trend",
-        "revenue": "Revenue/expenditure plan"
+        "revenue": "Revenue/Expense plan"
       },
       "chart": {
         "yUnit": "Year",
@@ -210,15 +211,23 @@
       }
     },
     "config": {
-      "adminSectionTitle": "Static parameter",
-      "userSectionTitle": "Default values",
-      "globalSectionTitle": "Global settings",
-      "vcSolarSectionTitle": "VC Solar Backend settings",
+      "adminSectionTitle": "Static Parameter",
+      "userSectionTitle": "Default Values",
+      "globalSectionTitle": "Global Settings",
+      "vcSolarSectionTitle": "VC Solar Backend Settings",
       "colorSectionTitle": "color",
       "profile": {
-        "sectionTitle": "Consumption profiles",
-        "direct": "Direktverbrauch",
-        "storage": "Speicherbrauch"
+        "sectionTitle": "Consumption Profiles",
+        "direct": "Direct consumption",
+        "storage": "Storage consumption"
+      },
+      "pdf": {
+        "title": "PDF Export",
+        "footerOne": "First footer line",
+        "footerTwo": "Second footer line",
+        "primaryColor": "Primary color",
+        "onPrimaryColor": "Background Color (primary fields)",
+        "infoPage": "i18n String for info page"
       },
       "admin": {
         "germanPowerMix": "german power mix",
@@ -233,7 +242,8 @@
         "maintenancePortion": "maintenance portion",
         "helpPriceIncreaseStart": "Energy price increase (start)",
         "helpPriceIncreaseEnd": "Energy price increase (end)",
-        "helpPriceIncreasePercentage": "Energy price increase (percentage)"
+        "helpPriceIncreasePercentage": "Energy price increase (percentage)",
+        "storageCapacityPrice": "investment costs per kWh storage"
       },
       "user": {
         "numberOfPersons": "number of persons",
@@ -241,6 +251,7 @@
         "annualDrivingDistance": "annual driving distance",
         "directConsumptionPortion": "direct consumption portion",
         "storageConsumptionPortion": "storage consumption portion",
+        "storageCapacity": "storage capacity",
         "gridPurchaseCosts": "grid purchase costs",
         "feedInTariff": "feed in tariff",
         "electricityPriceIncrease": "electricity prise increase",
@@ -255,7 +266,8 @@
         "isDebug": "Create debug features",
         "isPaginated": "Split tables into pages",
         "itemsPerPage": "Number of rows per table",
-        "infoContent": "i18n String for info page"
+        "infoContent": "i18n String for info page",
+        "startInfoOpen": "start info page at start"
       },
       "vcSolar": {
         "efficiency": "efficiency",
@@ -269,11 +281,11 @@
         "darkThemeTitle": "Color theme dark",
         "sync": "Synchronize colors",
         "global": {
-          "title": "Global diagram colors",
-          "strokeColorColor": "Outline color"
+          "title": "Global Diagram Colors",
+          "strokeColor": "Outline color"
         },
         "revenue": {
-          "title": "Diagramm colors - Revenue/expenditure plan",
+          "title": "Diagramm Colors - Revenue/Expense Plan",
           "maintenanceCostsColor": "Operating costs",
           "gridConsumptionPriceColor": "Purchase costs",
           "repaymentRateColor": "Repayment",
@@ -283,15 +295,121 @@
           "gridSupplyPriceColor": "Grid feed-in"
         },
         "liquidity": {
-          "title": "Diagram colors - Liquidity trend",
+          "title": "Diagram Colors - Liquidity Trend",
           "positiveLiquidityColor": "Positive liquidity",
           "negativeLiquidityColor": "Negative liquidity"
         },
         "co2": {
-          "title": "Diagram colors - CO2 savings",
+          "title": "Diagram Colors - CO2 Savings",
           "coTwoSavingsColor": "Savings",
           "coTwoCostsColor": "Manufacturing emissions"
         }
+      }
+    },
+    "pdf": {
+      "general": {
+        "totalTable": "Total:",
+        "subTitle": "Profitability for Solar Systems",
+        "years": "Years",
+        "kwhYear": "kWh / year",
+        "yes": "yes",
+        "no": "no",
+        "person": "Persons"
+      },
+      "titlePage": {
+        "title": "Report",
+        "subTitle1": "Profitability for",
+        "subTitle2": "Solar Systems"
+      },
+      "overviewPage": {
+        "title": "Overview",
+        "totalEnergy": "Total Energy Yield",
+        "totalSavings": "Total Savings",
+        "coTwoSavings": "CO2 Savings",
+        "period": "Reference period: {period} years",
+        "gainKey": "PROFIT",
+        "gainText1": "{value} compensation",
+        "gainText2": "for grid feed-in",
+        "gainText3": "{value} cost savings",
+        "gainText4": "from self-consumption",
+        "investKey": "INVESTMENT",
+        "investText1": "{value} system costs",
+        "investText2": "plus {value} operating costs / year",
+        "investText3": "{value} credit costs / {value2} interest amount",
+        "investText4": "with {value} financing requirement",
+        "investText5": "equivalent to an annuity of {value}",
+        "areaKey": "AREA",
+        "areaText": "{value} total area"
+      },
+      "user": {
+        "title": "Inputs",
+        "subtitleModules": "Selected Potential Areas",
+        "potSub": "Area: {area} Yield: {yield}",
+        "subtitleConsumption": "Consumption Details for Profitability Calculator",
+        "demandTitle": "Electricity Demand",
+        "demandText1": "This section contains your details about your personal electricity demand, derived either from your household size and additional consumption components or by specifying your exact electricity consumption.",
+        "demandPeople": "Household size:",
+        "demandDemand": "Calculated electricity demand:",
+        "demandHeat": "Heat pump available:",
+        "demandArea": "Living space size:",
+        "demandAreaNo": "Relevant only for heat pumps",
+        "demandCar": "E-car available:",
+        "demandCarDistance": "Distance / year",
+        "demandCarNo": "Relevant only for e-cars",
+        "consTitle": "Self-Consumption",
+        "consText1": "Depending on your consumption behavior, more electricity from the solar system can be used directly. For example, if you consume more electricity during the day, the direct consumption share will increase. The same applies to battery usage. This section contains your details about how much solar power you consume directly. These values may have been defined by selecting a predefined consumption profile.",
+        "consProfile": "Consumption profile:",
+        "consProfileNo": "No consumption profile selected",
+        "consDirect": "Direct consumption:",
+        "consIsStorage": "Include power storage:",
+        "consStorage": "Storage consumption:",
+        "consCapa": "Storage capacity:",
+        "consStorageNo": "Relevant only for storage usage",
+        "costTitle": "Energy Costs",
+        "costText1": "This section lists your energy cost details. These should match your current electricity costs from your provider. The feed-in compensation amount defines the compensation for the portion of generated solar power that is not consumed directly and fed into the public grid. You could also adjust the projected electricity price increase. The average electricity price increase in German households from {start} to {end} was approximately {value}%. Further increases are expected in the future.",
+        "costConsumption": "Cost per kWh:",
+        "costCompensation": "Compensation per kWh:",
+        "costIncrease": "Electricity price increase per year:",
+        "financeTitle": "Financing",
+        "financeText1": "This section contains your financing details, including equity capital, term, and interest rate. As current interest rates are subject to continuous fluctuations, independent research is necessary.",
+        "financeIs": "Financing planned:",
+        "financeInvest": "Investment costs:",
+        "financeEquity": "Equity capital:",
+        "financeCredit": "Credit amount:",
+        "financeDuration": "Duration:",
+        "financeInterest": "Interest rate:",
+        "financeNo": "Relevant only for financing"
+      },
+      "result": {
+        "title": "Results",
+        "financeTitle": "Financing Plan",
+        "financeText": "In addition to financing through a bank, there are other funding opportunities from the government. For more information, consult KfW. For investment cost calculation, a defined price per installed kilowatt peak (kWp) is used.",
+        "financeCreditAmount": "Credit amount",
+        "financeDuration": "Duration",
+        "financeInterestRate": "Interest rate",
+        "financeFooter": "Total credit costs",
+        "financeNo": "You have not provided financing details.",
+        "revTitle": "Profitability Calculation",
+        "revExpTitle": "Revenue/Expense Plan",
+        "revExpText": "The income and expense plan compares annual income and expenses over an assumed PV system lifespan of {lifeTime} years.",
+        "liqTitle": "Liquidity Trend",
+        "liqText": "The cumulative liquidity progression shows how the available funds change over time due to the acquisition and operation of the solar system over a period of {lifeTime} years.",
+        "envTitle": "Environmental Balance",
+        "co2Title": "CO2 Savings",
+        "co2Text1": "A solar system does not emit CO2 when generating electricity. Only during the production of solar modules is CO2 emitted due to the required manufacturing energy.",
+        "co2Text2": "The CO2 emissions are offset in your individual case after an operational period of:",
+        "co2Text3": "The CO2 savings correspond to the calculated comparison with CO2 emissions that would result from obtaining the same amount of electricity from the German electricity mix (as of {year}).",
+        "co2Text4": "Your total CO2 savings over a lifetime of {lifeTime} years is:",
+        "co2TextNoSavings": "The production emissions of the solar modules exceed the potential CO2 savings.",
+        "keyTitle": "Key Data Report",
+        "keyText": "The specified values are calculated based on the energy yield of potential areas as well as personalized consumption and energy cost details.",
+        "keyText2": "The specified values are calculated based on the energy yield of potential areas and personalized consumption details.",
+        "keyCostTitle": "Energy Cost Balance",
+        "keyEnergyTitle": "Energy Balance"
+      },
+      "lastPage": {
+        "title": "Information",
+        "infoContent": "Conventional solar cadastres usually calculate the solar radiation for roofs in 2.5D on the basis of a surface model. The potential of façade surfaces and the analysis of planned buildings are not mapped by conventional cadastres.\n\nWith VC Solar, we present you with a comprehensive solution for determining and analyzing solar radiation and photovoltaic output for all building and open spaces in 3D. With VC Solar, you can calculate the solar suitability interactively in the browser for any area in 3D, regardless of whether you use a CityGML-based building model, a 3D mesh model or a planning scenario as the basis. Shading and planning objects are taken into account and you can adapt the calculation of yield, CO2 savings and profitability to your individual situation."
       }
     }
   }

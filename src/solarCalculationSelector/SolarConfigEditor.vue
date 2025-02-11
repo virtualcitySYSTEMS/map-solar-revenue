@@ -194,6 +194,20 @@
             />
           </v-col>
         </v-row>
+        <v-row no-gutters>
+          <v-col>
+            <VcsLabel>
+              {{ $st('solarRevenue.config.admin.storageCapacityPrice') }}
+            </VcsLabel>
+          </v-col>
+          <v-col>
+            <VcsTextField
+              v-model.number="localConfig.adminOptions.storageCapacityPrice"
+              type="number"
+              hide-spin-buttons
+            />
+          </v-col>
+        </v-row>
       </v-container>
     </VcsFormSection>
     <VcsFormSection
@@ -267,6 +281,20 @@
           <v-col>
             <VcsTextField
               v-model.number="localConfig.userOptions.storageConsumptionPortion"
+              type="number"
+              hide-spin-buttons
+            />
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col>
+            <VcsLabel>
+              {{ $st('solarRevenue.config.user.storageCapacity') }}
+            </VcsLabel>
+          </v-col>
+          <v-col>
+            <VcsTextField
+              v-model.number="localConfig.userOptions.storageCapacity"
               type="number"
               hide-spin-buttons
             />
@@ -373,7 +401,7 @@
       </v-container>
     </VcsFormSection>
     <SolarConsumptionProfile
-      heading="my Heading"
+      heading="solarRevenue.config.profile.sectionTitle"
       v-model="localConfig.adminOptions.consumptionProfiles"
     />
     <VcsFormSection
@@ -444,6 +472,16 @@
           </v-col>
           <v-col>
             <VcsTextField v-model="localConfig.globalSettings.infoContent" />
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col>
+            <VcsLabel>
+              {{ $st('solarRevenue.config.global.startInfoOpen') }}
+            </VcsLabel>
+          </v-col>
+          <v-col>
+            <VcsCheckbox v-model="localConfig.globalSettings.startInfoOpen" />
           </v-col>
         </v-row>
       </v-container>
@@ -528,6 +566,62 @@
       name-space="solarRevenue.config.colors.co2"
       v-model="localConfig.colors.co2"
     />
+    <VcsFormSection
+      heading="solarRevenue.config.pdf.title"
+      expandable
+      :start-open="true"
+    >
+      <v-row no-gutters>
+        <v-col>
+          <VcsLabel>
+            {{ $st('solarRevenue.config.pdf.footerOne') }}
+          </VcsLabel>
+        </v-col>
+        <v-col>
+          <VcsTextField v-model="localConfig.pdf.footerLineOne" />
+        </v-col>
+      </v-row>
+      <v-row no-gutters>
+        <v-col>
+          <VcsLabel>
+            {{ $st('solarRevenue.config.pdf.footerTwo') }}
+          </VcsLabel>
+        </v-col>
+        <v-col>
+          <VcsTextField v-model="localConfig.pdf.footerLineTwo" />
+        </v-col>
+      </v-row>
+      <v-row no-gutters>
+        <v-col>
+          <VcsLabel>
+            {{ $st('solarRevenue.config.pdf.primaryColor') }}
+          </VcsLabel>
+        </v-col>
+        <v-col>
+          <VcsHexColorPicker v-model="localPDFPrimaryColor" name="name" />
+        </v-col>
+      </v-row>
+      <v-row no-gutters>
+        <v-col>
+          <VcsLabel>
+            {{ $st('solarRevenue.config.pdf.onPrimaryColor') }}
+          </VcsLabel>
+        </v-col>
+        <v-col>
+          <VcsHexColorPicker v-model="localPDFonPrimaryColor" name="name" />
+        </v-col>
+      </v-row>
+      <v-row no-gutters>
+        <v-col>
+          <VcsLabel>
+            {{ $st('solarRevenue.config.pdf.infoPage') }}
+          </VcsLabel>
+        </v-col>
+        <v-col>
+          <VcsTextField v-model="localConfig.pdf.infoContent" />
+        </v-col>
+      </v-row>
+    </VcsFormSection>
     <v-divider class="mt-2" />
   </AbstractConfigEditor>
 </template>
@@ -539,13 +633,15 @@
     VcsFormSection,
     VcsLabel,
     VcsTextField,
+    VcsUiApp,
   } from '@vcmap/ui';
-  import { PropType, Ref, ref, toRaw } from 'vue';
+  import { computed, inject, PropType, Ref, ref, toRaw } from 'vue';
   import { VCol, VContainer, VRow, VDivider } from 'vuetify/components';
   import defaultOptions, { SolarOptions } from '../solarOptions.js';
   import { deepMerge } from '../helper.js';
   import SolarDiagramColors from './SolarDiagramColors.vue';
   import SolarConsumptionProfile from './SolarConsumptionProfile.vue';
+  import VcsHexColorPicker from './VcsHexColorPicker.vue';
 
   const props = defineProps({
     getConfig: {
@@ -558,9 +654,33 @@
     },
   });
 
+  const app: VcsUiApp = inject<VcsUiApp>('vcsApp')!;
+
   const localConfig: Ref<SolarOptions> = ref(
     deepMerge(defaultOptions(), props.getConfig()),
   );
+
+  const localPDFPrimaryColor = computed({
+    get() {
+      return localConfig.value.pdf.primaryColor === 'primary'
+        ? app.vuetify.theme.computedThemes.value.light.colors.primary
+        : localConfig.value.pdf.primaryColor;
+    },
+    set(newValue) {
+      localConfig.value.pdf.primaryColor = newValue;
+    },
+  });
+
+  const localPDFonPrimaryColor = computed({
+    get() {
+      return localConfig.value.pdf.onPrimaryColor === 'on-primary'
+        ? app.vuetify.theme.computedThemes.value.light.colors['on-primary']
+        : localConfig.value.pdf.onPrimaryColor;
+    },
+    set(newValue) {
+      localConfig.value.pdf.onPrimaryColor = newValue;
+    },
+  });
 
   const apply = (): void => {
     props.setConfig(structuredClone(toRaw(localConfig.value)));

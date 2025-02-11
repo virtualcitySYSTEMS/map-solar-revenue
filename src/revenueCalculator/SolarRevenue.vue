@@ -4,8 +4,8 @@
       <v-row no-gutters class="pb-2">
         <v-col class="d-flex justify-center">
           <vcs-form-button v-bind="props" small>
-            {{ $st('solarRevenue.revenue.button') }}</vcs-form-button
-          >
+            {{ $st('solarRevenue.revenue.button') }}
+          </vcs-form-button>
         </v-col>
       </v-row>
     </template>
@@ -31,9 +31,9 @@
               <v-container>
                 <v-row no-gutters>
                   <v-col>
-                    <VcsLabel>{{
-                      $st('solarRevenue.revenue.demand.person')
-                    }}</VcsLabel>
+                    <VcsLabel
+                      >{{ $st('solarRevenue.revenue.demand.person') }}
+                    </VcsLabel>
                   </v-col>
                 </v-row>
                 <v-row no-gutters>
@@ -47,7 +47,11 @@
                         thumb-label="always"
                         :thumb-size="8"
                         v-model="solarOptions.userOptions.numberOfPersons"
-                      />
+                      >
+                        <template #thumb-label="{ modelValue }">
+                          {{ modelValue === 4 ? '4+' : modelValue }}
+                        </template>
+                      </VcsSlider>
                     </v-container>
                   </v-col>
                 </v-row>
@@ -61,9 +65,9 @@
                 </v-row>
                 <v-row no-gutters v-if="isHeatPump">
                   <v-col class="pl-10">
-                    <VcsLabel>{{
-                      $st('solarRevenue.revenue.demand.livingSpace')
-                    }}</VcsLabel>
+                    <VcsLabel
+                      >{{ $st('solarRevenue.revenue.demand.livingSpace') }}
+                    </VcsLabel>
                   </v-col>
                   <v-col>
                     <VcsTextField
@@ -86,9 +90,9 @@
                 </v-row>
                 <v-row no-gutters v-if="isCar">
                   <v-col class="pl-10">
-                    <VcsLabel>{{
-                      $st('solarRevenue.revenue.demand.distance')
-                    }}</VcsLabel>
+                    <VcsLabel
+                      >{{ $st('solarRevenue.revenue.demand.distance') }}
+                    </VcsLabel>
                   </v-col>
                   <v-col>
                     <VcsTextField
@@ -106,13 +110,14 @@
                 </v-row>
                 <v-row no-gutters>
                   <v-col>
-                    <VcsLabel class="font-weight-bold">{{
-                      $st('solarRevenue.revenue.demand.demand')
-                    }}</VcsLabel>
+                    <VcsLabel class="font-weight-bold"
+                      >{{ $st('solarRevenue.revenue.demand.demand') }}
+                    </VcsLabel>
                   </v-col>
                   <v-col>
                     <VcsTextField
                       type="number"
+                      step="100"
                       v-model.number="
                         solarOptions.userOptions.electricityDemand
                       "
@@ -148,9 +153,13 @@
                 </v-row>
                 <v-row no-gutters class="align-center">
                   <v-col>
-                    <VcsLabel>{{
-                      $st('solarRevenue.revenue.consumption.directConsumption')
-                    }}</VcsLabel>
+                    <VcsLabel
+                      >{{
+                        $st(
+                          'solarRevenue.revenue.consumption.directConsumption',
+                        )
+                      }}
+                    </VcsLabel>
                   </v-col>
                 </v-row>
                 <v-row no-gutters class="align-center">
@@ -187,9 +196,13 @@
                 </v-row>
                 <v-row no-gutters v-if="isStorageConsumption">
                   <v-col>
-                    <VcsLabel>{{
-                      $st('solarRevenue.revenue.consumption.storageConsumption')
-                    }}</VcsLabel>
+                    <VcsLabel
+                      >{{
+                        $st(
+                          'solarRevenue.revenue.consumption.storageConsumption',
+                        )
+                      }}
+                    </VcsLabel>
                   </v-col>
                 </v-row>
                 <v-row
@@ -226,9 +239,11 @@
                   v-if="isStorageConsumption"
                 >
                   <v-col>
-                    <VcsLabel>{{
-                      $st('solarRevenue.revenue.consumption.storageCapacity')
-                    }}</VcsLabel>
+                    <VcsLabel
+                      >{{
+                        $st('solarRevenue.revenue.consumption.storageCapacity')
+                      }}
+                    </VcsLabel>
                   </v-col>
                   <v-col>
                     <VcsTextField
@@ -261,9 +276,9 @@
               <v-container class="px-1 py-0">
                 <v-row no-gutters class="align-center">
                   <v-col>
-                    <VcsLabel>{{
-                      $st('solarRevenue.revenue.costs.consumption')
-                    }}</VcsLabel>
+                    <VcsLabel
+                      >{{ $st('solarRevenue.revenue.costs.consumption') }}
+                    </VcsLabel>
                   </v-col>
                   <v-col>
                     <VcsTextField
@@ -280,9 +295,9 @@
                 </v-row>
                 <v-row no-gutters class="align-center">
                   <v-col>
-                    <VcsLabel>{{
-                      $st('solarRevenue.revenue.costs.supply')
-                    }}</VcsLabel>
+                    <VcsLabel
+                      >{{ $st('solarRevenue.revenue.costs.supply') }}
+                    </VcsLabel>
                   </v-col>
                   <v-col>
                     <VcsTextField
@@ -297,9 +312,9 @@
                 </v-row>
                 <v-row no-gutters class="align-center">
                   <v-col>
-                    <VcsLabel>{{
-                      $st('solarRevenue.revenue.costs.increase')
-                    }}</VcsLabel>
+                    <VcsLabel
+                      >{{ $st('solarRevenue.revenue.costs.increase') }}
+                    </VcsLabel>
                   </v-col>
                   <v-col>
                     <VcsTextField
@@ -328,9 +343,9 @@
               <v-container class="px-1 py-0">
                 <v-row no-gutters class="align-center">
                   <v-col>
-                    <VcsLabel>{{
-                      $st('solarRevenue.revenue.finance.isFinance')
-                    }}</VcsLabel>
+                    <VcsLabel
+                      >{{ $st('solarRevenue.revenue.finance.isFinance') }}
+                    </VcsLabel>
                   </v-col>
                   <v-col class="d-flex justify-end">
                     <v-switch v-model="isFinance" hide-details class="ma-0" />
@@ -338,9 +353,9 @@
                 </v-row>
                 <v-row no-gutters class="align-center font-weight-bold">
                   <v-col>
-                    <VcsLabel>{{
-                      $st('solarRevenue.revenue.finance.invest')
-                    }}</VcsLabel>
+                    <VcsLabel
+                      >{{ $st('solarRevenue.revenue.finance.invest') }}
+                    </VcsLabel>
                   </v-col>
                   <v-col class="d-flex justify-end">
                     <VcsFormattedNumber
@@ -354,9 +369,9 @@
                 <v-container class="px-0 py-0" v-if="isFinance">
                   <v-row no-gutters class="align-center font-weight-bold">
                     <v-col>
-                      <VcsLabel>{{
-                        $st('solarRevenue.revenue.finance.credit')
-                      }}</VcsLabel>
+                      <VcsLabel
+                        >{{ $st('solarRevenue.revenue.finance.credit') }}
+                      </VcsLabel>
                     </v-col>
                     <v-col class="d-flex justify-end">
                       <VcsFormattedNumber
@@ -370,9 +385,9 @@
                   <v-divider />
                   <v-row no-gutters class="align-center pt-2">
                     <v-col>
-                      <VcsLabel>{{
-                        $st('solarRevenue.revenue.finance.equity')
-                      }}</VcsLabel>
+                      <VcsLabel
+                        >{{ $st('solarRevenue.revenue.finance.equity') }}
+                      </VcsLabel>
                     </v-col>
                     <v-col>
                       <VcsTextField
@@ -388,9 +403,9 @@
                   </v-row>
                   <v-row no-gutters class="align-center">
                     <v-col>
-                      <VcsLabel>{{
-                        $st('solarRevenue.revenue.finance.duration')
-                      }}</VcsLabel>
+                      <VcsLabel
+                        >{{ $st('solarRevenue.revenue.finance.duration') }}
+                      </VcsLabel>
                     </v-col>
                     <v-col>
                       <VcsTextField
@@ -411,9 +426,9 @@
                   </v-row>
                   <v-row no-gutters class="align-center">
                     <v-col>
-                      <VcsLabel>{{
-                        $st('solarRevenue.revenue.finance.interest')
-                      }}</VcsLabel>
+                      <VcsLabel
+                        >{{ $st('solarRevenue.revenue.finance.interest') }}
+                      </VcsLabel>
                     </v-col>
                     <v-col>
                       <VcsTextField
@@ -571,4 +586,10 @@
   );
   watch(isHeatPump, () => calculatedElectricityDemand());
   watch(isCar, () => calculatedElectricityDemand());
+
+  defineExpose({
+    isHeatPump,
+    isCar,
+    selectedConsumptionProfile,
+  });
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="600">
+  <v-dialog v-model="dialog" width="600" eager>
     <template #activator="{ props }">
       <VcsButton
         icon="mdi-open-in-new"
@@ -18,11 +18,11 @@
           </span>
         </h3>
         <VueApexCharts
-          v-if="coTwoSavings.size > 0"
           type="bar"
           :options="options"
           :series="series"
           height="500"
+          v-show="true"
         />
         <v-divider />
         <v-row no-gutters class="px-0 py-0 font-weight-bold">
@@ -108,7 +108,6 @@
   } from 'vuetify/components';
   import { VcsButton, VcsUiApp, VcsLabel, VcsFormattedNumber } from '@vcmap/ui';
   import VueApexCharts from 'vue3-apexcharts';
-  import { useTheme } from 'vuetify';
   import { downloadSVG, getSolarColorByKey } from '../../helper.js';
   import { SolarColors } from '../../solarOptions.js';
 
@@ -182,18 +181,34 @@
     return amort;
   });
 
+  const series = computed(() => [
+    {
+      name: vm?.$st('solarRevenue.cotwo.chart.seriesEmission'),
+      data: [...innerProps.coTwoCosts.values()].map((v) => v | 0).map(Math.abs),
+    },
+    {
+      name: vm?.$st('solarRevenue.cotwo.chart.seriesSavings'),
+      data: [...innerProps.coTwoSavings.values()]
+        .map((v) => v | 0)
+        .map(Math.abs),
+    },
+  ]);
+
   const options = computed(() => {
     return {
       chart: {
-        id: 'coTwoChart',
+        type: 'bar',
         stacked: true,
-        background: 'rgba(0, 0, 0, 0)',
         toolbar: {
           tools: {
             download: downloadSVG,
           },
         },
+        animations: {
+          enabled: false,
+        },
       },
+      series: series.value,
       dataLabels: {
         enabled: false,
       },
@@ -235,7 +250,7 @@
         },
       },
       theme: {
-        mode: useTheme().global.name.value,
+        mode: app.vuetify.theme.current.value.dark ? 'dark' : 'light',
       },
       grid: {
         show: false,
@@ -254,16 +269,9 @@
       },
     };
   });
-  const series = computed(() => [
-    {
-      name: vm?.$st('solarRevenue.cotwo.chart.seriesEmission'),
-      data: [...innerProps.coTwoCosts.values()].map((v) => v | 0).map(Math.abs),
-    },
-    {
-      name: vm?.$st('solarRevenue.cotwo.chart.seriesSavings'),
-      data: [...innerProps.coTwoSavings.values()]
-        .map((v) => v | 0)
-        .map(Math.abs),
-    },
-  ]);
+
+  defineExpose({
+    totalCoTwoSavings,
+    amortization,
+  });
 </script>
