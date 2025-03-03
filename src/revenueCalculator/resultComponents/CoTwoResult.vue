@@ -259,7 +259,7 @@
         position: 'top',
         horizontalAlign: 'left',
         labels: {
-          useSeriesColors: true,
+          useSeriesColors: false,
         },
       },
       stroke: {

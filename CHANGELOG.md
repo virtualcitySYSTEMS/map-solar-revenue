@@ -1,3 +1,13 @@
+# v2.1.2
+
+- Text color in legend items is black/white instead of series color.
+
+# v2.1.1
+
+- Fixed some typos
+- Fixed storage losses have not been considered in grid consumption
+- Selection Step 1 on hover over text.
+
 # v2.1.0
 
 - Added some clarifications in help texts

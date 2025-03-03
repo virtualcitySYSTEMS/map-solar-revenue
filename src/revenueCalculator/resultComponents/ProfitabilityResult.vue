@@ -385,7 +385,7 @@
         position: 'top',
         horizontalAlign: 'left',
         labels: {
-          useSeriesColors: true,
+          useSeriesColors: false,
         },
       },
     };
@@ -481,7 +481,7 @@
         position: 'top',
         horizontalAlign: 'left',
         labels: {
-          useSeriesColors: true,
+          useSeriesColors: false,
         },
       },
     };

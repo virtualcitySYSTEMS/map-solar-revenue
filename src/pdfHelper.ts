@@ -3,7 +3,7 @@ import { CesiumMap, VectorLayer } from '@vcmap/core';
 import { Cartesian3, HeadingPitchRange, Matrix4 } from '@vcmap-cesium/engine';
 import { ComponentInternalInstance } from 'vue';
 import { jsPDF } from 'jspdf';
-import { ApexOptions } from 'apexcharts';
+import ApexCharts, { ApexOptions } from 'apexcharts';
 import { v4 as uuidv4 } from 'uuid';
 import { SolarModule } from './solarInputTypes.js';
 import VcSolarInteraction from './solarCalculationSelector/vcSolarInteraction.js';

@@ -114,7 +114,7 @@
     "prof": {
       "title": "Profitability",
       "description": {
-        "revenue": "The income and expense plan compares the annual income and expenses over an assumed lifetime of the PV systems of {lifeTime} years.",
+        "revenue": "The income and expenditure plan compares the annual income and expenditure for electricity consumption over an assumed lifetime of the PV system of {lifeTime} years.",
         "liquidity": "The cumulative liquidity progression shows how the available funds change over time due to the acquisition and operation of the solar system over a period of {lifeTime} years."
       },
       "typeLabel": "Select the desired result:",
@@ -177,8 +177,8 @@
         "tooltip": {
           "maintenanceCosts": "Ongoing costs for maintenance and operation of the solar system. Corresponds to {maintenancePortion}% of the investment costs.",
           "gridConsumptionPrice": "Costs for the amount of electricity drawn from the public grid.",
-          "directConsumptionPrice": "Costs for the direct consumption portion if no solar system is available and this would have to be drawn from the public grid.",
-          "storageConsumptionPrice": "Costs for the storage consumption share if no solar system is available and this would have to be drawn from the public grid.",
+          "directConsumptionPrice": "Saved electricity costs due to direct consumption of solar power.",
+          "storageConsumptionPrice": "Saved electricity costs due to the storage of solar power.",
           "gridSupplyPrice": "Yield for the amount of solar power that is fed into the public grid.",
           "liquidity": "The cumulative liquidity for each year is calculated by adding the annual cash flow to the previous cumulative amount. "
         }
@@ -391,7 +391,7 @@
         "financeNo": "You have not provided financing details.",
         "revTitle": "Profitability Calculation",
         "revExpTitle": "Revenue/Expense Plan",
-        "revExpText": "The income and expense plan compares annual income and expenses over an assumed PV system lifespan of {lifeTime} years.",
+        "revExpText": "The income and expenditure plan compares the annual income and expenditure for electricity consumption over an assumed lifetime of the PV system of {lifeTime} years.",
         "liqTitle": "Liquidity Trend",
         "liqText": "The cumulative liquidity progression shows how the available funds change over time due to the acquisition and operation of the solar system over a period of {lifeTime} years.",
         "envTitle": "Environmental Balance",
@@ -409,7 +409,7 @@
       },
       "lastPage": {
         "title": "Information",
-        "infoContent": "Conventional solar cadastres usually calculate the solar radiation for roofs in 2.5D on the basis of a surface model. The potential of façade surfaces and the analysis of planned buildings are not mapped by conventional cadastres.\n\nWith VC Solar, we present you with a comprehensive solution for determining and analyzing solar radiation and photovoltaic output for all building and open spaces in 3D. With VC Solar, you can calculate the solar suitability interactively in the browser for any area in 3D, regardless of whether you use a CityGML-based building model, a 3D mesh model or a planning scenario as the basis. Shading and planning objects are taken into account and you can adapt the calculation of yield, CO2 savings and profitability to your individual situation."
+        "infoContent": "The interactive VC Solar App contains a yield calculator that determines the photovoltaic output based on semantic areas and drawn open spaces and allows the dimensioning and evaluation of a specific solar installation. In addition to roof surfaces and facades, the software can also take into account shading from other objects such as trees, dormers or planned buildings. All objects and models loaded into the VC Map contribute to shading calculations allowing interactive solar yield calculations directly in the browser. Individual adjustments enable efficient and environmentally friendly planning of the solar system. Cities, municipalities and citizens benefit from intuitive reporting and integration into existing planning processes. \n\nVirtual City Systems was founded in 2005 and has established itself as a pioneer in the field of urban digital twins based on 3D city models. With headquarters in Berlin and a branch in Grafing, the software company is part of the international CADFEM Group. More than 200 customers, including cities such as Hamburg, Rotterdam, Vienna and Singapore, use the innovative solutions for the management, visualization and use of 3D geodata. Virtual City Systems relies on open standards and open source software to support cities and municipalities in using digital tools to design urban environments and develop sustainable solutions.\n\nAre you a local authority or municipal service provider interested in a digital solution for solar potential analysis? Then find out more on our website:\nwww.vc.systems"
       }
     }
   }

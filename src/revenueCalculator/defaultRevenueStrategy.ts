@@ -130,13 +130,15 @@ export default class DefaultRevenueStrategy
   }): Map<number, number> {
     const directConsumption = this.directConsumption();
     const storageConsumption = this.storageConsumption(props);
+    const storageLosses = this.storageLosses(props);
     const gridConsumptionMap = new Map<number, number>();
     for (let i = 1; i <= this._amortizationPeriod; i++) {
       gridConsumptionMap.set(
         i,
         this._config.value.userOptions.electricityDemand -
           (directConsumption.get(i) || 0) -
-          (storageConsumption.get(i) || 0),
+          (storageConsumption.get(i) || 0) +
+          (storageLosses.get(i) || 0),
       );
     }
     return gridConsumptionMap;

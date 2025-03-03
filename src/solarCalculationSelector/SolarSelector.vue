@@ -31,14 +31,26 @@
           <v-row no-gutters class="pt-2">
             <v-col
               class="font-weight-bold"
+              :class="{
+                'highlighted-selection-mode':
+                  isHoveringVCSolar || vcSolarAction.active,
+              }"
               cols="4"
               v-if="solarOptions.globalSettings.isVcSolar"
+              @click="vcSolarAction.callback($event)"
+              @mouseenter="isHoveringVCSolar = true"
+              @mouseleave="isHoveringVCSolar = false"
             >
               {{ $st('solarRevenue.solarSelector.selectArea') }}
             </v-col>
             <v-col
               v-if="solarOptions.globalSettings.isVcSolar"
-              class="vcs-tool-button-wrapper"
+              :class="{
+                'highlighted-selection-mode':
+                  isHoveringVCSolar || vcSolarAction.active,
+              }"
+              @mouseenter="isHoveringVCSolar = true"
+              @mouseleave="isHoveringVCSolar = false"
             >
               <VcsToolButton
                 :active="vcSolarAction.active"
@@ -48,10 +60,27 @@
                 @click="vcSolarAction.callback($event)"
               />
             </v-col>
-            <v-col class="font-weight-bold" cols="4">
+            <v-col
+              class="font-weight-bold"
+              :class="{
+                'highlighted-selection-mode':
+                  isHoveringArea || solarAreaAction.active,
+              }"
+              cols="4"
+              @click="solarAreaAction.callback($event)"
+              @mouseenter="isHoveringArea = true"
+              @mouseleave="isHoveringArea = false"
+            >
               {{ $st('solarRevenue.solarSelector.drawArea') }}
             </v-col>
-            <v-col class="vcs-tool-button-wrapper">
+            <v-col
+              :class="{
+                'highlighted-selection-mode':
+                  isHoveringArea || solarAreaAction.active,
+              }"
+              @mouseenter="isHoveringArea = true"
+              @mouseleave="isHoveringArea = false"
+            >
               <VcsToolButton
                 :active="solarAreaAction.active"
                 :disabled="solarAreaAction.disabled"
@@ -343,7 +372,7 @@
             <v-col class="d-flex justify-end">
               <VcsFormButton
                 variant="filled"
-                @click="max()"
+                @click="createPDF()"
                 :disabled="selectedModules.length === 0"
               >
                 {{ $st('solarRevenue.solarSelector.exportPdf') }}
@@ -448,6 +477,8 @@
   const isStorageConsumption = ref(true);
   const hasSelectedModules = computed(() => selectedModules.value.length > 0);
   const calculateLoading = ref(false);
+  const isHoveringVCSolar = ref(false);
+  const isHoveringArea = ref(false);
 
   const defaultStrategy = new DefaultRevenueStrategy(
     selectedModules,
@@ -640,7 +671,7 @@
   const financeResultRef = ref();
   const solarRevenueRef = ref();
 
-  const max = async (): Promise<void> => {
+  const createPDF = async (): Promise<void> => {
     await generatePDF(
       app,
       selectedModules.value,
@@ -730,10 +761,16 @@
   .v-row.highlighted-result {
     &:hover {
       color: rgb(var(--v-theme-primary)) !important;
+      cursor: pointer !important;
     }
   }
 
-  .v-row.highlighted-result * {
+  .highlighted-selection-mode {
+    color: rgb(var(--v-theme-primary)) !important;
     cursor: pointer !important;
+    :deep(.v-btn__overlay) {
+      background-color: rgb(var(--v-theme-base-lighten-1)) !important;
+      opacity: 0.1 !important;
+    }
   }
 </style>

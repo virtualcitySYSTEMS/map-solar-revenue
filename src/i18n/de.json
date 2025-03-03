@@ -114,7 +114,7 @@
     "prof": {
       "title": "Wirtschaftlichkeit",
       "description": {
-        "revenue": "Der Einnahmen- und Ausgabenplan stellt die jährlichen Einnahmen und Ausgaben über eine angenommene Laufzeit der PV-Anlage von {lifeTime} Jahren gegenüber.",
+        "revenue": "Der Einnahmen- und Ausgabenplan stellt die jährlichen Einnahmen und Ausgaben für den Stromverbrauch über eine angenommene Laufzeit der PV-Anlage von {lifeTime} Jahren gegenüber.",
         "liquidity": "Der kumulierte Liquiditätsverlauf zeigt über den Zeitraum von {lifeTime} Jahren an, wie sich die verfügbaren Mittel im Laufe der Zeit aufgrund der Anschaffung und des Betriebs der Solaranlage verändern."
       },
       "typeLabel": "Wählen Sie das gewünschte Ergebnis:",
@@ -176,10 +176,10 @@
         "liquidity": "kum. Liquidität",
         "tooltip": {
           "maintenanceCosts": "Laufende Kosten zur Wartung und für den Betrieb der Solaranlage. Entspricht {maintenancePortion}% der Investitionskosten.",
-          "gridConsumptionPrice": "Kosten für die Menga an Strom, die aus dem öffentlichen Netz bezogen wird.",
-          "directConsumptionPrice": "Kosten für den Direktverbrauchsanteil, wenn keine Solaranlage vorhanden ist und dieser aus dem öffentlichen Netz bezogen werden müsste.",
-          "storageConsumptionPrice": "Kosten für den Speicherverbrauchsanteil, wenn keine Solaranlage vorhanden ist und dieser aus dem öffentlichen Netz bezogen werden müsste.",
-          "gridSupplyPrice": "Ertrag für die Menga an Solarstrom, die in das öffentliche Netz eingespeist wird.",
+          "gridConsumptionPrice": "Kosten für die Menge an Strom, die aus dem öffentlichen Netz bezogen wird.",
+          "directConsumptionPrice": "Eingesparte Stromkosten durch den Direktverbrauch des Solarstroms.",
+          "storageConsumptionPrice": "Eingesparte Stromkosten durch die Speicherung des Solarstroms.",
+          "gridSupplyPrice": "Ertrag für die Menge an Solarstrom, die in das öffentliche Netz eingespeist wird.",
           "liquidity": "Die kumulierte Liquidität für jedes Jahr wird berechnet, indem der jährliche Cashflow zum vorherigen kumulierten Betrag hinzugefügt wird. "
         }
       },
@@ -196,10 +196,10 @@
           "solarPowerYield": "Gesamtmenge des erzeugten Solarstroms.",
           "electricityDemand": "Strombedarf für den Haushalt.",
           "storageLosses": "Bei der Speicherung von Solarstrom geht ein Anteil der Energie als Umwandlungsverluste verloren.",
-          "directConsumption": "Menge an Solarstrom, die direkt währen der Erzeugung verbraucht wird.",
+          "directConsumption": "Menge an Solarstrom, die direkt während der Erzeugung verbraucht wird.",
           "storageConsumption": "Menge an Solarstrom, die für die Füllung eines Stromspeichers verbraucht wird.",
           "gridConsumption": "Menge an Strom, die für die Deckung des Energiebedarfs aus dem öffentlichen Netz bezogen wird.",
-          "gridSupply": "Menge an überschüssigem Solarstrom, die in des öffentliche Netz eingespeist wird."
+          "gridSupply": "Menge an überschüssigem Solarstrom, die in das öffentliche Netz eingespeist wird."
         }
       },
       "environmentalBalanceHeader": {
@@ -391,7 +391,7 @@
         "financeNo": "Sie haben keine Angaben zur Finanzierung erfasst.",
         "revTitle": "Wirtschaftlichkeitsberechnung",
         "revExpTitle": "Einnahmen-/Ausgabenplan",
-        "revExpText": "Der Einnahmen- und Ausgabenplan stellt die jährlichen Einnahmen und Ausgaben über eine angenommene Laufzeit der PV-Anlage von {lifeTime} Jahren gegenüber.",
+        "revExpText": "Der Einnahmen- und Ausgabenplan stellt die jährlichen Einnahmen und Ausgaben für den Stromverbrauch über eine angenommene Laufzeit der PV-Anlage von {lifeTime} Jahren gegenüber.",
         "liqTitle": "Liquiditätsverlauf",
         "liqText": "Der kumulierte Liquiditätsverlauf zeigt über den Zeitraum von {lifeTime} Jahren an, wie sich die verfügbaren Mittel im Laufe der Zeit aufgrund der Anschaffung und des Betriebs der Solaranlage verändern.",
         "envTitle": "Umweltbilanz",
@@ -409,7 +409,7 @@
       },
       "lastPage": {
         "title": "Informationen",
-        "infoContent": "Herkömmliche Solarkataster berechnen die Sonneneinstrahlung für Dächer in der Regel in 2.5D auf Basis eines Oberflächenmodells. Das Potenzial von Fassadenflächen und die Analyse von geplanten Bebauungen wird durch die herkömmlichen Kataster nicht abgebildet.\n\nMit VC Solar präsentieren wir Ihnen eine umfassende Lösung zur Ermittlung und Analyse der Sonneneinstrahlung und Photovoltaikleistung für sämtliche Gebäude- und Freiflächen in 3D. Mit VC Solar können Sie die solare Eignung interaktiv im Browser für beliebige Flächen in 3D berechnen, egal ob Sie als Basis ein CityGML basiertes Gebäudemodell, ein 3D-Meshmodell oder ein Planungsszenario verwenden. Dabei werden Verschattungs- und Planungsobjekte berücksichtig und Sie können die Berechnung von Ertrag, CO2-Einsparungen und der Wirtschaftlichkeit individuell auf ihre Situation anpassen."
+        "infoContent": "Die interaktive VC Solar App enthält einen Ertragsrechner, der die Photovoltaikleistung auf Basis von semantischen Flächen und gezeichneten Freiflächen ermittelt und eine Dimensionierung und Bewertung einer konkreten Solaranlage erlaubt. Die Software kann neben Dachflächen und Fassaden auch Verschattungen durch andere Objekte wie Bäume, Dachgauben oder geplante Bebauungen berücksichtigen. Alle in der VC Map geladenen Objekte und Modelle dienen als Verschattungsobjekte, sodass solare Ertragspotenziale interaktiv im Browser berechnet werden können. Durch individuelle Anpassungen ist eine effiziente und umweltfreundliche Planung der Solaranlage möglich. Städte, Kommunen und Bürger:innen profitieren von einer intuitiven Berichterstellung und der Einbindung in bestehende Planungsprozesse.\n\nVirtual City Systems wurde 2005 gegründet und hat sich als Pionier im Bereich Urbaner Digitaler Zwillinge auf Basis von 3D-Stadtmodellen etabliert. Mit Hauptsitz in Berlin und einer Niederlassung in Grafing ist das Softwarehaus Teil der internationalen CADFEM Group. Über 200 Kunden, darunter Städte wie Hamburg, Rotterdam, Wien und Singapur, nutzen die innovativen Lösungen zur Verwaltung, Visualisierung und Nutzung von 3D-Geodaten. Virtual City Systems setzt auf offene Standards und Open-Source-Software, um Städte und Kommunen dabei zu unterstützen, Lebensräume digital zu gestalten und nachhaltige Lösungen zu schaffen.\n\nSie sind als Kommune oder kommunaler Dienstleister an einer digitalen Lösung zur Solarpotenzialanalyse interessiert? Dann informieren Sie sich auf unserer Website:\nwww.vc.systems"
       }
     }
   }
