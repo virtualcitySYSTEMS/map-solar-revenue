@@ -251,7 +251,7 @@ export function createSolarAreaToolbox(
     name,
   );
   const removeSolarAreaToolbox = (): void => {
-    session.stop();
+    session?.stop();
     app.layers.remove(layer);
     window.removeEventListener('keydown', escapeListener);
   };
@@ -278,7 +278,7 @@ export function createVcSolarToolBox(
         removeSolarInteraction();
         this.active = false;
       } else {
-        app.featureInfo.clear();
+        app.featureInfo.clearSelection();
         solarInteraction.setActive(true);
         removeSolarInteraction = eventHandler.addExclusiveInteraction(
           solarInteraction,

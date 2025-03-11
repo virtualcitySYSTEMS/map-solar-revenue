@@ -1,3 +1,8 @@
+# v3.0.0
+
+- Instruction text in section 1 provided via help button. Starts open by default
+- Updated to @vcmap/core and @vcmap/ui Version 6.1
+
 # v2.1.2
 
 - Text color in legend items is black/white instead of series color.

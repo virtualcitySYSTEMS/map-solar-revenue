@@ -12,23 +12,26 @@
       heading="solarRevenue.solarSelector.method"
       start-open
       expandable
+      start-help-open
     >
+      <template #help>
+        <v-row no-gutters>
+          <v-col v-if="solarOptions.globalSettings.isVcSolar">
+            {{ $st('solarRevenue.solarSelector.helpMethod') }}
+          </v-col>
+          <v-col v-if="!solarOptions.globalSettings.isVcSolar">
+            {{ $st('solarRevenue.solarSelector.helpMethodArea') }}
+          </v-col>
+        </v-row>
+        <v-row no-gutters class="pt-2">
+          <v-col v-if="solarOptions.globalSettings.isVcSolar">
+            {{ $st('solarRevenue.solarSelector.helpMethod2') }}
+          </v-col>
+        </v-row>
+      </template>
       <template #default>
         <v-container>
           <v-row no-gutters>
-            <v-col v-if="solarOptions.globalSettings.isVcSolar">
-              {{ $st('solarRevenue.solarSelector.helpMethod') }}
-            </v-col>
-            <v-col v-if="!solarOptions.globalSettings.isVcSolar">
-              {{ $st('solarRevenue.solarSelector.helpMethodArea') }}
-            </v-col>
-          </v-row>
-          <v-row no-gutters class="pt-2">
-            <v-col v-if="solarOptions.globalSettings.isVcSolar">
-              {{ $st('solarRevenue.solarSelector.helpMethod2') }}
-            </v-col>
-          </v-row>
-          <v-row no-gutters class="pt-2">
             <v-col
               class="font-weight-bold"
               :class="{

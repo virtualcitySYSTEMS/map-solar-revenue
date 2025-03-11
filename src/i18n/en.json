@@ -103,7 +103,7 @@
       "text2": "In your individual case, the CO2 emissions are amortized after a period of:",
       "unit": "years",
       "text3": "The manufacturing emissions of the solar modules exceed the potential C02 savings",
-      "text4": "The CO2 savings correspond to the calculated comparison with the CO2 emissions that would result from purchasing the same amount of electricity from the German electricity mix (as of %{germanPowerMixYear}).",
+      "text4": "The CO2 savings correspond to the calculated comparison with the CO2 emissions that would result from purchasing the same amount of electricity from the German electricity mix (as of {germanPowerMixYear}).",
       "chart": {
         "yUnit": "Year",
         "xUnit": "kg",

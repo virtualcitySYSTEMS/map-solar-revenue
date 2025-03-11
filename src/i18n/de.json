@@ -103,7 +103,7 @@
       "text2": "Der CO2-Ausstoß amortisiert sich in Ihrem individuellen Fall nach einer Laufzeit von:",
       "unit": "Jahren",
       "text3": "Die Herstellungsemissionen der Solarmodule übersteigen die potenzielle C02-Einsparung",
-      "text4": "Die CO2-Einsparung entspricht dem rechnerischen Vergleich mit der CO2-Emission, welche durch den Bezug der gleichen Strommenge aus dem deutschen Strommix (Stand: %{germanPowerMixYear}) entstehen würde. ",
+      "text4": "Die CO2-Einsparung entspricht dem rechnerischen Vergleich mit der CO2-Emission, welche durch den Bezug der gleichen Strommenge aus dem deutschen Strommix (Stand: {germanPowerMixYear}) entstehen würde. ",
       "chart": {
         "yUnit": "Jahr",
         "xUnit": "kg",
