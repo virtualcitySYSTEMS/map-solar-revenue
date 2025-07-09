@@ -484,6 +484,16 @@
             <VcsCheckbox v-model="localConfig.globalSettings.startInfoOpen" />
           </v-col>
         </v-row>
+        <v-row no-gutters>
+          <v-col>
+            <VcsLabel>
+              {{ $st('solarRevenue.config.global.startPluginOpen') }}
+            </VcsLabel>
+          </v-col>
+          <v-col>
+            <VcsCheckbox v-model="localConfig.globalSettings.startPluginOpen" />
+          </v-col>
+        </v-row>
       </v-container>
     </VcsFormSection>
     <VcsFormSection

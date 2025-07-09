@@ -38,7 +38,7 @@ export const solarInfoActionId = 'solar-info-action-id';
 export default function createSolarNavbar(
   vcsUiApp: VcsUiApp,
   infoContent: string,
-): { removeSolarNavbar: () => void; infoAction: VcsAction } {
+): { removeSolarNavbar: () => void; infoAction: VcsAction; action: VcsAction } {
   const infoAction = createToggleAction(
     {
       name: 'solar-revenue-info-action',
@@ -108,7 +108,7 @@ export default function createSolarNavbar(
       }
     },
   );
-  return { removeSolarNavbar, infoAction: infoAction.action };
+  return { removeSolarNavbar, infoAction: infoAction.action, action };
 }
 
 export function createSolarAreaToolbox(

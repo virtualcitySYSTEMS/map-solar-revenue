@@ -35,6 +35,7 @@ export default function solarRevenuePlugin(
   let vcSolarInteraction: VcSolarInteraction;
   let solarAreaAction: VcsAction;
   let vcSolarAction: VcsAction;
+  let navbarAction: VcsAction;
   const destroyFunctions: (() => void)[] = [];
   const config = deepMerge(getDefaultOptions(), configInput) as SolarOptions;
   let selectedSolarModule: Ref<SolarModule | null>;
@@ -84,6 +85,8 @@ export default function solarRevenuePlugin(
         config.globalSettings.infoContent,
       );
 
+      navbarAction = solarNavbar.action;
+
       const removedListener = app.windowManager.removed.addEventListener(
         ({ id }) => {
           if (id === solarSelectorId) {
@@ -126,6 +129,12 @@ export default function solarRevenuePlugin(
       destroyFunctions.push(removedListener);
       destroyFunctions.push(solarNavbar.removeSolarNavbar);
       destroyFunctions.push(toolboxAddedListener);
+    },
+    onVcsAppMounted(): void {
+      if (this.config.globalSettings.startPluginOpen) {
+        // eslint-disable-next-line no-void
+        void navbarAction.callback();
+      }
     },
     getDefaultOptions,
     toJSON(): DeepPartial<SolarOptions> {

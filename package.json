@@ -74,14 +74,14 @@
     "@turf/turf": "^6.5.0",
     "apexcharts": "^3.54.1",
     "html2canvas": "^1.4.1",
-    "jspdf": "^2.5.2",
-    "jspdf-autotable": "^3.8.4",
+    "jspdf": "^3.0.0",
+    "jspdf-autotable": "^5.0.2",
     "suncalc": "^1.9.0",
     "uuid": "^11.0.3",
     "vue3-apexcharts": "^1.7.0"
   },
   "overrides": {
-    "dompurify": "^3.2.4",
+    "canvg": "^4.0.3",
     "esbuild": "^0.25.0"
   }
 }

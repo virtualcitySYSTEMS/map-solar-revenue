@@ -267,7 +267,8 @@
         "isPaginated": "Tabellen in Seiten aufteilen",
         "itemsPerPage": "Anzahl der Zeilen pro Tabelle",
         "infoContent": "i18n String für Informationsseite",
-        "startInfoOpen": "Informationsseite beim Start öffnen"
+        "startInfoOpen": "Informationsseite beim Start öffnen",
+        "startPluginOpen": "Plugin geöffnet starten"
       },
       "vcSolar": {
         "efficiency": "Effizienz",

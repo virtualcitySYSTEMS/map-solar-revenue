@@ -61,6 +61,7 @@ export type GlobalSettings = {
   isPaginated: boolean;
   infoContent: string;
   startInfoOpen: boolean;
+  startPluginOpen: boolean;
 };
 
 export type SolarColor = {
@@ -162,6 +163,7 @@ export default (): SolarOptions => ({
     isPaginated: true,
     infoContent: 'solarRevenue.infoContent.content',
     startInfoOpen: false,
+    startPluginOpen: false,
   },
   vcSolarOptions: {
     efficiency: 20,

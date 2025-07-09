@@ -1,7 +1,9 @@
 {
   "name": "@vcmap/solar-revenue",
   "globalSettings": {
-    "isVcSolar": true
+    "isVcSolar": true,
+    "startPluginOpen": true,
+    "startInfoOpen": true
   },
   "adminOptions": {
     "amortizationPeriod": 20

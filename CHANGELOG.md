@@ -1,3 +1,7 @@
+# v3.0.1
+
+- Option to start the plugin opened
+
 # v3.0.0
 
 - Instruction text in section 1 provided via help button. Starts open by default
