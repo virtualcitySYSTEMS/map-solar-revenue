@@ -1,6 +1,6 @@
 {
   "name": "@vcmap/solar-revenue",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Solar revenue calculator",
   "type": "module",
   "main": "src/index.ts",
