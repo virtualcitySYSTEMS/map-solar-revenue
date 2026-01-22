@@ -515,8 +515,21 @@
     required: true,
   });
 
-  const isHeatPump: Ref<boolean> = ref(false);
-  const isCar: Ref<boolean> = ref(false);
+  const isHeatPump = defineModel('isHeatPump', {
+    type: Boolean,
+    default: false,
+  });
+
+  const isCar = defineModel('isCar', {
+    type: Boolean,
+    default: false,
+  });
+
+  const selectedConsumptionProfile = defineModel('selectedConsumptionProfile', {
+    type: Object as PropType<ConsumptionProfile | undefined>,
+    default: undefined,
+  });
+
   const dialog: Ref<boolean> = ref(false);
   const stepOrder = {
     DEMAND: 1,
@@ -530,8 +543,6 @@
   const consumptionProfiles = ref(
     Object.values(solarOptions.value.adminOptions.consumptionProfiles),
   );
-
-  const selectedConsumptionProfile: Ref<ConsumptionProfile | undefined> = ref();
 
   const clearSelectedConsumptionProfile = (): void => {
     selectedConsumptionProfile.value = undefined;

@@ -1,3 +1,8 @@
+# v3.1.0
+
+- Updated jspdf from version 3 to 4
+- Fixed pdf report generation when section 3 is closed or minimalized
+
 # v3.0.1
 
 - Option to start the plugin opened

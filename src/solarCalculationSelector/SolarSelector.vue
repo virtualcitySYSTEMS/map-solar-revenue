@@ -231,7 +231,9 @@
       <template #default>
         <v-container>
           <SolarRevenue
-            ref="solarRevenueRef"
+            v-model:is-car="isCar"
+            v-model:is-heat-pump="isHeatPump"
+            v-model:selected-consumption-profile="selectedConsumptionProfile"
             v-model:is-storage-consumption="isStorageConsumption"
             v-model:is-finance="isFinance"
             v-model:solar-options="solarOptions"
@@ -425,7 +427,7 @@
   import type { SolarPlugin } from '../index.js';
   import { name } from '../../package.json';
   import { sumValues } from '../helper.js';
-  import { SolarOptions } from '../solarOptions.js';
+  import { ConsumptionProfile, SolarOptions } from '../solarOptions.js';
   import {
     calculateSolarAreaModules,
     highlightSelectedAreaModule,
@@ -482,6 +484,11 @@
   const calculateLoading = ref(false);
   const isHoveringVCSolar = ref(false);
   const isHoveringArea = ref(false);
+  const isCar = ref(false);
+  const isHeatPump = ref(false);
+  const selectedConsumptionProfile = ref<ConsumptionProfile | undefined>(
+    undefined,
+  );
 
   const defaultStrategy = new DefaultRevenueStrategy(
     selectedModules,
@@ -672,7 +679,6 @@
   const coTwoSavingsRef = ref();
   const profitabilityResultRef = ref();
   const financeResultRef = ref();
-  const solarRevenueRef = ref();
 
   const createPDF = async (): Promise<void> => {
     await generatePDF(
@@ -694,9 +700,9 @@
       coTwoSavingsRef.value.amortization,
       profitabilityResultRef.value.revenueOptions,
       profitabilityResultRef.value.liquidityOptions,
-      solarRevenueRef.value.isHeatPump,
-      solarRevenueRef.value.isCar,
-      solarRevenueRef.value.selectedConsumptionProfile,
+      isHeatPump.value,
+      isCar.value,
+      selectedConsumptionProfile.value,
       isStorageConsumption.value,
       solarAreaLayer,
       vcSolarInteraction,

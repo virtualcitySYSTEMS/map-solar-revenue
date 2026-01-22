@@ -57,7 +57,7 @@ export default async function generatePDF(
   liquidityChartOptions: ApexOptions,
   isHeatPump: boolean,
   isCar: boolean,
-  selectedConsumptionProfile: ConsumptionProfile | null,
+  selectedConsumptionProfile: ConsumptionProfile | undefined,
   isStorageConsumption: boolean,
   solarAreaLayer: VectorLayer,
   vcSolarInteraction: VcSolarInteraction,
@@ -607,7 +607,7 @@ export default async function generatePDF(
   );
   doc.text(transText(vm, 'solarRevenue.pdf.user.consProfile'), 20, 210);
   doc.text(
-    `${getConsumptionProfileString(vm, selectedConsumptionProfile)}`,
+    `${getConsumptionProfileString(vm, selectedConsumptionProfile ?? null)}`,
     105,
     210,
   );
