@@ -2,6 +2,7 @@
 
 - Updated jspdf from version 3 to 4
 - Fixed pdf report generation when section 3 is closed or minimalized
+- Fixed diagram not rendered in safari browser
 
 # v3.0.1
 

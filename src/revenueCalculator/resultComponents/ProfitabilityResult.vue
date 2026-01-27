@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="700px">
+  <v-dialog v-model="dialog" width="700px" @after-enter="remountChart">
     <template #activator="{ props }">
       <VcsButton
         icon="mdi-open-in-new"
@@ -64,6 +64,7 @@
 
         <VueApexCharts
           v-if="selectedChartType === 'revenue'"
+          :key="chartKey"
           type="bar"
           :options="revenueOptions"
           :series="revenueSeries"
@@ -71,6 +72,7 @@
         />
         <VueApexCharts
           v-if="selectedChartType === 'liquidity'"
+          :key="chartKey"
           type="bar"
           :options="liquidityOptions"
           :series="liquiditySeries"
@@ -107,6 +109,11 @@
     type: Boolean as PropType<boolean>,
     required: true,
   });
+
+  const chartKey = ref(0);
+  function remountChart(): void {
+    chartKey.value += 1;
+  }
 
   const innerProps = defineProps({
     maintenanceCosts: {
