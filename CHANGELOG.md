@@ -1,3 +1,7 @@
+# v3.1.1
+
+- Added optional nonce to charts.
+
 # v3.1.0
 
 - Updated jspdf from version 3 to 4

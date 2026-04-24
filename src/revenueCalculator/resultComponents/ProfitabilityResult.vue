@@ -319,6 +319,8 @@
       chart: {
         id: 'liquidity',
         type: 'bar',
+        nonce: (window as Window & { vcs?: { styleNonce?: string } }).vcs
+          ?.styleNonce,
         toolbar: {
           tools: {
             download: downloadSVG,
@@ -422,6 +424,8 @@
       chart: {
         id: 'revenueChart',
         type: 'bar',
+        nonce: (window as Window & { vcs?: { styleNonce?: string } }).vcs
+          ?.styleNonce,
         stacked: true,
         toolbar: {
           tools: {

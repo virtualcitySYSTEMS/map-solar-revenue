@@ -198,6 +198,8 @@
     return {
       chart: {
         type: 'bar',
+        nonce: (window as Window & { vcs?: { styleNonce?: string } }).vcs
+          ?.styleNonce,
         stacked: true,
         toolbar: {
           tools: {
